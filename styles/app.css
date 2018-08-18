@@ -28,6 +28,11 @@ body {
   width: 128px;
 }
 
+.attackToRight {
+  animation-name: attackToRight;
+  animation-duration: 0.5s;
+}
+
 @keyframes attackToRight {
   0% {
     transform: translateX(0px);

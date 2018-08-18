@@ -9,9 +9,9 @@ const attack = () => {
   img.style.animationDuration = '0.5s';
 };
 
-export default () => (
+export default ({ playerAttack }) => (
   <div class="buttons">
-    <button onclick={attack} id="b1">
+    <button onclick={playerAttack} id="b1">
       Special Stomp
     </button>
     <button id="b2">Thunder Kick</button>
