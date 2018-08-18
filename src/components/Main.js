@@ -13,6 +13,9 @@ export default (state, actions) => (
         enemy: state.shoes.boot,
       }}
     />
-    <Buttons playerAttack={actions.playerAttack} moves={state.moves} />
+    <Buttons
+      playerAttack={actions.playerAttack}
+      moves={state.player.shoes[state.player.currentShoe].moves}
+    />
   </div>
 );
