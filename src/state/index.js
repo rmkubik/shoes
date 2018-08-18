@@ -6,6 +6,7 @@ import types from './types';
 export default {
   turn: 0,
   playerAttacking: false,
+  enemy: shoes.boot,
   moves,
   shoes,
   player,

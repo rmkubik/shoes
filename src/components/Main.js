@@ -10,7 +10,7 @@ export default (state, actions) => (
       playerStopAttack={actions.playerStopAttack}
       shoes={{
         player: state.player.shoes[state.player.currentShoe],
-        enemy: state.shoes.boot,
+        enemy: state.enemy,
       }}
     />
     <Buttons
