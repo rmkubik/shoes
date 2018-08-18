@@ -9,4 +9,5 @@ export default {
   moves,
   shoes,
   player,
+  types,
 };
