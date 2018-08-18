@@ -1,9 +1,11 @@
 import moves from './moves';
 import shoes from './shoes';
+import player from './player';
 
 export default {
-  num: 0,
+  turn: 0,
   playerAttacking: false,
   moves,
   shoes,
+  player,
 };

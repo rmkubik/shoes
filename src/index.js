@@ -7,8 +7,7 @@ import view from './components/Main';
 const appArgs = [state, actions, view, document.getElementById('app')];
 
 function onMount(main) {
-  const { add, sub } = main;
-
+  // const { add, sub } = main;
   // /**
   //  * Hyperapp wires your actions so the view is re-rendered every time the state
   //  * changes as a result of calling any action. This object is useful because it
