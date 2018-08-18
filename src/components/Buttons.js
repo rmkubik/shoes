@@ -2,11 +2,9 @@ import { h } from 'hyperapp';
 
 export default ({ playerAttack }) => (
   <div class="buttons">
-    <button onclick={playerAttack} id="b1">
-      Special Stomp
-    </button>
-    <button id="b2">Thunder Kick</button>
-    <button id="b3">Crush</button>
-    <button id="b4">Lick</button>
+    <button onclick={playerAttack}>Special Stomp</button>
+    <button onclick={playerAttack}>Thunder Kick</button>
+    <button onclick={playerAttack}>Crush</button>
+    <button onclick={playerAttack}>Lick</button>
   </div>
 );
