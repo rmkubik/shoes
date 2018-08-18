@@ -6,6 +6,6 @@ import Screen from './Screen';
 export default (state, actions) => (
   <div class="main">
     <Screen playerAttacking={state.playerAttacking} playerStopAttack={actions.playerStopAttack} />
-    <Buttons playerAttack={actions.playerAttack} />
+    <Buttons playerAttack={actions.playerAttack} moves={state.moves} />
   </div>
 );
