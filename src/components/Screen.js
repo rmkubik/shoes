@@ -6,11 +6,11 @@ import ShoeDisplay from './ShoeDisplay';
 export default ({ playerAttacking, playerStopAttack, shoes }) => (
   <div class="screen">
     <div />
-    <ShoeDisplay shoe={shoes.boot} />
+    <ShoeDisplay shoe={shoes.enemy} />
     <Shoe
       playerAttacking={playerAttacking}
       playerStopAttack={playerStopAttack}
-      shoe={shoes.highHeel}
+      shoe={shoes.player}
     />
     <div />
   </div>

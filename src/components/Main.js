@@ -8,7 +8,10 @@ export default (state, actions) => (
     <Screen
       playerAttacking={state.playerAttacking}
       playerStopAttack={actions.playerStopAttack}
-      shoes={state.shoes}
+      shoes={{
+        player: state.player.shoes[state.player.currentShoe],
+        enemy: state.shoes.boot,
+      }}
     />
     <Buttons playerAttack={actions.playerAttack} moves={state.moves} />
   </div>
