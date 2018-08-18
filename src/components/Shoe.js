@@ -1,5 +1,7 @@
 import { h } from 'hyperapp';
 
+import ShoeDisplay from './ShoeDisplay';
+
 export default ({
   playerAttacking, playerStopAttack, image, hp, name,
 }) => (
@@ -11,8 +13,6 @@ export default ({
       });
     }}
   >
-    <img src={image} />
-    <p>{name}</p>
-    <progress value={hp.current} max={hp.max} />
+    <ShoeDisplay image={image} name={name} hp={hp} />
   </div>
 );

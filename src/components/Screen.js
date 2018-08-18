@@ -1,13 +1,12 @@
 import { h } from 'hyperapp';
 
 import Shoe from './Shoe';
+import ShoeDisplay from './ShoeDisplay';
 
 export default ({ playerAttacking, playerStopAttack }) => (
   <div class="screen">
     <div />
-    <Shoe
-      playerAttacking={playerAttacking}
-      playerStopAttack={playerStopAttack}
+    <ShoeDisplay
       image={'https://r-k.io/assets/images/ssj18parody/shoes_0.png'}
       name={'Boot'}
       hp={{
