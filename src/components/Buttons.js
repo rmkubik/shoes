@@ -1,14 +1,5 @@
 import { h } from 'hyperapp';
 
-const attack = () => {
-  const img = document.querySelector('#i2');
-  img.addEventListener('animationend', () => {
-    img.style.animationName = '';
-  });
-  img.style.animationName = 'attackToRight';
-  img.style.animationDuration = '0.5s';
-};
-
 export default ({ playerAttack }) => (
   <div class="buttons">
     <button onclick={playerAttack} id="b1">
