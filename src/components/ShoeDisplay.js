@@ -1,6 +1,6 @@
 import { h } from 'hyperapp';
 
-export default ({ image, hp, name }) => (
+export default ({ shoe: { image, name, hp } }) => (
   <div>
     <img src={image} />
     <p>{name}</p>

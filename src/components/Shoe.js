@@ -2,9 +2,7 @@ import { h } from 'hyperapp';
 
 import ShoeDisplay from './ShoeDisplay';
 
-export default ({
-  playerAttacking, playerStopAttack, image, hp, name,
-}) => (
+export default ({ playerAttacking, playerStopAttack, shoe }) => (
   <div
     className={playerAttacking ? 'attackToRight' : ''}
     oncreate={(element) => {
@@ -13,6 +11,6 @@ export default ({
       });
     }}
   >
-    <ShoeDisplay image={image} name={name} hp={hp} />
+    <ShoeDisplay shoe={shoe} />
   </div>
 );
