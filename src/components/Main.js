@@ -1,21 +1,9 @@
 import { h } from 'hyperapp';
 
-import Buttons from './Buttons';
-import Screen from './Screen';
+import BattleScene from './BattleScene';
 
 export default (state, actions) => (
   <div class="main">
-    <Screen
-      playerAttacking={state.playerAttacking}
-      playerStopAttack={actions.playerStopAttack}
-      shoes={{
-        player: state.player.shoes[state.player.currentShoe],
-        enemy: state.enemy,
-      }}
-    />
-    <Buttons
-      playerAttack={actions.playerAttack}
-      moves={state.player.shoes[state.player.currentShoe].moves}
-    />
+    <BattleScene state={state} actions={actions} />
   </div>
 );
