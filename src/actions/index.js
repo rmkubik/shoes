@@ -13,4 +13,10 @@ export default {
   playerStopAttack: () => () => ({
     playerAttacking: false,
   }),
+  changeScene: ({ newScene }) => ({ scene }) => ({
+    scene: {
+      ...scene,
+      current: newScene,
+    },
+  }),
 };
