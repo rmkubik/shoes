@@ -1,3 +1,4 @@
+import map from './map';
 import moves from './moves';
 import shoes from './shoes';
 import player from './player';
@@ -13,4 +14,5 @@ export default {
   shoes,
   player,
   types,
+  map,
 };

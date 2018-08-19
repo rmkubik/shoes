@@ -6,10 +6,11 @@ export default ({ state, actions }) => (
   <div class="mapScene">
     <h3> Route 5 </h3>
     <ol>
-      <li>
-        <MapLink name="Wild Shoe!" changeScene={actions.changeScene} />
-      </li>
-      <li> Wild Shoe! </li>
+      {state.map.map(({ name }) => (
+        <li>
+          <MapLink name={name} changeScene={actions.changeScene} />
+        </li>
+      ))}
       <li> Trainer Battle </li>
       <li> Shop </li>
       <li> Wild Shoe! </li>
