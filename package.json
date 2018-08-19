@@ -13,6 +13,7 @@
   "author": "Regis Boudinot (selfup)",
   "license": "MIT",
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "hyperapp": "^1.2.6",
     "hyperapp-redux-devtools": "^1.1.6"
   },

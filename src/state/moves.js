@@ -9,7 +9,7 @@ export default {
   },
   crush: {
     name: 'Crush',
-    damage: 10,
+    damage: 50,
   },
   lick: {
     name: 'Lick',
