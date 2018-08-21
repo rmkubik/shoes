@@ -12,7 +12,7 @@ const sceneMap = {
 
 export default (state, actions) => {
   const { enemy, scene } = state.map[state.currentMapIndex];
-  if (isEnemyDead(enemy) && state.scene.current === 'BattleScene') {
+  if (isEnemyDead(enemy) && state.scene.current !== 'MapScene') {
     actions.changeScene({ newScene: 'MapScene' });
   }
 
