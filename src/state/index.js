@@ -9,7 +9,7 @@ export default {
   turn: 0,
   playerAttacking: false,
   scene,
-  enemy: shoes.highHeel,
+  currentMapIndex: 0,
   moves,
   shoes,
   player,

@@ -6,9 +6,9 @@ export default ({ state, actions }) => (
   <div class="mapScene">
     <h3> Route 5 </h3>
     <ol>
-      {state.map.map(({ name }) => (
+      {state.map.map(({ name }, index) => (
         <li>
-          <MapLink name={name} changeScene={actions.changeScene} />
+          <MapLink name={name} changeScene={actions.changeScene} index={index} />
         </li>
       ))}
       <li> Trainer Battle </li>
