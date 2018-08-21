@@ -1,4 +1,5 @@
 import shoes, { isAlive } from './shoes';
+import items from './items';
 
 export const getCurrentEnemy = (state) => {
   const currentMapItem = state.map[state.currentMapIndex];
@@ -28,5 +29,10 @@ export default [
     currentEnemyIndex: 0,
     name: 'Trainer Battle',
     scene: 'BattleScene',
+  },
+  {
+    name: 'Shop',
+    scene: 'ShopScene',
+    items: [items.shoeBox, items.elasticLaces, items.velcroStrap],
   },
 ];

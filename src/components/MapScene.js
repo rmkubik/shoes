@@ -19,7 +19,6 @@ export default ({ state, actions }) => (
           />
         </li>
       ))}
-      <li> Trainer Battle </li>
       <li> Shop </li>
       <li> Wild Shoe! </li>
       <li> Wild Shoe! </li>
