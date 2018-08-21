@@ -1,13 +1,23 @@
-const dealMapItemEnemyDamage = (mapItem, damage) => ({
-  ...mapItem,
-  enemy: {
-    ...mapItem.enemy,
-    hp: {
-      ...mapItem.enemy.hp,
-      current: mapItem.enemy.hp.current - damage,
-    },
-  },
-});
+const getCurrentEnemyFromMapItem = mapItem => mapItem.enemies[mapItem.currentEnemyIndex];
+
+const dealMapItemEnemyDamage = (mapItem, damage) => {
+  const enemy = getCurrentEnemyFromMapItem(mapItem);
+
+  return {
+    ...mapItem,
+    enemies: [
+      ...mapItem.enemies.slice(0, mapItem.currentEnemyIndex),
+      {
+        ...enemy,
+        hp: {
+          ...enemy.hp,
+          current: enemy.hp.current - damage,
+        },
+      },
+      ...mapItem.enemies.slice(mapItem.currentEnemyIndex + 1),
+    ],
+  };
+};
 
 export default {
   playerAttack: ({ damage }) => ({ map, currentMapIndex }) => ({
@@ -25,7 +35,8 @@ export default {
     scene,
     currentMapIndex,
   }) => ({
-    currentMapIndex: newCurrentMapIndex || currentMapIndex,
+    // need to use ternary intstead of || in case newCurrentMapIndex is 0
+    currentMapIndex: newCurrentMapIndex === undefined ? currentMapIndex : newCurrentMapIndex,
     scene: {
       ...scene,
       current: newScene,

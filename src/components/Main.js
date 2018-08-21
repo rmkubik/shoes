@@ -2,6 +2,7 @@ import { h } from 'hyperapp';
 
 import BattleScene from './BattleScene';
 import MapScene from './MapScene';
+import { getCurrentEnemy } from '../state/map';
 
 const isEnemyDead = enemy => enemy.hp.current <= 0;
 
@@ -11,8 +12,7 @@ const sceneMap = {
 };
 
 export default (state, actions) => {
-  const { enemy } = state.map[state.currentMapIndex];
-  if (isEnemyDead(enemy) && state.scene.current !== 'MapScene') {
+  if (isEnemyDead(getCurrentEnemy(state)) && state.scene.current !== 'MapScene') {
     actions.changeScene({ newScene: 'MapScene' });
   }
 
