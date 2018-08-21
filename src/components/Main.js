@@ -5,6 +5,7 @@ import MapScene from './MapScene';
 import { getCurrentEnemy } from '../state/map';
 
 const isEnemyDead = enemy => enemy.hp.current <= 0;
+const isBattleOver = enemies => enemies.every(isEnemyDead);
 
 const sceneMap = {
   BattleScene: (state, actions) => <BattleScene state={state} actions={actions} />,
@@ -12,7 +13,10 @@ const sceneMap = {
 };
 
 export default (state, actions) => {
-  if (isEnemyDead(getCurrentEnemy(state)) && state.scene.current !== 'MapScene') {
+  if (
+    isBattleOver(state.map[state.currentMapIndex].enemies) &&
+    state.scene.current !== 'MapScene'
+  ) {
     actions.changeScene({ newScene: 'MapScene' });
   }
 
