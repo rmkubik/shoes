@@ -6,13 +6,13 @@ export default ({ state, actions }) => (
   <div class="mapScene">
     <h3> Route 5 </h3>
     <ol>
-      {state.map.map(({ name }, index) => (
+      {state.map.map(({ name, scene }, index) => (
         <li>
           <MapLink
             name={name}
             changeScene={() =>
               actions.changeScene({
-                newScene: 'BattleScene',
+                newScene: scene,
                 currentMapIndex: index,
               })
             }
