@@ -42,4 +42,14 @@ export default {
       current: newScene,
     },
   }),
+  changeCurrentEnemyIndex: ({ index }) => ({ map, currentMapIndex }) => ({
+    map: [
+      ...map.slice(0, currentMapIndex),
+      {
+        ...map[currentMapIndex],
+        currentEnemyIndex: index,
+      },
+      ...map.slice(currentMapIndex + 1),
+    ],
+  }),
 };

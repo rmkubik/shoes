@@ -1,5 +1,4 @@
-import shoes from './shoes';
-import { pickRandomlyFromArray } from '../helpers';
+import shoes, { isAlive } from './shoes';
 
 export const getCurrentEnemy = (state) => {
   const currentMapItem = state.map[state.currentMapIndex];
@@ -8,7 +7,7 @@ export const getCurrentEnemy = (state) => {
 
 export const getNextEnemyIndex = (state) => {
   const currentMapItem = state.map[state.currentMapIndex];
-  currentMapItem.enemies.filter(enemy);
+  return currentMapItem.enemies.findIndex(isAlive);
 };
 
 export default [
