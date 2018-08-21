@@ -15,7 +15,7 @@ const sceneMap = {
 export default (state, actions) => {
   if (!isAlive(getCurrentEnemy(state))) {
     if (isBattleOver(state.map[state.currentMapIndex].enemies)) {
-      if (state.scene.current !== 'MapScene') {
+      if (state.scene.current !== 'MapScene' && !state.playerAttacking) {
         actions.changeScene({ newScene: 'MapScene' });
       }
     } else {
