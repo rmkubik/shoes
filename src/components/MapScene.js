@@ -8,7 +8,15 @@ export default ({ state, actions }) => (
     <ol>
       {state.map.map(({ name }, index) => (
         <li>
-          <MapLink name={name} changeScene={actions.changeScene} index={index} />
+          <MapLink
+            name={name}
+            changeScene={() =>
+              actions.changeScene({
+                newScene: 'BattleScene',
+                currentMapIndex: index,
+              })
+            }
+          />
         </li>
       ))}
       <li> Trainer Battle </li>
