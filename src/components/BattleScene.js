@@ -17,6 +17,8 @@ export default ({ state, actions }) => (
     <Buttons
       playerAttack={actions.playerAttack}
       moves={state.player.shoes[state.player.currentShoe].moves}
+      wild={state.map[state.currentMapIndex].wild}
+      attemptCatch={actions.attemptCatch}
     />
   </div>
 );

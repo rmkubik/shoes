@@ -52,4 +52,20 @@ export default {
       ...map.slice(currentMapIndex + 1),
     ],
   }),
+  attemptCatch: () => ({ player, map, currentMapIndex }) => {
+    const catchChance = 0.5;
+    const newState = {
+      player: {
+        ...player,
+        items: {
+          ...player.items,
+          shoeBox: player.items.shoeBox - 1,
+        },
+      },
+    };
+    if (Math.random() > catchChance) {
+      newState.player.shoes.push(getCurrentEnemyFromMapItem(map[currentMapIndex]));
+    }
+    return newState;
+  },
 };

@@ -17,12 +17,14 @@ export default [
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
+    wild: true,
   },
   {
     enemies: [shoes.boot],
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
+    wild: true,
   },
   {
     enemies: [shoes.boot, shoes.highHeel],
@@ -40,12 +42,14 @@ export default [
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
+    wild: true,
   },
   {
     enemies: [shoes.boot],
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
+    wild: true,
   },
   {
     enemies: [shoes.boot, shoes.highHeel],
