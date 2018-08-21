@@ -1,6 +1,6 @@
 import { h } from 'hyperapp';
 
-import MapLink from './MapLink';
+import MapItem from './MapItem';
 
 export default ({ state, actions }) => (
   <div class="mapScene">
@@ -8,7 +8,7 @@ export default ({ state, actions }) => (
     <ol>
       {state.map.map(({ name, scene }, index) => (
         <li>
-          <MapLink
+          <MapItem
             name={name}
             changeScene={() =>
               actions.changeScene({
