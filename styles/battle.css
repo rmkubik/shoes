@@ -1,0 +1,15 @@
+.battleScene .screen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 25px;
+}
+
+.battleScene .buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 25px;
+}
+
+.battleScene .screen img {
+  width: 128px;
+}

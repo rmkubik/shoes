@@ -4,6 +4,10 @@ import actions from './actions';
 import state from './state';
 import view from './components/Main';
 
+import '../styles/shop.css';
+import '../styles/battle.css';
+import '../styles/animations.css';
+
 const appArgs = [state, actions, view, document.getElementById('app')];
 
 function onMount(main) {

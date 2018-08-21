@@ -1,0 +1,28 @@
+.attackToRight {
+  animation-name: attackToRight;
+  animation-duration: 0.5s;
+}
+
+@keyframes attackToRight {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes attackToLeft {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-15px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
