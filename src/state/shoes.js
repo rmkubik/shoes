@@ -1,6 +1,8 @@
 import moves from './moves';
 import types from './types';
 
+export const isAlive = shoe => shoe.hp.current > 0;
+
 export default {
   boot: {
     name: 'Boot',

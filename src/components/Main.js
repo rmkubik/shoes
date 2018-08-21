@@ -2,10 +2,9 @@ import { h } from 'hyperapp';
 
 import BattleScene from './BattleScene';
 import MapScene from './MapScene';
-import { getCurrentEnemy } from '../state/map';
+import { isAlive } from '../state/shoes';
 
-const isEnemyDead = enemy => enemy.hp.current <= 0;
-const isBattleOver = enemies => enemies.every(isEnemyDead);
+const isBattleOver = enemies => !enemies.some(isAlive);
 
 const sceneMap = {
   BattleScene: (state, actions) => <BattleScene state={state} actions={actions} />,
