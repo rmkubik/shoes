@@ -6,5 +6,5 @@ export default {
     shoeBox: 5,
   },
   currentShoe: 0,
-  money: 0,
+  money: 30,
 };

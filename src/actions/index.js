@@ -68,4 +68,16 @@ export default {
     }
     return newState;
   },
+  purchaseItem: ({ key }) => ({ items, player }) => {
+    const newItems = { ...player.items };
+    newItems[key] = newItems[key] ? newItems[key] + 1 : 1;
+
+    return {
+      player: {
+        ...player,
+        items: newItems,
+        money: player.money - items[key].cost,
+      },
+    };
+  },
 };
