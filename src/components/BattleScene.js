@@ -18,7 +18,7 @@ export default ({ state, actions }) => {
   }
 
   if (!isPlayerTurn(state)) {
-    actions.enemyAttack(pickRandomlyFromArray(getCurrentEnemy(state).moves).damage);
+    actions.enemyAttack({ damage: pickRandomlyFromArray(getCurrentEnemy(state).moves).damage });
   }
 
   return (

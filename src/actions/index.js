@@ -37,7 +37,7 @@ export default {
       ...map.slice(0, currentMapIndex),
       {
         ...map[currentMapIndex],
-        turn: map[currentMapIndex] + 1,
+        turn: map[currentMapIndex].turn + 1,
       },
       ...map.slice(currentMapIndex + 1),
     ],
