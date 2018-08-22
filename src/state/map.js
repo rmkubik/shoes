@@ -11,6 +11,11 @@ export const getNextEnemyIndex = (state) => {
   return currentMapItem.enemies.findIndex(isAlive);
 };
 
+export const isPlayerTurn = (state) => {
+  const currentMapItem = state.map[state.currentMapIndex];
+  return currentMapItem.playerFirst ? currentMapItem.turn % 2 === 0 : currentMapItem.turn % 2 === 1;
+};
+
 export default [
   {
     enemies: [shoes.highHeel],
@@ -18,6 +23,8 @@ export default [
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
     wild: true,
+    turn: 0,
+    playerFirst: true,
   },
   {
     enemies: [shoes.boot],
@@ -25,12 +32,16 @@ export default [
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
     wild: true,
+    turn: 0,
+    playerFirst: true,
   },
   {
     enemies: [shoes.boot, shoes.highHeel],
     currentEnemyIndex: 0,
     name: 'Trainer Battle',
     scene: 'BattleScene',
+    turn: 0,
+    playerFirst: true,
   },
   {
     name: 'Shop',
@@ -43,6 +54,8 @@ export default [
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
     wild: true,
+    turn: 0,
+    playerFirst: true,
   },
   {
     enemies: [shoes.boot],
@@ -50,12 +63,16 @@ export default [
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
     wild: true,
+    turn: 0,
+    playerFirst: true,
   },
   {
     enemies: [shoes.boot, shoes.highHeel],
     currentEnemyIndex: 0,
     name: 'Trainer Battle',
     scene: 'BattleScene',
+    turn: 0,
+    playerFirst: true,
   },
   {
     name: 'Shop',

@@ -5,6 +5,7 @@ const dealMapItemEnemyDamage = (mapItem, damage) => {
 
   return {
     ...mapItem,
+    turn: mapItem.turn + 1,
     enemies: [
       ...mapItem.enemies.slice(0, mapItem.currentEnemyIndex),
       {
