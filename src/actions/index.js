@@ -1,5 +1,13 @@
 const getCurrentEnemyFromMapItem = mapItem => mapItem.enemies[mapItem.currentEnemyIndex];
 
+const dealShoeDamage = (shoe, damage) => ({
+  ...shoe,
+  hp: {
+    ...shoe.hp,
+    current: shoe.hp.current - damage,
+  },
+});
+
 const dealMapItemEnemyDamage = (mapItem, damage) => {
   const enemy = getCurrentEnemyFromMapItem(mapItem);
 
@@ -8,13 +16,7 @@ const dealMapItemEnemyDamage = (mapItem, damage) => {
     turn: mapItem.turn + 1,
     enemies: [
       ...mapItem.enemies.slice(0, mapItem.currentEnemyIndex),
-      {
-        ...enemy,
-        hp: {
-          ...enemy.hp,
-          current: enemy.hp.current - damage,
-        },
-      },
+      dealShoeDamage(enemy, damage),
       ...mapItem.enemies.slice(mapItem.currentEnemyIndex + 1),
     ],
   };
@@ -25,10 +27,11 @@ export default {
     enemyAttacking: true,
     player: {
       ...player,
-      hp: {
-        ...player.hp,
-        current: player.hp.current - damage,
-      },
+      shoes: [
+        ...player.shoes.slice(0, player.currentShoe),
+        dealShoeDamage(player.shoes[player.currentShoe], damage),
+        ...player.shoes.slice(player.currentShoe + 1),
+      ],
     },
     map: [
       ...map.slice(0, currentMapIndex),

@@ -2,8 +2,9 @@ import { h } from 'hyperapp';
 
 import Buttons from './Buttons';
 import Screen from './Screen';
-import { getCurrentEnemy, getNextEnemyIndex } from '../state/map';
+import { getCurrentEnemy, getNextEnemyIndex, isPlayerTurn } from '../state/map';
 import { isAlive } from '../state/shoes';
+import { pickRandomlyFromArray } from '../helpers';
 
 const isBattleOver = enemies => !enemies.some(isAlive);
 
@@ -14,6 +15,10 @@ export default ({ state, actions }) => {
     }
   } else if (!isAlive(getCurrentEnemy(state))) {
     actions.changeCurrentEnemyIndex({ index: getNextEnemyIndex(state) });
+  }
+
+  if (!isPlayerTurn(state)) {
+    actions.enemyAttack(pickRandomlyFromArray(getCurrentEnemy(state).moves).damage);
   }
 
   return (
