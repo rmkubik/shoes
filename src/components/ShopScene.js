@@ -4,6 +4,7 @@ import ShopItem from './ShopItem';
 
 export default ({ state, actions }) => (
   <div class="shopScene">
+    <p>{`Money: ${state.player.money}`}</p>
     {state.map[state.currentMapIndex].items.map(({ name, cost, key }) => (
       <ShopItem
         name={name}
