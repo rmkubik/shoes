@@ -3,6 +3,11 @@
   animation-duration: 0.5s;
 }
 
+.attackToLeft {
+  animation-name: attackToLeft;
+  animation-duration: 0.5s;
+}
+
 @keyframes attackToRight {
   0% {
     transform: translateX(0px);
