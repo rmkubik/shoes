@@ -21,6 +21,24 @@ const dealMapItemEnemyDamage = (mapItem, damage) => {
 };
 
 export default {
+  enemyAttack: ({ damage }) => ({ map, currentMapIndex, player }) => ({
+    enemyAttacking: true,
+    player: {
+      ...player,
+      hp: {
+        ...player.hp,
+        current: player.hp.current - damage,
+      },
+    },
+    map: [
+      ...map.slice(0, currentMapIndex),
+      {
+        ...map[currentMapIndex],
+        turn: map[currentMapIndex] + 1,
+      },
+      ...map.slice(currentMapIndex + 1),
+    ],
+  }),
   playerAttack: ({ damage }) => ({ map, currentMapIndex }) => ({
     playerAttacking: true,
     map: [

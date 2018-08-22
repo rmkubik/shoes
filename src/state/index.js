@@ -7,8 +7,8 @@ import types from './types';
 import scene from './scene';
 
 export default {
-  turn: 0,
   playerAttacking: false,
+  enemyAttacking: false,
   scene,
   currentMapIndex: 0,
   moves,
