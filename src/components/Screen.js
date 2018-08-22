@@ -3,10 +3,17 @@ import { h } from 'hyperapp';
 import Shoe from './Shoe';
 import ShoeDisplay from './ShoeDisplay';
 
-export default ({ playerAttacking, playerStopAttack, shoes }) => (
+export default ({
+  enemyAttacking, enemyStopAttack, playerAttacking, playerStopAttack, shoes,
+}) => (
   <div class="screen">
     <div />
-    <ShoeDisplay shoe={shoes.enemy} />
+    <Shoe
+      shoeAttacking={enemyAttacking}
+      shoeStopAttack={enemyStopAttack}
+      shoe={shoes.enemy}
+      shoeAttackClass={'attackToLeft'}
+    />
     <Shoe
       shoeAttacking={playerAttacking}
       shoeStopAttack={playerStopAttack}

@@ -39,6 +39,9 @@ export default {
       ...map.slice(currentMapIndex + 1),
     ],
   }),
+  enemyStopAttack: () => () => ({
+    enemyAttacking: false,
+  }),
   playerAttack: ({ damage }) => ({ map, currentMapIndex }) => ({
     playerAttacking: true,
     map: [
