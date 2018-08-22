@@ -8,9 +8,10 @@ export default ({ playerAttacking, playerStopAttack, shoes }) => (
     <div />
     <ShoeDisplay shoe={shoes.enemy} />
     <Shoe
-      playerAttacking={playerAttacking}
-      playerStopAttack={playerStopAttack}
+      shoeAttacking={playerAttacking}
+      shoeStopAttack={playerStopAttack}
       shoe={shoes.player}
+      shoeAttackClass={'attackToRight'}
     />
     <div />
   </div>

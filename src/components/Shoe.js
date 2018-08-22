@@ -2,12 +2,14 @@ import { h } from 'hyperapp';
 
 import ShoeDisplay from './ShoeDisplay';
 
-export default ({ playerAttacking, playerStopAttack, shoe }) => (
+export default ({
+  shoeAttacking, shoeStopAttack, shoe, shoeAttackClass,
+}) => (
   <div
-    className={playerAttacking ? 'attackToRight' : ''}
+    className={shoeAttacking ? shoeAttackClass : ''}
     oncreate={(element) => {
       element.addEventListener('animationend', () => {
-        playerStopAttack();
+        shoeStopAttack();
       });
     }}
   >
