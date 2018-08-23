@@ -23,7 +23,7 @@ const dealMapItemEnemyDamage = (mapItem, damage) => {
 };
 
 export default {
-  enemyAttack: ({ damage }) => ({ map, currentMapIndex, player }) => ({
+  enemyAttack: ({ damage }) => ({ player }) => ({
     enemyAttacking: true,
     player: {
       ...player,
@@ -33,6 +33,9 @@ export default {
         ...player.shoes.slice(player.currentShoe + 1),
       ],
     },
+  }),
+  enemyStopAttack: () => ({ map, currentMapIndex }) => ({
+    enemyAttacking: false,
     map: [
       ...map.slice(0, currentMapIndex),
       {
@@ -41,9 +44,6 @@ export default {
       },
       ...map.slice(currentMapIndex + 1),
     ],
-  }),
-  enemyStopAttack: () => () => ({
-    enemyAttacking: false,
   }),
   playerAttack: ({ damage }) => ({ map, currentMapIndex }) => ({
     playerAttacking: true,

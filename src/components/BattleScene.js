@@ -15,9 +15,7 @@ export default ({ state, actions }) => {
     }
   } else if (!isAlive(getCurrentEnemy(state))) {
     actions.changeCurrentEnemyIndex({ index: getNextEnemyIndex(state) });
-  }
-
-  if (!isPlayerTurn(state)) {
+  } else if (!isPlayerTurn(state) && !state.enemyAttacking) {
     actions.enemyAttack({ damage: pickRandomlyFromArray(getCurrentEnemy(state).moves).damage });
   }
 
@@ -26,6 +24,8 @@ export default ({ state, actions }) => {
       <Screen
         playerAttacking={state.playerAttacking}
         playerStopAttack={actions.playerStopAttack}
+        enemyAttacking={state.enemyAttacking}
+        enemyStopAttack={actions.enemyStopAttack}
         shoes={{
           player: state.player.shoes[state.player.currentShoe],
           enemy: getCurrentEnemy(state),
