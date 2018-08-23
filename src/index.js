@@ -7,6 +7,7 @@ import view from './components/Main';
 import '../styles/shop.css';
 import '../styles/battle.css';
 import '../styles/animations.css';
+import '../styles/map.css';
 
 const appArgs = [state, actions, view, document.getElementById('app')];
 

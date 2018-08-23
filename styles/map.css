@@ -1,0 +1,8 @@
+.mapItem p {
+  display: inline-block;
+  margin: 0;
+}
+
+.mapItem a {
+  margin-right: 5px;
+}
