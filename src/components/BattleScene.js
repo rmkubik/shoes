@@ -10,7 +10,7 @@ const allShoesDead = shoes => !shoes.some(isAlive);
 
 export default ({ state, actions }) => {
   if (allShoesDead(state.player.shoes)) {
-    console.log('GAME OVER PLAYER LOSES!');
+    alert('GAME OVER PLAYER LOSES!');
   } else if (allShoesDead(state.map[state.currentMapIndex].enemies)) {
     if (!state.playerAttacking) {
       actions.changeScene({ newScene: 'MapScene' });
