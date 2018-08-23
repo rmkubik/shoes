@@ -25,11 +25,13 @@ export default ({ state, actions }) => (
         <li>
           <MapItem
             name={name}
-            changeScene={() =>
-              actions.changeScene({
-                newScene: scene,
-              })
-            }
+            changeScene={() => {
+              if (state.currentMapIndex === index) {
+                actions.changeScene({
+                  newScene: scene,
+                });
+              }
+            }}
             icon={getStatusIcon(state, index)}
           />
         </li>
