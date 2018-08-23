@@ -28,7 +28,6 @@ export default ({ state, actions }) => (
             changeScene={() =>
               actions.changeScene({
                 newScene: scene,
-                currentMapIndex: index,
               })
             }
             icon={getStatusIcon(state, index)}

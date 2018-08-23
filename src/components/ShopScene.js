@@ -15,7 +15,7 @@ export default ({ state, actions }) => (
     ))}
     <button
       onclick={() => {
-        actions.changeScene({ newScene: 'MapScene' });
+        actions.changeScene({ newScene: 'MapScene', currentMapIndex: state.currentMapIndex + 1 });
       }}
     >
       Back
