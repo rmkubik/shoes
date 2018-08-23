@@ -6,10 +6,12 @@ import { getCurrentEnemy, getNextEnemyIndex, isPlayerTurn } from '../state/map';
 import { isAlive } from '../state/shoes';
 import { pickRandomlyFromArray } from '../helpers';
 
-const isBattleOver = enemies => !enemies.some(isAlive);
+const allShoesDead = shoes => !shoes.some(isAlive);
 
 export default ({ state, actions }) => {
-  if (isBattleOver(state.map[state.currentMapIndex].enemies)) {
+  if (allShoesDead(state.player.shoes)) {
+    console.log('GAME OVER PLAYER LOSES!');
+  } else if (allShoesDead(state.map[state.currentMapIndex].enemies)) {
     if (!state.playerAttacking) {
       actions.changeScene({ newScene: 'MapScene' });
     }
