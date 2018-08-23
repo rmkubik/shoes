@@ -15,7 +15,7 @@ export default ({ state, actions }) => {
     }
   } else if (!isAlive(getCurrentEnemy(state))) {
     actions.changeCurrentEnemyIndex({ index: getNextEnemyIndex(state) });
-  } else if (!isPlayerTurn(state) && !state.enemyAttacking) {
+  } else if (!isPlayerTurn(state) && !state.enemyAttacking && !state.playerAttacking) {
     actions.enemyAttack({ damage: pickRandomlyFromArray(getCurrentEnemy(state).moves).damage });
   }
 
