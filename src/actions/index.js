@@ -1,5 +1,11 @@
 const getCurrentEnemyFromMapItem = mapItem => mapItem.enemies[mapItem.currentEnemyIndex];
 
+const modifyIndex = (array, index, modifier) => [
+  ...array.slice(0, index),
+  modifier(array[index]),
+  ...array.slice(index + 1),
+];
+
 const dealShoeDamage = (shoe, damage) => ({
   ...shoe,
   hp: {
@@ -8,50 +14,39 @@ const dealShoeDamage = (shoe, damage) => ({
   },
 });
 
-const dealMapItemEnemyDamage = (mapItem, damage) => {
-  const enemy = getCurrentEnemyFromMapItem(mapItem);
+const decrementMoveUses = (shoe, moveIndex) => ({
+  ...shoe,
+  moves: modifyIndex(shoe.moves, moveIndex, move => ({
+    ...move,
+    uses: move.uses - 1,
+  })),
+});
 
-  return {
-    ...mapItem,
-    turn: mapItem.turn + 1,
-    enemies: [
-      ...mapItem.enemies.slice(0, mapItem.currentEnemyIndex),
-      dealShoeDamage(enemy, damage),
-      ...mapItem.enemies.slice(mapItem.currentEnemyIndex + 1),
-    ],
-  };
-};
+const dealMapItemEnemyDamage = (mapItem, damage) => ({
+  ...mapItem,
+  turn: mapItem.turn + 1,
+  enemies: modifyIndex(mapItem.enemies, mapItem.currentEnemyIndex, shoe =>
+    dealShoeDamage(shoe, damage)),
+});
 
 export default {
   enemyAttack: ({ damage }) => ({ player }) => ({
     enemyAttacking: true,
     player: {
       ...player,
-      shoes: [
-        ...player.shoes.slice(0, player.currentShoe),
-        dealShoeDamage(player.shoes[player.currentShoe], damage),
-        ...player.shoes.slice(player.currentShoe + 1),
-      ],
+      shoes: modifyIndex(player.shoes, player.currentShoe, shoe => dealShoeDamage(shoe, damage)),
     },
   }),
   enemyStopAttack: () => ({ map, currentMapIndex }) => ({
     enemyAttacking: false,
-    map: [
-      ...map.slice(0, currentMapIndex),
-      {
-        ...map[currentMapIndex],
-        turn: map[currentMapIndex].turn + 1,
-      },
-      ...map.slice(currentMapIndex + 1),
-    ],
+    map: modifyIndex(map, currentMapIndex, mapItem => ({
+      ...mapItem,
+      turn: mapItem.turn + 1,
+    })),
   }),
   playerAttack: ({ damage }) => ({ map, currentMapIndex }) => ({
     playerAttacking: true,
-    map: [
-      ...map.slice(0, currentMapIndex),
-      dealMapItemEnemyDamage(map[currentMapIndex], damage),
-      ...map.slice(currentMapIndex + 1),
-    ],
+    map: modifyIndex(map, currentMapIndex, mapItem => dealMapItemEnemyDamage(mapItem, damage)),
   }),
   playerStopAttack: () => () => ({
     playerAttacking: false,
@@ -68,14 +63,10 @@ export default {
     },
   }),
   changeCurrentEnemyIndex: ({ index }) => ({ map, currentMapIndex }) => ({
-    map: [
-      ...map.slice(0, currentMapIndex),
-      {
-        ...map[currentMapIndex],
-        currentEnemyIndex: index,
-      },
-      ...map.slice(currentMapIndex + 1),
-    ],
+    map: modifyIndex(map, currentMapIndex, mapItem => ({
+      ...mapItem,
+      currentEnemyIndex: index,
+    })),
   }),
   attemptCatch: () => ({ player, map, currentMapIndex }) => {
     const catchChance = 0.5;
