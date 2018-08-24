@@ -105,4 +105,10 @@ export default {
       },
     };
   },
+  rewardPlayer: () => ({ map, currentMapIndex, player }) => ({
+    player: {
+      ...player,
+      money: player.money + map[currentMapIndex].reward,
+    },
+  }),
 };

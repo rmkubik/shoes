@@ -13,6 +13,7 @@ export default ({ state, actions }) => {
     alert('GAME OVER PLAYER LOSES!');
   } else if (allShoesDead(state.map[state.currentMapIndex].enemies)) {
     if (!state.playerAttacking) {
+      actions.rewardPlayer();
       actions.changeScene({ newScene: 'MapScene', currentMapIndex: state.currentMapIndex + 1 });
     }
   } else if (!isAlive(getCurrentEnemy(state))) {

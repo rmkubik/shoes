@@ -24,6 +24,7 @@ export default [
     scene: 'BattleScene',
     wild: true,
     turn: 0,
+    reward: 50,
     playerFirst: true,
   },
   {
@@ -33,6 +34,7 @@ export default [
     scene: 'BattleScene',
     wild: true,
     turn: 0,
+    reward: 50,
     playerFirst: true,
   },
   {
@@ -41,6 +43,7 @@ export default [
     name: 'Trainer Battle',
     scene: 'BattleScene',
     turn: 0,
+    reward: 150,
     playerFirst: true,
   },
   {
@@ -55,6 +58,7 @@ export default [
     scene: 'BattleScene',
     wild: true,
     turn: 0,
+    reward: 50,
     playerFirst: true,
   },
   {
@@ -64,6 +68,7 @@ export default [
     scene: 'BattleScene',
     wild: true,
     turn: 0,
+    reward: 50,
     playerFirst: true,
   },
   {
@@ -72,6 +77,7 @@ export default [
     name: 'Trainer Battle',
     scene: 'BattleScene',
     turn: 0,
+    reward: 150,
     playerFirst: true,
   },
   {
