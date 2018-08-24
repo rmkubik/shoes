@@ -18,7 +18,10 @@ const decrementMoveUses = (shoe, moveIndex) => ({
   ...shoe,
   moves: modifyIndex(shoe.moves, moveIndex, move => ({
     ...move,
-    uses: move.uses - 1,
+    uses: {
+      ...move.uses,
+      current: move.uses.current - 1,
+    },
   })),
 });
 

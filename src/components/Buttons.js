@@ -7,12 +7,12 @@ export default ({
     {moves.map((move, index) => (
       <button
         onclick={() => {
-          if (move.uses > 0) {
+          if (move.uses.current > 0) {
             playerAttack({ damage: move.damage, index });
           }
         }}
       >
-        {move.name}
+        {`${move.name} - ${move.uses.current}/${move.uses.max}`}
       </button>
     ))}
     {wild && <button onclick={attemptCatch}>Throw Shoe Box</button>}
