@@ -1,9 +1,15 @@
 import { h } from 'hyperapp';
 
 export default ({
-  playerAttack, moves, items, actions, itemList,
+  playerAttack, moves, items, actions, itemList, playerShoes,
 }) => (
   <div class="buttons">
+    {playerShoes.map(shoe => (
+      <div>
+        <input type="radio" name="playerShoe" />
+        {shoe.name}
+      </div>
+    ))}
     {moves.map((move, index) => (
       <button
         onclick={() => {

@@ -42,6 +42,7 @@ export default ({ state, actions }) => {
         items={Object.entries(state.player.items)}
         itemList={state.items}
         actions={actions}
+        playerShoes={state.player.shoes}
       />
     </div>
   );
