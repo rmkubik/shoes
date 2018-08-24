@@ -39,6 +39,9 @@ export default ({ state, actions }) => {
         moves={state.player.shoes[state.player.currentShoe].moves}
         wild={state.map[state.currentMapIndex].wild}
         attemptCatch={actions.attemptCatch}
+        items={Object.entries(state.player.items)}
+        itemList={state.items}
+        actions={actions}
       />
     </div>
   );

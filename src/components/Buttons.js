@@ -1,7 +1,7 @@
 import { h } from 'hyperapp';
 
 export default ({
-  playerAttack, moves, wild, attemptCatch,
+  playerAttack, moves, items, actions, itemList,
 }) => (
   <div class="buttons">
     {moves.map((move, index) => (
@@ -15,6 +15,10 @@ export default ({
         {`${move.name} - ${move.uses.current}/${move.uses.max}`}
       </button>
     ))}
-    {wild && <button onclick={attemptCatch}>Throw Shoe Box</button>}
+    {items.map(([itemName, itemCount]) => {
+      const item = itemList[itemName];
+      return <button onclick={actions[item.effect]}>{`${item.useText} - ${itemCount}`}</button>;
+    })}
   </div>
 );
+// {wild && <button onclick={attemptCatch}>Throw Shoe Box</button>}

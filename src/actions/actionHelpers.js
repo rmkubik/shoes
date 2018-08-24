@@ -25,6 +25,11 @@ export const decrementMoveUses = (shoe, moveIndex) => ({
   })),
 });
 
+export const decrementItemUses = (items, item) => ({
+  ...items,
+  [item]: items[item] - 1,
+});
+
 export const dealMapItemEnemyDamage = (mapItem, damage) => ({
   ...mapItem,
   turn: mapItem.turn + 1,
