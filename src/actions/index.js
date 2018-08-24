@@ -50,6 +50,12 @@ export default {
       currentEnemyIndex: index,
     })),
   }),
+  changeCurrentShoeIndex: ({ index }) => ({ player }) => ({
+    player: {
+      ...player,
+      currentShoe: index,
+    },
+  }),
   purchaseItem: ({ key }) => ({ items, player }) => {
     const newItems = { ...player.items };
     newItems[key] = newItems[key] ? newItems[key] + 1 : 1;

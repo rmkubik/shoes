@@ -4,9 +4,16 @@ export default ({
   playerAttack, moves, items, actions, itemList, playerShoes,
 }) => (
   <div class="buttons">
-    {playerShoes.map(shoe => (
+    {playerShoes.map((shoe, index) => (
       <div>
-        <input type="radio" name="playerShoe" />
+        <input
+          type="radio"
+          name="playerShoe"
+          value={index}
+          onchange={({ srcElement }) => {
+            actions.changeCurrentShoeIndex({ index: parseInt(srcElement.value, 10) });
+          }}
+        />
         {shoe.name}
       </div>
     ))}
