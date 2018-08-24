@@ -47,7 +47,7 @@ export default [
     playerFirst: true,
   },
   {
-    name: 'Shop',
+    name: 'Cobbler',
     scene: 'ShopScene',
     items: [items.shoeBox, items.elasticLaces, items.velcroStrap],
   },
@@ -81,7 +81,7 @@ export default [
     playerFirst: true,
   },
   {
-    name: 'Shop',
+    name: 'Cobbler',
     scene: 'ShopScene',
     items: [items.shoeBox, items.elasticLaces, items.velcroStrap],
   },
