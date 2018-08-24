@@ -3,11 +3,13 @@ import { h } from 'hyperapp';
 import Shoe from './Shoe';
 import ShoeDisplay from './ShoeDisplay';
 
+import { isAlive } from '../state/shoes';
+
 export default ({
   enemyAttacking, enemyStopAttack, playerAttacking, playerStopAttack, shoes,
 }) => (
   <div class="screen">
-    <div />
+    <div>{shoes.enemies.map(enemy => (isAlive(enemy) ? '☐' : '☠'))}</div>
     <Shoe
       shoeAttacking={enemyAttacking}
       shoeStopAttack={enemyStopAttack}

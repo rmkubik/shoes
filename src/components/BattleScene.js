@@ -32,6 +32,7 @@ export default ({ state, actions }) => {
         shoes={{
           player: state.player.shoes[state.player.currentShoe],
           enemy: getCurrentEnemy(state),
+          enemies: state.map[state.currentMapIndex].enemies,
         }}
       />
       <Buttons
