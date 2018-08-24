@@ -13,3 +13,15 @@
 .battleScene .screen img {
   width: 128px;
 }
+
+/* .battleScene .buttons input[type='radio']:disabled {
+  display: none;
+}
+
+.battleScene .buttons input[type='radio']:disabled:before {
+  content: '☠';
+} */
+
+.battleScene .buttons input[type='radio']:disabled + label {
+  text-decoration: line-through;
+}

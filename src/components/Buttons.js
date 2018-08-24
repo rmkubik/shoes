@@ -1,5 +1,7 @@
 import { h } from 'hyperapp';
 
+import { isAlive } from '../state/shoes';
+
 export default ({
   playerAttack, moves, items, actions, itemList, playerShoes,
 }) => (
@@ -13,8 +15,9 @@ export default ({
           onchange={({ srcElement }) => {
             actions.changeCurrentShoeIndex({ index: parseInt(srcElement.value, 10) });
           }}
+          disabled={!isAlive(shoe)}
         />
-        {shoe.name}
+        <label>{shoe.name}</label>
       </div>
     ))}
     {moves.map((move, index) => (
