@@ -44,9 +44,13 @@ export default {
       turn: mapItem.turn + 1,
     })),
   }),
-  playerAttack: ({ damage }) => ({ map, currentMapIndex }) => ({
+  playerAttack: ({ damage, index }) => ({ map, currentMapIndex, player }) => ({
     playerAttacking: true,
     map: modifyIndex(map, currentMapIndex, mapItem => dealMapItemEnemyDamage(mapItem, damage)),
+    player: {
+      ...player,
+      shoes: modifyIndex(player.shoes, player.currentShoe, shoe => decrementMoveUses(shoe, index)),
+    },
   }),
   playerStopAttack: () => () => ({
     playerAttacking: false,
