@@ -3,7 +3,14 @@ import { h } from 'hyperapp';
 import { isAlive } from '../state/shoes';
 
 export default ({
-  playerAttack, moves, items, actions, itemList, playerShoes,
+  playerAttack,
+  moves,
+  items,
+  actions,
+  itemList,
+  playerShoes,
+  playerAttacking,
+  enemyAttacking,
 }) => (
   <div class="buttons">
     {playerShoes.map((shoe, index) => (
@@ -23,7 +30,7 @@ export default ({
     {moves.map((move, index) => (
       <button
         onclick={() => {
-          if (move.uses.current > 0) {
+          if (move.uses.current > 0 && !playerAttacking && !enemyAttacking) {
             playerAttack({ damage: move.damage, index });
           }
         }}

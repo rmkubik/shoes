@@ -39,6 +39,8 @@ export default ({ state, actions }) => {
         }}
       />
       <Buttons
+        playerAttacking={state.playerAttacking}
+        enemyAttacking={state.enemyAttacking}
         playerAttack={actions.playerAttack}
         moves={state.player.shoes[state.player.currentShoe].moves}
         wild={state.map[state.currentMapIndex].wild}
