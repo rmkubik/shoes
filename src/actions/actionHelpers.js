@@ -8,11 +8,14 @@ export const modifyIndex = (array, index, modifier) => [
 
 export const removeIndex = (array, index) => [...array.slice(0, index), ...array.slice(index + 1)];
 
-export const dealShoeDamage = (shoe, damage) => ({
-  ...shoe,
+const calcShoeDamage = (attacker, defender, damage) =>
+  damage * (attacker.stats.attack.current / defender.stats.defense.current);
+
+export const dealShoeDamage = (attacker, defender, damage) => ({
+  ...defender,
   hp: {
-    ...shoe.hp,
-    current: shoe.hp.current - damage,
+    ...defender.hp,
+    current: defender.hp.current - calcShoeDamage(attacker, defender, damage),
   },
 });
 
@@ -38,9 +41,9 @@ export const decrementItemUses = (items, item) => {
   return newItems;
 };
 
-export const dealMapItemEnemyDamage = (mapItem, damage) => ({
+export const dealMapItemEnemyDamage = (attacker, mapItem, damage) => ({
   ...mapItem,
   turn: mapItem.turn + 1,
-  enemies: modifyIndex(mapItem.enemies, mapItem.currentEnemyIndex, shoe =>
-    dealShoeDamage(shoe, damage)),
+  enemies: modifyIndex(mapItem.enemies, mapItem.currentEnemyIndex, defender =>
+    dealShoeDamage(attacker, defender, damage)),
 });
