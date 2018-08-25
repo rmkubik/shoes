@@ -13,7 +13,20 @@ export default {
     image: 'https://r-k.io/assets/images/ssj18parody/shoes_0.png',
     moves: [moves.thunderKick, moves.specialStomp, moves.lick, moves.crush],
     type: types.boot,
-    catchChance: 0.3,
+    catchChance: {
+      current: 0.3,
+      default: 0.3,
+    },
+    stats: {
+      attack: {
+        current: 50,
+        default: 50,
+      },
+      defense: {
+        current: 150,
+        default: 150,
+      },
+    },
   },
   highHeel: {
     name: 'High Heel',
@@ -24,6 +37,19 @@ export default {
     image: 'https://r-k.io/assets/images/ssj18parody/shoes_1.png',
     moves: [moves.thunderKick, moves.specialStomp, moves.lick, moves.crush],
     type: types.dress,
-    catchChance: 0.4,
+    catchChance: {
+      current: 0.4,
+      default: 0.4,
+    },
+    stats: {
+      attack: {
+        current: 125,
+        default: 125,
+      },
+      defense: {
+        current: 50,
+        default: 50,
+      },
+    },
   },
 };

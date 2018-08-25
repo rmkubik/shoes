@@ -5,6 +5,7 @@ import shoes from './shoes';
 import player from './player';
 import types from './types';
 import scene from './scene';
+import stats from './stats';
 
 export default {
   playerAttacking: false,
@@ -17,4 +18,5 @@ export default {
   types,
   map,
   items,
+  stats,
 };
