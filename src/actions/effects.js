@@ -5,9 +5,11 @@ import {
   decrementItemUses,
 } from './actionHelpers';
 
+const catchChance = 0.5;
+const calcCatchChance = shoe => (1 - shoe.hp.current / shoe.hp.max) * catchChance;
+
 export default {
   attemptCatch: () => ({ player, map, currentMapIndex }) => {
-    const catchChance = 0.5;
     const newState = {
       player: {
         ...player,
@@ -15,8 +17,9 @@ export default {
       },
     };
 
-    if (map[currentMapIndex].wild && Math.random() > catchChance) {
-      newState.player.shoes.push(getCurrentEnemyFromMapItem(map[currentMapIndex]));
+    const enemy = getCurrentEnemyFromMapItem(map[currentMapIndex]);
+    if (map[currentMapIndex].wild && Math.random() < calcCatchChance(enemy)) {
+      newState.player.shoes.push(enemy);
       newState.map = [...map];
       newState.map[currentMapIndex].enemies = removeIndex(
         map[currentMapIndex].enemies,
