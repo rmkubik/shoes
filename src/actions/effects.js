@@ -5,8 +5,7 @@ import {
   decrementItemUses,
 } from './actionHelpers';
 
-const catchChance = 0.5;
-const calcCatchChance = shoe => (1 - shoe.hp.current / shoe.hp.max) * catchChance;
+const calcCatchChance = shoe => (1 - shoe.hp.current / shoe.hp.max) * shoe.catchChance;
 
 export default {
   attemptCatch: () => ({ player, map, currentMapIndex }) => {
