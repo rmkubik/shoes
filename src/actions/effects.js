@@ -1,4 +1,9 @@
-import { modifyIndex, getCurrentEnemyFromMapItem, decrementItemUses } from './actionHelpers';
+import {
+  modifyIndex,
+  removeIndex,
+  getCurrentEnemyFromMapItem,
+  decrementItemUses,
+} from './actionHelpers';
 
 export default {
   attemptCatch: () => ({ player, map, currentMapIndex }) => {
@@ -9,8 +14,14 @@ export default {
         items: decrementItemUses(player.items, 'shoeBox'),
       },
     };
+
     if (Math.random() > catchChance) {
       newState.player.shoes.push(getCurrentEnemyFromMapItem(map[currentMapIndex]));
+      newState.map = [...map];
+      newState.map[currentMapIndex].enemies = removeIndex(
+        map[currentMapIndex].enemies,
+        map[currentMapIndex].currentEnemyIndex,
+      );
     }
     return newState;
   },

@@ -6,6 +6,8 @@ export const modifyIndex = (array, index, modifier) => [
   ...array.slice(index + 1),
 ];
 
+export const removeIndex = (array, index) => [...array.slice(0, index), ...array.slice(index + 1)];
+
 export const dealShoeDamage = (shoe, damage) => ({
   ...shoe,
   hp: {
