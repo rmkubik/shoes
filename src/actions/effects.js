@@ -15,7 +15,7 @@ export default {
       },
     };
 
-    if (Math.random() > catchChance) {
+    if (getCurrentEnemyFromMapItem(map[currentMapIndex]).wild && Math.random() > catchChance) {
       newState.player.shoes.push(getCurrentEnemyFromMapItem(map[currentMapIndex]));
       newState.map = [...map];
       newState.map[currentMapIndex].enemies = removeIndex(
