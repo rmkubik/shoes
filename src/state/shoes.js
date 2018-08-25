@@ -10,7 +10,7 @@ export default {
       max: 100,
       current: 100,
     },
-    image: 'https://r-k.io/assets/images/ssj18parody/shoes_0.png',
+    image: '../../assets/images/shoes_0.png',
     moves: [moves.thunderKick, moves.specialStomp, moves.lick, moves.crush],
     type: types.boot,
     catchChance: {
@@ -34,7 +34,7 @@ export default {
       max: 100,
       current: 100,
     },
-    image: 'https://r-k.io/assets/images/ssj18parody/shoes_1.png',
+    image: '../../assets/images/shoes_1.png',
     moves: [moves.thunderKick, moves.specialStomp, moves.lick, moves.crush],
     type: types.dress,
     catchChance: {
