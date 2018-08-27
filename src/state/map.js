@@ -1,5 +1,6 @@
 import shoes, { isAlive } from './shoes';
 import items from './items';
+import { pickRandomlyFromArray } from '../helpers';
 
 export const getCurrentEnemy = (state) => {
   const currentMapItem = state.map[state.currentMapIndex];
@@ -18,7 +19,7 @@ export const isPlayerTurn = (state) => {
 
 export default [
   {
-    enemies: [shoes.croc],
+    enemies: [pickRandomlyFromArray([shoes.sneaker, shoes.cleat])],
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
@@ -28,7 +29,7 @@ export default [
     playerFirst: true,
   },
   {
-    enemies: [shoes.boot],
+    enemies: [pickRandomlyFromArray([shoes.boot, shoes.flats, shoes.slipper])],
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
@@ -38,7 +39,7 @@ export default [
     playerFirst: true,
   },
   {
-    enemies: [shoes.boot, shoes.highHeel],
+    enemies: [pickRandomlyFromArray([shoes.boot, shoes.flats, shoes.slipper]), shoes.clown],
     currentEnemyIndex: 0,
     name: 'Trainer Battle',
     scene: 'BattleScene',
@@ -62,7 +63,7 @@ export default [
     playerFirst: true,
   },
   {
-    enemies: [shoes.boot],
+    enemies: [pickRandomlyFromArray([shoes.cowboy, shoes.croc])],
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
@@ -72,7 +73,11 @@ export default [
     playerFirst: true,
   },
   {
-    enemies: [shoes.boot, shoes.highHeel],
+    enemies: [
+      pickRandomlyFromArray([shoes.cowboy, shoes.croc]),
+      pickRandomlyFromArray([shoes.cleat, shoes.sandal, shoes.flats]),
+      pickRandomlyFromArray([shoes.sneaker, shoes.sandal]),
+    ],
     currentEnemyIndex: 0,
     name: 'Trainer Battle',
     scene: 'BattleScene',
@@ -83,6 +88,20 @@ export default [
   {
     name: 'Cobbler',
     scene: 'ShopScene',
-    items: [items.shoeBox, items.elasticLaces, items.velcroStrap],
+    items: [items.shoeBox, items.shoeRepairKit],
+  },
+  {
+    enemies: [
+      pickRandomlyFromArray([shoes.cowboy, shoes.croc]),
+      pickRandomlyFromArray([shoes.cleat, shoes.sandal, shoes.flats]),
+      pickRandomlyFromArray([shoes.sneaker, shoes.sandal]),
+      pickRandomlyFromArray([shoes.clown, shoes.highHeel]),
+    ],
+    currentEnemyIndex: 0,
+    name: 'Final Throw Down!',
+    scene: 'BattleScene',
+    turn: 0,
+    reward: 250,
+    playerFirst: true,
   },
 ];

@@ -36,7 +36,6 @@ export default ({ state, actions }) => (
           />
         </li>
       ))}
-      <li> Final Four </li>
     </ol>
   </div>
 );
