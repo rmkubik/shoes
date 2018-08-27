@@ -18,7 +18,7 @@ export const isPlayerTurn = (state) => {
 
 export default [
   {
-    enemies: [shoes.highHeel],
+    enemies: [shoes.croc],
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
@@ -49,7 +49,7 @@ export default [
   {
     name: 'Cobbler',
     scene: 'ShopScene',
-    items: [items.shoeBox, items.elasticLaces, items.velcroStrap],
+    items: [items.shoeBox, items.shoeRepairKit],
   },
   {
     enemies: [shoes.highHeel],
