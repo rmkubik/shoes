@@ -9,7 +9,7 @@ export default {
   },
   thunderKick: {
     name: 'Thunder Kick',
-    damage: 20,
+    damage: 30,
     uses: {
       current: 10,
       max: 10,
@@ -25,7 +25,7 @@ export default {
   },
   lick: {
     name: 'Lick',
-    damage: 8,
+    damage: 15,
     uses: {
       current: 20,
       max: 20,
@@ -117,6 +117,14 @@ export default {
     uses: {
       current: 10,
       max: 10,
+    },
+  },
+  whip: {
+    name: 'Strap Whip',
+    damage: 30,
+    uses: {
+      current: 20,
+      max: 20,
     },
   },
 };

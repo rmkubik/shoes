@@ -203,20 +203,44 @@ export default {
       current: 90,
     },
     image: '../../assets/images/shoes_8.png',
-    moves: [moves.dance, moves.love],
+    moves: [moves.whip],
     type: types.slipOn,
     catchChance: {
-      current: 0.3,
-      default: 0.3,
+      current: 0.4,
+      default: 0.4,
     },
     stats: {
       attack: {
-        current: 120,
-        default: 120,
+        current: 110,
+        default: 110,
       },
       defense: {
-        current: 120,
-        default: 120,
+        current: 80,
+        default: 80,
+      },
+    },
+  },
+  sneaker: {
+    name: 'Sneaker',
+    hp: {
+      max: 110,
+      current: 110,
+    },
+    image: '../../assets/images/shoes_9.png',
+    moves: [moves.lick, moves.thunderKick],
+    type: types.slipOn,
+    catchChance: {
+      current: 0.4,
+      default: 0.4,
+    },
+    stats: {
+      attack: {
+        current: 135,
+        default: 135,
+      },
+      defense: {
+        current: 100,
+        default: 100,
       },
     },
   },
