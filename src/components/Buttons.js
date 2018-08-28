@@ -11,6 +11,7 @@ export default ({
   playerShoes,
   playerAttacking,
   enemyAttacking,
+  currentShoe,
 }) => (
   <div class="buttons">
     {playerShoes.map((shoe, index) => (
@@ -19,6 +20,7 @@ export default ({
           type="radio"
           name="playerShoe"
           value={index}
+          checked={index === currentShoe ? 'checked' : undefined}
           onchange={({ srcElement }) => {
             actions.changeCurrentShoeIndex({ index: parseInt(srcElement.value, 10) });
           }}

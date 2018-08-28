@@ -53,6 +53,7 @@ export default ({ state, actions }) => {
         itemList={state.items}
         actions={actions}
         playerShoes={state.player.shoes}
+        currentShoe={state.player.currentShoe}
       />
     </div>
   );
