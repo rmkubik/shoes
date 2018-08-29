@@ -3,7 +3,7 @@ import { h } from 'hyperapp';
 import ShoeDisplay from './ShoeDisplay';
 
 export default ({
-  shoeAttacking, shoeStopAttack, shoe, shoeAttackClass,
+  shoeAttacking, shoeStopAttack, shoe, shoeAttackClass, flip,
 }) => (
   <div
     className={shoeAttacking ? shoeAttackClass : ''}
@@ -13,6 +13,6 @@ export default ({
       });
     }}
   >
-    <ShoeDisplay shoe={shoe} />
+    <ShoeDisplay shoe={shoe} flip={flip} />
   </div>
 );

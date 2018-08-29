@@ -15,6 +15,7 @@ export default ({
       shoeStopAttack={enemyStopAttack}
       shoe={shoes.enemy}
       shoeAttackClass={'attackToLeft'}
+      flip={true}
     />
     <Shoe
       shoeAttacking={playerAttacking}
