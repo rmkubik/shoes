@@ -20,10 +20,7 @@ const plugins = [
 ];
 
 module.exports = () => ({
-  entry: [
-    './src/index.js',
-    './styles/app.css',
-  ],
+  entry: ['./src/index.js', './styles/app.css'],
   devtool: 'source-map',
   output: {
     filename: '[name].[hash].js',
@@ -34,15 +31,22 @@ module.exports = () => ({
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [
-          path.resolve(__dirname, './'),
-        ],
+        include: [path.resolve(__dirname, './')],
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           use: 'css-loader?importLoaders=1',
         }),
+      },
+      {
+        test: /\.(jpg|png)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[hash].[ext]',
+          },
+        },
       },
     ],
   },

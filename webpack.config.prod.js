@@ -6,13 +6,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const webpack = require('webpack');
 
-const OUTPUT_DIR = './build';
+const OUTPUT_DIR = './dist';
 
 const plugins = [
   new HtmlWebpackPlugin({
     title: 'Hyperapp One',
     template: './src/index.html',
-    filename: path.join(__dirname, './index.html'),
+    filename: path.join(__dirname, OUTPUT_DIR, './index.html'),
   }),
   new ScriptExtHtmlWebpackPlugin({
     defaultAttribute: 'defer',
@@ -27,10 +27,7 @@ const plugins = [
 ];
 
 module.exports = () => ({
-  entry: [
-    './src/index.js',
-    './styles/app.css',
-  ],
+  entry: ['./src/index.js', './styles/app.css'],
   output: {
     filename: '[name].[hash].js',
     path: path.resolve(__dirname, OUTPUT_DIR),
@@ -40,15 +37,22 @@ module.exports = () => ({
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [
-          path.resolve(__dirname, './'),
-        ],
+        include: [path.resolve(__dirname, './')],
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           use: 'css-loader?importLoaders=1',
         }),
+      },
+      {
+        test: /\.(jpg|png)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+          },
+        },
       },
     ],
   },
