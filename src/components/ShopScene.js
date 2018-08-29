@@ -15,6 +15,7 @@ export default ({ state, actions }) => (
     ))}
     <button
       onclick={() => {
+        actions.healAll();
         actions.changeScene({ newScene: 'MapScene', currentMapIndex: state.currentMapIndex + 1 });
       }}
     >

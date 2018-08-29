@@ -89,7 +89,7 @@ export default {
   },
   squish: {
     name: 'Big Squish',
-    damage: 40,
+    damage: 30,
     uses: {
       current: 12,
       max: 12,
@@ -97,7 +97,7 @@ export default {
   },
   squirt: {
     name: 'Surprise Squirt',
-    damage: 80,
+    damage: 40,
     uses: {
       current: 2,
       max: 2,

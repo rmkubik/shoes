@@ -1,6 +1,17 @@
 import moves from './moves';
 import types from './types';
 
+import bootImage from '../../assets/images/shoes_0.png';
+import highHeelImage from '../../assets/images/shoes_1.png';
+import crocImage from '../../assets/images/shoes_2.png';
+import cowboyImage from '../../assets/images/shoes_3.png';
+import cleatImage from '../../assets/images/shoes_4.png';
+import slipperImage from '../../assets/images/shoes_5.png';
+import clownImage from '../../assets/images/shoes_6.png';
+import flatsImage from '../../assets/images/shoes_7.png';
+import sandalImage from '../../assets/images/shoes_8.png';
+import sneakerImage from '../../assets/images/shoes_9.png';
+
 export const isAlive = shoe => shoe.hp.current > 0;
 
 export default {
@@ -10,7 +21,7 @@ export default {
       max: 100,
       current: 100,
     },
-    image: '../../assets/images/shoes_0.png',
+    image: bootImage,
     moves: [moves.thunderKick, moves.specialStomp, moves.crush],
     type: types.boot,
     catchChance: {
@@ -34,7 +45,7 @@ export default {
       max: 100,
       current: 100,
     },
-    image: '../../assets/images/shoes_1.png',
+    image: highHeelImage,
     moves: [moves.stab, moves.puncture],
     type: types.dress,
     catchChance: {
@@ -58,7 +69,7 @@ export default {
       max: 100,
       current: 100,
     },
-    image: '../../assets/images/shoes_2.png',
+    image: crocImage,
     moves: [moves.chomp, moves.flail],
     type: types.slipOn,
     catchChance: {
@@ -82,7 +93,7 @@ export default {
       max: 100,
       current: 100,
     },
-    image: '../../assets/images/shoes_3.png',
+    image: cowboyImage,
     moves: [moves.spur, moves.squish],
     type: types.boot,
     catchChance: {
@@ -106,7 +117,7 @@ export default {
       max: 80,
       current: 80,
     },
-    image: '../../assets/images/shoes_4.png',
+    image: cleatImage,
     moves: [moves.thunderKick, moves.quick],
     type: types.boot,
     catchChance: {
@@ -130,7 +141,7 @@ export default {
       max: 80,
       current: 80,
     },
-    image: '../../assets/images/shoes_5.png',
+    image: slipperImage,
     moves: [moves.flail, moves.quick, moves.squish],
     type: types.slipOn,
     catchChance: {
@@ -151,10 +162,10 @@ export default {
   clown: {
     name: 'Clown Shoes',
     hp: {
-      max: 180,
-      current: 180,
+      max: 140,
+      current: 140,
     },
-    image: '../../assets/images/shoes_6.png',
+    image: clownImage,
     moves: [moves.squish, moves.squirt],
     type: types.sneaker,
     catchChance: {
@@ -178,7 +189,7 @@ export default {
       max: 70,
       current: 70,
     },
-    image: '../../assets/images/shoes_7.png',
+    image: flatsImage,
     moves: [moves.dance, moves.love],
     type: types.dress,
     catchChance: {
@@ -202,7 +213,7 @@ export default {
       max: 90,
       current: 90,
     },
-    image: '../../assets/images/shoes_8.png',
+    image: sandalImage,
     moves: [moves.whip],
     type: types.slipOn,
     catchChance: {
@@ -226,7 +237,7 @@ export default {
       max: 110,
       current: 110,
     },
-    image: '../../assets/images/shoes_9.png',
+    image: sneakerImage,
     moves: [moves.lick, moves.thunderKick],
     type: types.slipOn,
     catchChance: {

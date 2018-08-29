@@ -77,4 +77,19 @@ export default {
       money: player.money + map[currentMapIndex].reward,
     },
   }),
+  healAll: () => ({ player }) => {
+    const healed = player.shoes.map(shoe => ({
+      ...shoe,
+      hp: {
+        ...shoe.hp,
+        current: shoe.hp.max,
+      },
+    }));
+    return {
+      player: {
+        ...player,
+        shoes: healed,
+      },
+    };
+  },
 };

@@ -18,6 +18,7 @@ export default {
 
     const enemy = getCurrentEnemyFromMapItem(map[currentMapIndex]);
     if (map[currentMapIndex].wild && Math.random() < calcCatchChance(enemy)) {
+      enemy.hp.current = enemy.hp.max;
       newState.player.shoes.push(enemy);
       newState.map = [...map];
       newState.map[currentMapIndex].enemies = removeIndex(
