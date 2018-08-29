@@ -9,13 +9,18 @@ import {
 
 export default {
   ...effects,
-  enemyAttack: ({ damage }) => ({ map, currentMapIndex, player }) => ({
+  enemyAttack: ({ damage, index }) => ({ map, currentMapIndex, player }) => ({
     enemyAttacking: true,
     player: {
       ...player,
       shoes: modifyIndex(player.shoes, player.currentShoe, shoe =>
         dealShoeDamage(getCurrentEnemyFromMapItem(map[currentMapIndex]), shoe, damage)),
     },
+    map: modifyIndex(map, currentMapIndex, mapItem => ({
+      ...mapItem,
+      enemies: modifyIndex(mapItem.enemies, mapItem.currentEnemyIndex, shoe =>
+        decrementMoveUses(shoe, index)),
+    })),
   }),
   enemyStopAttack: () => ({ map, currentMapIndex }) => ({
     enemyAttacking: false,

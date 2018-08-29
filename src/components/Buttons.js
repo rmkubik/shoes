@@ -37,7 +37,7 @@ export default ({
           }
         }}
       >
-        {`${move.name} - ${move.uses.current}/${move.uses.max}`}
+        {`${move.name} - USES: ${move.uses.current}/${move.uses.max} - POWER: ${move.damage}`}
       </button>
     ))}
     {items.map(([itemName, itemCount]) => {

@@ -3,6 +3,7 @@ import {
   removeIndex,
   getCurrentEnemyFromMapItem,
   decrementItemUses,
+  restoreAllMovesUses,
 } from './actionHelpers';
 
 const calcCatchChance = shoe => (1 - shoe.hp.current / shoe.hp.max) * shoe.catchChance.current;
@@ -19,7 +20,8 @@ export default {
     const enemy = getCurrentEnemyFromMapItem(map[currentMapIndex]);
     if (map[currentMapIndex].wild && Math.random() < calcCatchChance(enemy)) {
       enemy.hp.current = enemy.hp.max;
-      newState.player.shoes.push(enemy);
+      const restoredEnemy = restoreAllMovesUses(enemy);
+      newState.player.shoes.push(restoredEnemy);
       newState.map = [...map];
       newState.map[currentMapIndex].enemies = removeIndex(
         map[currentMapIndex].enemies,

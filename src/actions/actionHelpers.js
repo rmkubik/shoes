@@ -47,3 +47,14 @@ export const dealMapItemEnemyDamage = (attacker, mapItem, damage) => ({
   enemies: modifyIndex(mapItem.enemies, mapItem.currentEnemyIndex, defender =>
     dealShoeDamage(attacker, defender, damage)),
 });
+
+export const restoreAllMovesUses = shoe => ({
+  ...shoe,
+  moves: shoe.moves.map(move => ({
+    ...move,
+    uses: {
+      ...move.uses,
+      current: move.uses.max,
+    },
+  })),
+});

@@ -4,7 +4,7 @@ import Buttons from './Buttons';
 import Screen from './Screen';
 import { getCurrentEnemy, getNextEnemyIndex, isPlayerTurn } from '../state/map';
 import { isAlive } from '../state/shoes';
-import { pickRandomlyFromArray } from '../helpers';
+import { pickRandomlyFromArray, pickRandomArrayIndex } from '../helpers';
 import { getNextShoeIndex } from '../state/player';
 
 const allShoesDead = shoes => !shoes.some(isAlive);
@@ -26,7 +26,12 @@ export default ({ state, actions }) => {
   } else if (!isAlive(state.player.shoes[state.player.currentShoe])) {
     actions.changeCurrentShoeIndex({ index: getNextShoeIndex(state) });
   } else if (!isPlayerTurn(state) && !state.enemyAttacking && !state.playerAttacking) {
-    actions.enemyAttack({ damage: pickRandomlyFromArray(getCurrentEnemy(state).moves).damage });
+    const movesWithUsesLeft = getCurrentEnemy(state).moves.filter(move => move.uses.current > 0);
+    const randomIndex = pickRandomArrayIndex(movesWithUsesLeft);
+    actions.enemyAttack({
+      damage: movesWithUsesLeft[randomIndex].damage,
+      index: randomIndex,
+    });
   }
 
   return (
