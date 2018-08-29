@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "rm -rf build && webpack -p --config webpack.config.prod.js",
+    "build": "rm -rf dist && webpack -p --config webpack.config.prod.js",
     "wipe": "rm -rf .git && git init && git add . && git commit -m 'initial commit'",
-    "deploy": "./scripts/gh_pages.sh",
+    "deploy-gh": "./scripts/gh_pages.sh",
+    "dist": "zip ",
+    "deploy": "butler push dist law5guy/shoes:html",
     "test": "jest --coverage --no-cache"
   },
   "author": "Regis Boudinot (selfup)",
@@ -33,6 +35,7 @@
     "eslint-plugin-jest": "^21.7.0",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "imports": "^1.0.0",
     "jest": "^22.1.4",
