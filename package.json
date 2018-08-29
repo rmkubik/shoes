@@ -9,7 +9,7 @@
     "wipe": "rm -rf .git && git init && git add . && git commit -m 'initial commit'",
     "deploy-gh": "./scripts/gh_pages.sh",
     "dist": "zip ",
-    "deploy": "butler push dist law5guy/shoes:html",
+    "deploy": "npm run build && butler push dist law5guy/shoes:html",
     "test": "jest --coverage --no-cache"
   },
   "author": "Regis Boudinot (selfup)",
