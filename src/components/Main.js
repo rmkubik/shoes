@@ -6,12 +6,18 @@ import ShopScene from './ShopScene';
 // import { isAlive } from '../state/shoes';
 // import { getCurrentEnemy, getNextEnemyIndex } from '../state/map';
 
+import Game from './Game';
+
 const sceneMap = {
   BattleScene: (state, actions) => <BattleScene state={state} actions={actions} />,
   MapScene: (state, actions) => <MapScene state={state} actions={actions} />,
   ShopScene: (state, actions) => <ShopScene state={state} actions={actions} />,
 };
 
+// export default (state, actions) => (
+//   <div class="main">{sceneMap[state.scene.current](state, actions)}</div>
+// );
+
 export default (state, actions) => (
-  <div class="main">{sceneMap[state.scene.current](state, actions)}</div>
+  <Game state={state} actions={actions} gameParentId={'game'}/>
 );

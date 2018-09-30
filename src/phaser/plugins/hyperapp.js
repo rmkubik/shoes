@@ -18,3 +18,4 @@ export function HyperappStateFactory(state) {
   Object.assign(HyperappState.prototype, state);
 
   return HyperappState;
+}
