@@ -1,0 +1,12 @@
+{ "columns":54,
+ "image":"..\/..\/assets\/spritesheets\/roguelikeChar_transparent.png",
+ "imageheight":203,
+ "imagewidth":918,
+ "margin":0,
+ "name":"roguelikeChar_transparent",
+ "spacing":1,
+ "tilecount":648,
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset"
+}
