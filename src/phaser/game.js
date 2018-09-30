@@ -41,6 +41,13 @@ function create() {
     sheet: 'characters',
     sprite: 0,
   });
+
+  const speed = 16;
+
+  this.input.keyboard.on('keydown_W', () => { prefab.y -= speed; });
+  this.input.keyboard.on('keydown_A', () => { prefab.x -= speed; });
+  this.input.keyboard.on('keydown_S', () => { prefab.y += speed; });
+  this.input.keyboard.on('keydown_D', () => { prefab.x += speed; });
 }
 
 function update() {}
