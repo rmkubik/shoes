@@ -6,6 +6,7 @@ import {
   HyperappStateFactory,
 } from './plugins/hyperapp';
 import Prefab from './prefab';
+import { generateArrayFromInclusive } from '../helpers';
 
 import characterSheet from '../../assets/spritesheets/roguelikeChar_transparent.png';
 import tileSheet from '../../assets/spritesheets/roguelikeSheet_transparent.png';
@@ -31,10 +32,19 @@ function create() {
   const baseLayer = map.createStaticLayer('base', tiles, 0, 0);
   const sceneryLowerLayer = map.createStaticLayer('sceneryLower', tiles, 0, 0);
   const objectsLayer = map.createStaticLayer('objects', tiles, 0, 0);
+  const sceneryUpperLayer = map.createStaticLayer('sceneryUpper', tiles, 0, 0);
 
-  objectsLayer.setCollisionBetween(0, 1765); // number of tiles in tiles spritesheet, TODO: dynamically calculate
+  // 1356 is index of fence gate from Tiled (phaser seems to be +1)
+  // 1765 is index of final index in tilesheet
+  objectsLayer.setCollision([
+    ...generateArrayFromInclusive(0, 1356),
+    ...generateArrayFromInclusive(1358, 1765),
+  ]);
 
-  console.log(map.layers.find(layer => layer.name === 'objects').data);
+  // const debugGraphics = this.add.graphics();
+  // map.renderDebug(debugGraphics, undefined, objectsLayer);
+
+  // console.log(map.layers.find(layer => layer.name === 'objects').data);
 
   this.objects = this.add.group({
     runChildUpdate: true,
@@ -45,7 +55,7 @@ function create() {
   this.sKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
   this.dKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
-  const speed = 200;
+  const speed = 150;
 
   const prefab = new Prefab({
     scene: this,
@@ -54,7 +64,7 @@ function create() {
       y: 32,
     },
     sheet: 'characters',
-    sprite: 0,
+    sprite: 325,
   });
 
   prefab.speed = speed;
