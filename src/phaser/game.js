@@ -5,7 +5,7 @@ import {
   HyperappActionsFactory,
   HyperappStateFactory,
 } from './plugins/hyperapp';
-import Prefab from './prefab';
+import Prefab from './prefabs/prefab';
 import { generateArrayFromInclusive } from '../helpers';
 
 import characterSheet from '../../assets/spritesheets/roguelikeChar_transparent.png';
