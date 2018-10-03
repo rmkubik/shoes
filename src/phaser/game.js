@@ -6,6 +6,7 @@ import {
   HyperappStateFactory,
 } from './plugins/hyperapp';
 import Prefab from './prefabs/prefab';
+import Player from './prefabs/player';
 import { generateArrayFromInclusive } from '../helpers';
 
 import characterSheet from '../../assets/spritesheets/roguelikeChar_transparent.png';
@@ -50,58 +51,25 @@ function create() {
     runChildUpdate: true,
   });
 
-  this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-  this.aKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-  this.sKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-  this.dKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+  const keys = {
+    up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
+    left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT),
+    down: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
+    right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
+  };
 
-  const speed = 150;
-
-  const prefab = new Prefab({
+  const player = new Player({
     scene: this,
     position: {
       x: 32,
       y: 32,
     },
-    sheet: 'characters',
-    sprite: 325,
+    speed: 150,
+    keys,
   });
 
-  prefab.speed = speed;
-
-  prefab.update = () => {
-    const direction = { x: 0, y: 0 };
-    prefab.body.setVelocity(0);
-
-    if (this.wKey.isDown) {
-      direction.y = -1;
-    }
-    if (this.aKey.isDown) {
-      direction.x = -1;
-    }
-    if (this.sKey.isDown) {
-      direction.y = 1;
-    }
-    if (this.dKey.isDown) {
-      direction.x = 1;
-    }
-
-    if (direction.x !== 0 || direction.y !== 0) {
-      prefab.direction = direction;
-
-      prefab.body.setVelocityX(prefab.speed * prefab.direction.x);
-      prefab.body.setVelocityY(prefab.speed * prefab.direction.y);
-
-      // console.log(prefab.direction);
-      // console.log(prefab.body.velocity);
-      // console.log(prefab.speed);
-    }
-  };
-
-  this.physics.add.collider(prefab, objectsLayer);
-  prefab.body.setCollideWorldBounds(true);
-
-  this.objects.add(prefab);
+  this.physics.add.collider(player, objectsLayer);
+  this.objects.add(player);
 
 
   // this.input.keyboard.on('keydown_W', () => { prefab.y -= speed; });
