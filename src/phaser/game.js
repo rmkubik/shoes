@@ -1,14 +1,16 @@
 import Phaser from 'phaser';
 
+// internal dependencies
 import config from './config';
 import {
   HyperappActionsFactory,
   HyperappStateFactory,
 } from './plugins/hyperapp';
-import Prefab from './prefabs/prefab';
 import Player from './prefabs/player';
+import Map from './map';
 import { generateArrayFromInclusive } from '../helpers';
 
+// assets
 import characterSheet from '../../assets/spritesheets/roguelikeChar_transparent.png';
 import tileSheet from '../../assets/spritesheets/roguelikeSheet_transparent.png';
 import tiledMap from '../../rawAssets/tilemaps/main.json';
@@ -28,24 +30,34 @@ function preload() {
 }
 
 function create() {
-  const map = this.make.tilemap({ key: 'map' });
-  const tiles = map.addTilesetImage('roguelikeSheet_transparent', 'tiles');
-  const baseLayer = map.createStaticLayer('base', tiles, 0, 0);
-  const sceneryLowerLayer = map.createStaticLayer('sceneryLower', tiles, 0, 0);
-  const objectsLayer = map.createStaticLayer('objects', tiles, 0, 0);
-  const sceneryUpperLayer = map.createStaticLayer('sceneryUpper', tiles, 0, 0);
-
-  // 1356 is index of fence gate from Tiled (phaser seems to be +1)
-  // 1765 is index of final index in tilesheet
-  objectsLayer.setCollision([
-    ...generateArrayFromInclusive(0, 1356),
-    ...generateArrayFromInclusive(1358, 1765),
-  ]);
-
-  // const debugGraphics = this.add.graphics();
-  // map.renderDebug(debugGraphics, undefined, objectsLayer);
-
-  // console.log(map.layers.find(layer => layer.name === 'objects').data);
+  const map = new Map({
+    scene: this,
+    key: 'map',
+    tilesets: [
+      {
+        tiledName: 'roguelikeSheet_transparent',
+        tileSetKey: 'tiles',
+      },
+    ],
+    layers: [
+      {
+        tiledName: 'base',
+        tileSetKey: 'tiles',
+      },
+      {
+        tiledName: 'sceneryLower',
+        tileSetKey: 'tiles',
+      },
+      {
+        tiledName: 'objects',
+        tileSetKey: 'tiles',
+      },
+      {
+        tiledName: 'sceneryUpper',
+        tileSetKey: 'tiles',
+      },
+    ],
+  });
 
   this.objects = this.add.group({
     runChildUpdate: true,
@@ -68,7 +80,7 @@ function create() {
     keys,
   });
 
-  this.physics.add.collider(player, objectsLayer);
+  this.physics.add.collider(player, map.layers.objects);
   this.objects.add(player);
 
 
