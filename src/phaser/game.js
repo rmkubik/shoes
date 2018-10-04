@@ -8,7 +8,7 @@ import {
 } from './plugins/hyperapp';
 import Player from './prefabs/player';
 import Map from './map';
-import { generateArrayFromInclusive } from '../helpers';
+import BattleTransitionPipeline from './pipelines/BattleTransitionPipeline';
 
 // assets
 import characterSheet from '../../assets/spritesheets/roguelikeChar_transparent.png';
@@ -30,6 +30,18 @@ function preload() {
 }
 
 function create() {
+  this.transitioning = false;
+  this.startBattleTransition = () => {
+    if (!this.transitioning) {
+      this.t = 0;
+      this.customPipeline.setFloat1('time', this.t);
+      this.cameras.main.setRenderToTexture(this.customPipeline);
+      this.transitioning = true;
+      // this.cameras.main.clearRenderToTexture();
+      // this.cameras.main.fade(800, 0, 0, 0);
+    }
+  };
+
   const map = new Map({
     scene: this,
     key: 'map',
@@ -83,6 +95,7 @@ function create() {
   this.physics.add.collider(player, map.layers.objects);
   this.objects.add(player);
 
+  this.customPipeline = this.game.renderer.addPipeline('BattleTransition', new BattleTransitionPipeline(this.game));
 
   // this.input.keyboard.on('keydown_W', () => { prefab.y -= speed; });
   // this.input.keyboard.on('keydown_A', () => { prefab.x -= speed; });
@@ -90,7 +103,12 @@ function create() {
   // this.input.keyboard.on('keydown_D', () => { prefab.x += speed; });
 }
 
-function update() {}
+function update() {
+  if (this.transitioning) {
+    this.customPipeline.setFloat1('time', this.t);
+    this.t += 0.005;
+  }
+}
 
 class Game {
   constructor(actions, state, parent) {

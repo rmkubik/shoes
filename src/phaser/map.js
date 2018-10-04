@@ -23,19 +23,8 @@ class Map {
       ...generateArrayFromInclusive(1358, 1765),
     ]);
 
-    let fading = false;
-    this.layers.objects.setTileIndexCallback(593, () => {
-      if (!fading) {
-        scene.cameras.main.fade(800, 0, 0, 0);
-        fading = true;
-      }
-    });
-    this.layers.objects.setTileIndexCallback(650, () => {
-      if (!fading) {
-        scene.cameras.main.fade(800, 0, 0, 0);
-        fading = true;
-      }
-    });
+    this.layers.objects.setTileIndexCallback(593, scene.startBattleTransition);
+    this.layers.objects.setTileIndexCallback(650, scene.startBattleTransition);
 
     // const debugGraphics = this.add.graphics();
     // map.renderDebug(debugGraphics, undefined, objectsLayer);
