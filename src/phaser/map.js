@@ -17,12 +17,24 @@ class Map {
     }), {});
 
     this.layers.objects.setCollision([
-      ...generateArrayFromInclusive(0, 1356),
+      ...generateArrayFromInclusive(0, 592),
+      ...generateArrayFromInclusive(594, 649),
+      ...generateArrayFromInclusive(651, 1356),
       ...generateArrayFromInclusive(1358, 1765),
     ]);
 
+    let fading = false;
     this.layers.objects.setTileIndexCallback(593, () => {
-      console.log('grass');
+      if (!fading) {
+        scene.cameras.main.fade(800, 0, 0, 0);
+        fading = true;
+      }
+    });
+    this.layers.objects.setTileIndexCallback(650, () => {
+      if (!fading) {
+        scene.cameras.main.fade(800, 0, 0, 0);
+        fading = true;
+      }
     });
 
     // const debugGraphics = this.add.graphics();
