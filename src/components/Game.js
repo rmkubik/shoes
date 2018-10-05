@@ -2,8 +2,22 @@ import { h } from 'hyperapp';
 
 import Game from '../phaser/game';
 
-export default ({ state, actions, gameParentId }) => {
-  const game = new Game(actions, state, gameParentId);
+let phaserCanvas;
 
-  return <div class={gameParentId}></div>;
-};
+export default ({ state, actions, gameParentId }) => (
+  <div
+    key={gameParentId}
+    id={gameParentId}
+    oncreate={(element) => {
+      new Game(actions, state, gameParentId);
+
+      // if (!phaserCanvas) {
+      //   new Game(actions, state, gameParentId);
+      //   phaserCanvas = element.querySelector('canvas');
+      //   // actions.setPhaserCanvas({ phaserCanvas: element.querySelector('canvas') });
+      // } else {
+      //   element.appendChild(phaserCanvas);
+      // }
+    }}
+  />
+);

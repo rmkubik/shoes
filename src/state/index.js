@@ -10,6 +10,7 @@ import stats from './stats';
 export default {
   playerAttacking: false,
   enemyAttacking: false,
+  phaserCanvas: null,
   scene,
   currentMapIndex: 0,
   moves,

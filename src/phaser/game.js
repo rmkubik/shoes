@@ -37,6 +37,11 @@ function create() {
       this.customPipeline.setFloat1('time', this.t);
       this.cameras.main.setRenderToTexture(this.customPipeline);
       this.transitioning = true;
+      this.time.delayedCall(1000, () => {
+        this.scene.pause();
+        this.actions.changeScene({ newScene: 'BattleScene' });
+        this.transitioning = false;
+      });
       // this.cameras.main.clearRenderToTexture();
       // this.cameras.main.fade(800, 0, 0, 0);
     }

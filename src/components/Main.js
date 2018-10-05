@@ -8,16 +8,32 @@ import ShopScene from './ShopScene';
 
 import Game from './Game';
 
-const sceneMap = {
-  BattleScene: (state, actions) => <BattleScene state={state} actions={actions} />,
-  MapScene: (state, actions) => <MapScene state={state} actions={actions} />,
-  ShopScene: (state, actions) => <ShopScene state={state} actions={actions} />,
+// const sceneMap = {
+//   BattleScene: (state, actions) => <BattleScene state={state} actions={actions} />,
+//   MapScene: (state, actions) => <Game state={state} actions={actions} gameParentId={'game'} />,
+//   ShopScene: (state, actions) => <ShopScene state={state} actions={actions} />,
+// };
+
+const sceneMap = (state, actions) => {
+  switch (state.scene.current) {
+    case 'ShopScene':
+      return <ShopScene state={state} actions={actions} />;
+    case 'BattleScene':
+      return <BattleScene state={state} actions={actions} />;
+    default:
+    case 'MapScene':
+      // no hyperapp scene
+      break;
+  }
 };
 
-// export default (state, actions) => (
-//   <div class="main">{sceneMap[state.scene.current](state, actions)}</div>
-// );
-
 export default (state, actions) => (
-  <Game state={state} actions={actions} gameParentId={'game'}/>
+  <div class="main">
+    {sceneMap(state, actions)}
+    <Game state={state} actions={actions} gameParentId={'game'} />
+  </div>
 );
+
+// export default (state, actions) => (
+//   <Game state={state} actions={actions} gameParentId={'game'}/>
+// );

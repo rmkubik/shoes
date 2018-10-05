@@ -97,4 +97,7 @@ export default {
       },
     };
   },
+  setPhaserCanvas: ({ phaserCanvas }) => () => ({
+    phaserCanvas,
+  }),
 };
