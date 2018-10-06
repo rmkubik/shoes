@@ -113,6 +113,10 @@ function update() {
     this.customPipeline.setFloat1('time', this.t);
     this.t += 0.005;
   }
+
+  if (this.state.scene.current === 'MapScene') {
+    this.scene.resume('mapScene');
+  }
 }
 
 class Game {
@@ -122,6 +126,7 @@ class Game {
         preload,
         create,
         update,
+        key: 'mapScene',
       },
       plugins: {
         global: [
