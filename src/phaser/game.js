@@ -97,6 +97,9 @@ function create() {
     keys,
   });
 
+  this.cameras.main.startFollow(player, true); //, 0.1, 0.1);
+  this.cameras.main.setBounds(0, 0, map.tilemap.widthInPixels, map.tilemap.heightInPixels);
+
   this.physics.add.collider(player, map.layers.objects);
   this.objects.add(player);
 
