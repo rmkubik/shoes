@@ -24,7 +24,8 @@ function preload() {
   this.load.spritesheet('tiles', tileSheet, {
     frameWidth: 16,
     frameHeight: 16,
-    spacing: 1,
+    spacing: 3,
+    margin: 1,
   });
   this.load.tilemapTiledJSON('map', tiledMap);
 }

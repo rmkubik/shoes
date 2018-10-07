@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "rm -rf dist && webpack -p --config webpack.config.prod.js",
-    "wipe": "rm -rf .git && git init && git add . && git commit -m 'initial commit'",
+    "extrude": "tile-extruder --tileWidth 16 --tileHeight 16 --input rawAssets/spritesheets/roguelikeSheet_transparent.png --output assets/spritesheets/roguelikeSheet_transparent.png --spacing 1",
     "deploy-gh": "./scripts/gh_pages.sh",
     "dist": "zip ",
     "deploy": "npm run build && butler push dist law5guy/shoes:html",
@@ -42,6 +42,7 @@
     "jest": "^22.1.4",
     "node-libs-browser": "^2.0.0",
     "script-ext-html-webpack-plugin": "^2.0.1",
+    "tile-extruder": "^1.1.0",
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.4.2"
