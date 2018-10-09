@@ -10,10 +10,14 @@ import Player from './prefabs/player';
 import Map from './map';
 import BattleTransitionPipeline from './pipelines/BattleTransitionPipeline';
 
-// assets
+// tilesheets
 import characterSheet from '../../assets/spritesheets/roguelikeChar_transparent.png';
 import tileSheet from '../../assets/spritesheets/roguelikeSheet_transparent.png';
-import tiledMap from '../../rawAssets/tilemaps/main.json';
+
+// tilemaps
+import tiledMap from '../../assets/tilemaps/main.json';
+import houseMap from '../../assets/tilemaps/house.json';
+import clearingMap from '../../assets/tilemaps/clearing.json';
 
 function preload() {
   this.load.spritesheet('characters', characterSheet, {
@@ -28,6 +32,8 @@ function preload() {
     margin: 1,
   });
   this.load.tilemapTiledJSON('map', tiledMap);
+  this.load.tilemapTiledJSON('house', houseMap);
+  this.load.tilemapTiledJSON('clearing', clearingMap);
 }
 
 function create() {
