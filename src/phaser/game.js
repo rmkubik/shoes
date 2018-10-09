@@ -59,8 +59,16 @@ function create() {
     key: 'map',
     tilesets: [
       {
+        tiledName: 'roguelikeChars_transparent',
+        tileSetKey: 'characters',
+        spacing: 1,
+      },
+      {
         tiledName: 'roguelikeSheet_transparent',
         tileSetKey: 'tiles',
+        margin: 1,
+        spacing: 3,
+        gid: 1,
       },
     ],
     layers: [
