@@ -8,7 +8,7 @@ class Map {
   }) {
     // this.tilemap = scene.make.tilemap({ key });
     this.tilemap = scene.make.tilemap({
-      tileWidth: 16, tileHeight: 16, width: 15, height: 10,
+      tileWidth: 16, tileHeight: 16, width: 15, height: 100,
     });
 
     this.tilesets = tilesets.reduce((map, {
@@ -36,7 +36,11 @@ class Map {
 
     // this.layers.objects.putTilesAt([0], 0, 0);
 
+    this.clearingMap = scene.make.tilemap({ key: 'clearing' });
+
+
     this.setMapDataLayer(scene, 'clearing', { x: 0, y: 0 });
+    this.setMapDataLayer(scene, 'clearing', { x: 0, y: 10 });
 
     // const debugGraphics = this.add.graphics();
     // map.renderDebug(debugGraphics, undefined, objectsLayer);
@@ -48,16 +52,15 @@ class Map {
     return tiles.map(row => row.map(tile => tile.index));
   }
 
-  static getMapLayerData(scene, key) {
-    const map = scene.make.tilemap({ key });
-    return map.layers.reduce((layers, layer) => ({
+  getMapLayerData(scene, key) {
+    return this.clearingMap.layers.reduce((layers, layer) => ({
       ...layers,
       [layer.name]: layer.data, // Map.convertTilesToData(layer.data),
     }), {});
   }
 
   setMapDataLayer(scene, key, position) {
-    const mapLayerData = Map.getMapLayerData(scene, key);
+    const mapLayerData = this.getMapLayerData(scene, key);
     Object.entries(mapLayerData).forEach(([layerName, layerData]) => {
       this.layers[layerName].putTilesAt(layerData, position.x, position.y);
     });
