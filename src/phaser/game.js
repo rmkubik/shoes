@@ -18,6 +18,8 @@ import tileSheet from '../../assets/spritesheets/roguelikeSheet_transparent.png'
 import tiledMap from '../../assets/tilemaps/main.json';
 import houseMap from '../../assets/tilemaps/house.json';
 import clearingMap from '../../assets/tilemaps/clearing.json';
+import clearing2Map from '../../assets/tilemaps/clearing2.json';
+
 
 function preload() {
   this.load.spritesheet('characters', characterSheet, {
@@ -34,6 +36,7 @@ function preload() {
   this.load.tilemapTiledJSON('map', tiledMap);
   this.load.tilemapTiledJSON('house', houseMap);
   this.load.tilemapTiledJSON('clearing', clearingMap);
+  this.load.tilemapTiledJSON('clearing2', clearing2Map);
 }
 
 function create() {
