@@ -62,7 +62,7 @@ function create() {
     key: 'map',
     tilesets: [
       {
-        tiledName: 'roguelikeChars_transparent',
+        tiledName: 'roguelikeChar_transparent',
         tileSetKey: 'characters',
         spacing: 1,
       },

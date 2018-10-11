@@ -24,28 +24,33 @@ class Map {
       [tiledName]: this.tilemap.createBlankDynamicLayer(tiledName, this.tilesets[tileSetKey], 0, 0),
     }), {});
 
-    this.layers.objects.setCollision([
-      ...generateArrayFromInclusive(0, 592),
-      ...generateArrayFromInclusive(594, 649),
-      ...generateArrayFromInclusive(651, 1356),
-      ...generateArrayFromInclusive(1358, 1765),
-    ]);
-
-    this.layers.objects.setTileIndexCallback(593, scene.startBattleTransition);
-    this.layers.objects.setTileIndexCallback(650, scene.startBattleTransition);
-
-    // this.layers.objects.putTilesAt([0], 0, 0);
-
     this.maps = {
+      house: scene.make.tilemap({ key: 'house' }),
       clearing: scene.make.tilemap({ key: 'clearing' }),
       clearing2: scene.make.tilemap({ key: 'clearing2' }),
     };
 
-    this.setMapDataLayer('clearing', { x: 0, y: 0 });
-    this.setMapDataLayer('clearing2', { x: 0, y: 10 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 0 });
+    this.setMapDataLayer('house', { x: 0, y: 0 });
+    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 10 });
+    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 20 });
+    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 30 });
 
-    // const debugGraphics = this.add.graphics();
-    // map.renderDebug(debugGraphics, undefined, objectsLayer);
+    // this.layers.objects.setCollision([
+    //   ...generateArrayFromInclusive(0, 592),
+    //   ...generateArrayFromInclusive(594, 649),
+    //   ...generateArrayFromInclusive(651, 1356),
+    //   ...generateArrayFromInclusive(1358, 1765),
+    // ]);
+
+    // add 1 to index for some reason?
+    this.layers.objects.setCollisionByExclusion([-1, 593, 650, 1362, 1363]);
+
+    this.layers.objects.setTileIndexCallback(593, scene.startBattleTransition);
+    this.layers.objects.setTileIndexCallback(650, scene.startBattleTransition);
+
+    // const debugGraphics = scene.add.graphics();
+    // this.tilemap.renderDebug(debugGraphics, undefined, this.layers.objects);
 
     // console.log(map.layers.find(layer => layer.name === 'objects').data);
   }
