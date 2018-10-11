@@ -59,7 +59,6 @@ function create() {
 
   const map = new Map({
     scene: this,
-    key: 'map',
     tilesets: [
       {
         tiledName: 'roguelikeChar_transparent',
@@ -115,11 +114,11 @@ function create() {
     keys,
   });
 
-  this.cameras.main.startFollow(player, true); //, 0.1, 0.1);
+  this.cameras.main.startFollow(player, true);
   this.cameras.main.setBounds(0, 0, map.tilemap.widthInPixels, map.tilemap.heightInPixels);
   // this.cameras.main.setSize(240, 480);
 
-  this.physics.world.setBounds(0, 0, 240, 1080);
+  this.physics.world.setBounds(0, 0, 240, 100 * 16); // height is number of tiles in map * tile size
   this.physics.add.collider(player, map.layers.objects);
   this.objects.add(player);
 

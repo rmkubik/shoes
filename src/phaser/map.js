@@ -1,10 +1,8 @@
 import Phaser from 'phaser';
 
-import { generateArrayFromInclusive } from '../helpers';
-
 class Map {
   constructor({
-    scene, key, layers, tilesets,
+    scene, layers, tilesets,
   }) {
     // this.tilemap = scene.make.tilemap({ key });
     this.tilemap = scene.make.tilemap({
@@ -20,7 +18,6 @@ class Map {
 
     this.layers = layers.reduce((map, { tiledName, tileSetKey }) => ({
       ...map,
-      // [tiledName]: this.tilemap.createStaticLayer(tiledName, this.tilesets[tileSetKey], 0, 0),
       [tiledName]: this.tilemap.createBlankDynamicLayer(tiledName, this.tilesets[tileSetKey], 0, 0),
     }), {});
 
@@ -30,18 +27,17 @@ class Map {
       clearing2: scene.make.tilemap({ key: 'clearing2' }),
     };
 
-    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 0 });
     this.setMapDataLayer('house', { x: 0, y: 0 });
     this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 10 });
     this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 20 });
     this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 30 });
-
-    // this.layers.objects.setCollision([
-    //   ...generateArrayFromInclusive(0, 592),
-    //   ...generateArrayFromInclusive(594, 649),
-    //   ...generateArrayFromInclusive(651, 1356),
-    //   ...generateArrayFromInclusive(1358, 1765),
-    // ]);
+    this.setMapDataLayer('house', { x: 0, y: 40 });
+    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 50 });
+    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 60 });
+    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 70 });
+    this.setMapDataLayer('house', { x: 0, y: 80 });
+    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 90 });
+    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 100 });
 
     // add 1 to index for some reason?
     this.layers.objects.setCollisionByExclusion([-1, 593, 650, 1362, 1363]);
@@ -49,20 +45,16 @@ class Map {
     this.layers.objects.setTileIndexCallback(593, scene.startBattleTransition);
     this.layers.objects.setTileIndexCallback(650, scene.startBattleTransition);
 
-    // const debugGraphics = scene.add.graphics();
-    // this.tilemap.renderDebug(debugGraphics, undefined, this.layers.objects);
-
-    // console.log(map.layers.find(layer => layer.name === 'objects').data);
-  }
-
-  static convertTilesToData(tiles) {
-    return tiles.map(row => row.map(tile => tile.index));
+    if (this.debug) {
+      const debugGraphics = scene.add.graphics();
+      this.tilemap.renderDebug(debugGraphics, undefined, this.layers.objects);
+    }
   }
 
   getMapLayerData(key) {
     return this.maps[key].layers.reduce((layers, layer) => ({
       ...layers,
-      [layer.name]: layer.data, // Map.convertTilesToData(layer.data),
+      [layer.name]: layer.data,
     }), {});
   }
 
