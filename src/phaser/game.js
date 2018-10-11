@@ -9,6 +9,7 @@ import {
 import Player from './prefabs/player';
 import Map from './map';
 import BattleTransitionPipeline from './pipelines/BattleTransitionPipeline';
+import battleScene from './scenes/battle';
 
 // tilesheets
 import characterSheet from '../../assets/spritesheets/roguelikeChar_transparent.png';
@@ -124,7 +125,7 @@ function create() {
 
   this.customPipeline = this.game.renderer.addPipeline('BattleTransition', new BattleTransitionPipeline(this.game));
 
-  // this.input.keyboard.on('keydown_W', () => { prefab.y -= speed; });
+  this.input.keyboard.on('keydown_W', () => { this.scene.start('battle'); });
   // this.input.keyboard.on('keydown_A', () => { prefab.x -= speed; });
   // this.input.keyboard.on('keydown_S', () => { prefab.y += speed; });
   // this.input.keyboard.on('keydown_D', () => { prefab.x += speed; });
@@ -144,12 +145,12 @@ function update() {
 class Game {
   constructor(actions, state, parent) {
     this.game = new Phaser.Game({
-      scene: {
+      scene: [{
         preload,
         create,
         update,
         key: 'mapScene',
-      },
+      }, battleScene],
       plugins: {
         global: [
           {
