@@ -7,9 +7,15 @@ body {
   -ms-interpolation-mode: nearest-neighbor;
   image-rendering: pixelated;
 
-  padding-left: 10vw;
-  padding-right: 10vw;
-  padding-top: 5vh;
+  /* padding-left: 10vw;
+  padding-right: 10vw; */
+  /* padding-top: 5vh; */
+
+  width: 480px;
 
   background-color: white;
+}
+
+#game {
+  position: absolute;
 }

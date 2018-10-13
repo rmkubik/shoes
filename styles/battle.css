@@ -1,3 +1,8 @@
+.battleScene {
+  position: absolute;
+  margin-top: 320px;
+}
+
 .battleScene .screen {
   display: grid;
   grid-template-columns: 1fr 1fr;
