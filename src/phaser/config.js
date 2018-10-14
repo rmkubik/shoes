@@ -10,6 +10,6 @@ export default {
       debug: false,
     },
   },
-  pixelArt: false,
+  pixelArt: true,
   backgroundColor: '#000000',
 };
