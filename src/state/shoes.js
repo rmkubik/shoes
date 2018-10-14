@@ -22,6 +22,7 @@ export default {
       current: 100,
     },
     image: bootImage,
+    imageKey: 'boot',
     moves: [moves.thunderKick, moves.specialStomp, moves.crush],
     type: types.boot,
     catchChance: {
@@ -46,6 +47,7 @@ export default {
       current: 100,
     },
     image: highHeelImage,
+    imageKey: 'highHeel',
     moves: [moves.stab, moves.puncture],
     type: types.dress,
     catchChance: {
@@ -70,6 +72,7 @@ export default {
       current: 100,
     },
     image: crocImage,
+    imageKey: 'croc',
     moves: [moves.chomp, moves.flail],
     type: types.slipOn,
     catchChance: {
@@ -94,6 +97,7 @@ export default {
       current: 100,
     },
     image: cowboyImage,
+    imageKey: 'cowboy',
     moves: [moves.spur, moves.squish],
     type: types.boot,
     catchChance: {
@@ -118,6 +122,7 @@ export default {
       current: 80,
     },
     image: cleatImage,
+    imageKey: 'cleat',
     moves: [moves.thunderKick, moves.quick],
     type: types.boot,
     catchChance: {
@@ -142,6 +147,7 @@ export default {
       current: 80,
     },
     image: slipperImage,
+    imageKey: 'slipper',
     moves: [moves.flail, moves.quick, moves.squish],
     type: types.slipOn,
     catchChance: {
@@ -166,6 +172,7 @@ export default {
       current: 140,
     },
     image: clownImage,
+    imageKey: 'clown',
     moves: [moves.squish, moves.squirt],
     type: types.sneaker,
     catchChance: {
@@ -190,6 +197,7 @@ export default {
       current: 70,
     },
     image: flatsImage,
+    imageKey: 'flats',
     moves: [moves.dance, moves.love],
     type: types.dress,
     catchChance: {
@@ -214,6 +222,7 @@ export default {
       current: 90,
     },
     image: sandalImage,
+    imageKey: 'sandal',
     moves: [moves.whip],
     type: types.slipOn,
     catchChance: {
@@ -238,6 +247,7 @@ export default {
       current: 110,
     },
     image: sneakerImage,
+    imageKey: 'sneaker',
     moves: [moves.lick, moves.thunderKick],
     type: types.slipOn,
     catchChance: {

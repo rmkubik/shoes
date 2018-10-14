@@ -1,6 +1,9 @@
 .battleScene {
   position: absolute;
   margin-top: 320px;
+  width: 480px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .battleScene .screen {
