@@ -51,6 +51,7 @@ function create() {
       this.time.delayedCall(1000, () => {
         this.scene.pause();
         this.actions.changeScene({ newScene: 'BattleScene' });
+        this.scene.start('battle');
         this.transitioning = false;
       });
       // this.cameras.main.clearRenderToTexture();
@@ -117,9 +118,9 @@ function create() {
 
   this.cameras.main.startFollow(player, true);
   this.cameras.main.setBounds(0, 0, map.tilemap.widthInPixels, map.tilemap.heightInPixels);
-  // this.cameras.main.setSize(240, 480);
+  this.cameras.main.setSize(480, 480);
 
-  this.physics.world.setBounds(0, 0, 240, 100 * 16); // height is number of tiles in map * tile size
+  this.physics.world.setBounds(120, 0, 240, 100 * 16); // height is number of tiles in map * tile size
   this.physics.add.collider(player, map.layers.objects);
   this.objects.add(player);
 

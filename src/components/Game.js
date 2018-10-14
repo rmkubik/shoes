@@ -6,13 +6,13 @@ let phaserCanvas;
 
 export default ({ state, actions, gameParentId }) => {
   const style = {
-    display: 'none',
+    // display: 'none',
   };
 
-  if (state.scene.current === 'MapScene') {
-    style.display = 'block';
-    // resume state
-  }
+  // if (state.scene.current === 'MapScene') {
+  //   style.display = 'block';
+  //   // resume state
+  // }
 
 
   return (

@@ -10,6 +10,7 @@ import clownImage from '../../../assets/images/shoes_6.png';
 import flatsImage from '../../../assets/images/shoes_7.png';
 import sandalImage from '../../../assets/images/shoes_8.png';
 import sneakerImage from '../../../assets/images/shoes_9.png';
+import backgroundImage from '../../../assets/images/background.png';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -27,11 +28,13 @@ class battleScene extends Phaser.Scene {
     this.load.image('flats', flatsImage);
     this.load.image('sandal', sandalImage);
     this.load.image('sneaker', sneakerImage);
+    this.load.image('background', backgroundImage);
   }
 
   create() {
-    this.add.sprite(240 - 64, 120, 'sandal').setScale(2);
-    this.add.sprite(64, 360, 'boot').setScale(2);
+    this.add.sprite(240, 240, 'background'); // zero centered
+    this.add.sprite(480 - 120, 80, 'sandal').setScale(-2, 2);
+    this.add.sprite(120, 220, 'boot').setScale(2);
   }
 
   update() {

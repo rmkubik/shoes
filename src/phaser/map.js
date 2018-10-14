@@ -18,7 +18,7 @@ class Map {
 
     this.layers = layers.reduce((map, { tiledName, tileSetKey }) => ({
       ...map,
-      [tiledName]: this.tilemap.createBlankDynamicLayer(tiledName, this.tilesets[tileSetKey], 0, 0),
+      [tiledName]: this.tilemap.createBlankDynamicLayer(tiledName, this.tilesets[tileSetKey], 120, 0),
     }), {});
 
     this.maps = {

@@ -29,8 +29,8 @@ const sceneMap = (state, actions) => {
 
 export default (state, actions) => (
   <div class="main">
-    {sceneMap(state, actions)}
     <Game state={state} actions={actions} gameParentId={'game'} />
+    {sceneMap(state, actions)}
   </div>
 );
 

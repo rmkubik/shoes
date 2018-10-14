@@ -36,7 +36,7 @@ export default ({ state, actions }) => {
 
   return (
     <div class="battleScene">
-      <Screen
+      {/* <Screen
         playerAttacking={state.playerAttacking}
         playerStopAttack={actions.playerStopAttack}
         enemyAttacking={state.enemyAttacking}
@@ -46,7 +46,7 @@ export default ({ state, actions }) => {
           enemy: getCurrentEnemy(state),
           enemies: state.map[state.currentMapIndex].enemies,
         }}
-      />
+      /> */}
       <Buttons
         playerAttacking={state.playerAttacking}
         enemyAttacking={state.enemyAttacking}

@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 export default {
   type: Phaser.AUTO,
-  width: 240,
+  width: 480,
   height: 480,
   physics: {
     default: 'arcade',
@@ -11,5 +11,5 @@ export default {
     },
   },
   pixelArt: false,
-  backgroundColor: '#FFFFFF',
+  backgroundColor: '#000000',
 };
