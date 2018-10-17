@@ -21,9 +21,9 @@ class Button extends Prefab {
         { name: 'up', from: 'down', to: 'hover' },
       ],
       methods: {
-        onEnterHover: () => { this.frame = sprites.hover; },
-        onEnterUp: () => { this.frame = sprites.up; },
-        onEnterDown: () => { this.frame = sprites.down; },
+        onEnterHover: () => { this.setFrame(sprites.hover); },
+        onEnterUp: () => { this.setFrame(sprites.up); },
+        onEnterDown: () => { this.setFrame(sprites.down); },
       },
     });
 

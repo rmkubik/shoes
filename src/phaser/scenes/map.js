@@ -103,7 +103,14 @@ class mapScene extends Phaser.Scene {
     // this.input.keyboard.on('keydown_D', () => { prefab.x += speed; });
 
     this.button = new Button({
-      scene: this, position: { x: 0, y: 0 }, sheet: 'tiles', frame: 0,
+      scene: this,
+      position: { x: 0, y: 0 },
+      sheet: 'tiles',
+      sprites: {
+        up: 0,
+        down: 2,
+        hover: 1,
+      },
     });
   }
 
