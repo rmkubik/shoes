@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 import { getCurrentEnemy } from '../../state/map';
 import Button from '../prefabs/button';
+import Prefab from '../prefabs/prefab';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -29,17 +30,46 @@ class battleScene extends Phaser.Scene {
 
     this.input.keyboard.on('keydown_Q', () => { this.actions.playerStopAttack(); });
 
-    this.button = new Button({
-      scene: this,
-      position: { x: 0, y: 0 },
-      sheet: 'buttons',
-      sprites: {
-        up: 0,
-        hover: 1,
-        down: 2,
+    const moves = [
+      'KICK',
+      'LICK',
+      'JUMP',
+      'STOMP',
+      'SNAP',
+      'POP',
+    ];
+
+    const grid = {
+      x: 160,
+      y: 310,
+      spacing: {
+        x: 20,
+        y: 15,
       },
-      onclick: () => console.log('asdf'),
-      text: 'KICK',
+      button: {
+        height: 40,
+        width: 140,
+      },
+      columns: 2,
+    };
+
+    this.buttons = [];
+    moves.forEach((move, index) => {
+      this.buttons.push(new Button({
+        scene: this,
+        position: {
+          x: grid.x + ((grid.spacing.x + grid.button.width) * Math.floor(index % grid.columns)),
+          y: grid.y + ((grid.spacing.y + grid.button.height) * Math.floor(index / grid.columns)),
+        },
+        sheet: 'buttons',
+        sprites: {
+          up: 0,
+          hover: 1,
+          down: 2,
+        },
+        onclick: () => console.log(move),
+        text: move,
+      }));
     });
   }
 

@@ -9,7 +9,7 @@ class Prefab extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
     // scene.objects.add(this);
 
-    this.setPosition(this.width / 2, this.height / 2);
+    this.setPosition(position.x + (this.width / 2), position.y + (this.height / 2));
   }
 
   static convertVelocityToAngle(velocity) {
