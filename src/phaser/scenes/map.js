@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 
 // internal dependencies
-import Button from '../prefabs/button';
 import Player from '../prefabs/player';
 import Map from '../map';
 import BattleTransitionPipeline from '../pipelines/BattleTransitionPipeline';
@@ -101,17 +100,6 @@ class mapScene extends Phaser.Scene {
     // this.input.keyboard.on('keydown_A', () => { prefab.x -= speed; });
     // this.input.keyboard.on('keydown_S', () => { prefab.y += speed; });
     // this.input.keyboard.on('keydown_D', () => { prefab.x += speed; });
-
-    this.button = new Button({
-      scene: this,
-      position: { x: 0, y: 0 },
-      sheet: 'tiles',
-      sprites: {
-        up: 0,
-        down: 2,
-        hover: 1,
-      },
-    });
   }
 
   update() {

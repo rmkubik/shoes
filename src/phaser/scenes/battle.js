@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import { getCurrentEnemy } from '../../state/map';
+import Button from '../prefabs/button';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -27,6 +28,19 @@ class battleScene extends Phaser.Scene {
     ).setScale(3);
 
     this.input.keyboard.on('keydown_Q', () => { this.actions.playerStopAttack(); });
+
+    this.button = new Button({
+      scene: this,
+      position: { x: 0, y: 0 },
+      sheet: 'buttons',
+      sprites: {
+        up: 0,
+        hover: 1,
+        down: 2,
+      },
+      onclick: () => console.log('asdf'),
+      text: 'KICK',
+    });
   }
 
   update() {
