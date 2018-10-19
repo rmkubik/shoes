@@ -2,10 +2,11 @@ import Phaser from 'phaser';
 
 // internal dependencies
 import config from './config';
-import {
-  HyperappActionsFactory,
-  HyperappStateFactory,
-} from './plugins/hyperapp';
+// import {
+//   HyperappActionsFactory,
+//   HyperappStateFactory,
+// } from './plugins/hyperapp';
+import GameStateFactory from './plugins/gameState';
 import battleScene from './scenes/battle';
 import loadScene from './scenes/load';
 import mapScene from './scenes/map';
@@ -17,26 +18,28 @@ class Game {
       plugins: {
         global: [
           {
-            key: 'HyperappActions',
-            plugin: HyperappActionsFactory(actions),
-            start: false,
-            mapping: 'actions',
-          },
-          {
-            key: 'HyperappState',
-            plugin: HyperappStateFactory(state),
-            start: false,
+            key: 'GameState',
+            plugin: GameStateFactory(),
+            start: true,
             mapping: 'state',
           },
+          // {
+          //   key: 'HyperappActions',
+          //   plugin: HyperappActionsFactory(actions),
+          //   start: false,
+          //   mapping: 'actions',
+          // },
+          // {
+          //   key: 'HyperappState',
+          //   plugin: HyperappStateFactory(state),
+          //   start: false,
+          //   mapping: 'state',
+          // },
         ],
       },
       parent,
       ...config,
     });
-  }
-
-  updateState(state) {
-    console.log(state);
   }
 }
 

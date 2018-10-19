@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { getCurrentEnemy } from '../../state/map';
+import { getCurrentEnemy } from '../state/map';
 import Button from '../prefabs/button';
 import Prefab from '../prefabs/prefab';
 
@@ -21,6 +21,7 @@ class battleScene extends Phaser.Scene {
     ellipse.setTo(120, 180 + 38, 128, 32);
     graphics.fillEllipseShape(ellipse);
 
+    this.add.sprite(120, 150 / 2, 'legs', 0);
     this.add.sprite(480 - 120, 80, getCurrentEnemy(this.state).imageKey).setScale(-3, 3);
     this.add.sprite(
       120,
@@ -28,7 +29,7 @@ class battleScene extends Phaser.Scene {
       this.state.player.shoes[this.state.player.currentShoe].imageKey,
     ).setScale(3);
 
-    this.input.keyboard.on('keydown_Q', () => { this.actions.playerStopAttack(); });
+    // this.input.keyboard.on('keydown_Q', () => { this.actions.playerStopAttack(); });
 
     const moves = [
       'KICK',

@@ -20,7 +20,7 @@ class mapScene extends Phaser.Scene {
         this.transitioning = true;
         this.time.delayedCall(1000, () => {
           this.scene.pause();
-          this.actions.changeScene({ newScene: 'BattleScene' });
+          // this.actions.changeScene({ newScene: 'BattleScene' });
           this.scene.start('battle');
           this.transitioning = false;
         });
@@ -108,9 +108,9 @@ class mapScene extends Phaser.Scene {
       this.t += 0.005;
     }
 
-    if (this.state.scene.current === 'MapScene') {
-      this.scene.resume('mapScene');
-    }
+    // if (this.state.scene.current === 'MapScene') {
+    //   this.scene.resume('mapScene');
+    // }
   }
 }
 
