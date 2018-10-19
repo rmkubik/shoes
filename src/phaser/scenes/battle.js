@@ -31,14 +31,16 @@ class battleScene extends Phaser.Scene {
 
     // this.input.keyboard.on('keydown_Q', () => { this.actions.playerStopAttack(); });
 
-    const moves = [
-      'KICK',
-      'LICK',
-      'JUMP',
-      'STOMP',
-      'SNAP',
-      'POP',
-    ];
+    // const moves = [
+    //   'KICK',
+    //   'LICK',
+    //   'JUMP',
+    //   'STOMP',
+    //   'SNAP',
+    //   'POP',
+    // ];
+
+    const moves = this.state.player.shoes[this.state.player.currentShoe].moves.map(move => move.name);
 
     const grid = {
       x: 160,
