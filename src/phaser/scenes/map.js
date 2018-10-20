@@ -20,8 +20,7 @@ class mapScene extends Phaser.Scene {
         this.transitioning = true;
         this.time.delayedCall(1000, () => {
           this.scene.pause();
-          // this.actions.changeScene({ newScene: 'BattleScene' });
-          this.scene.start('battle');
+          this.scene.launch('battle');
           this.transitioning = false;
         });
         // this.cameras.main.clearRenderToTexture();

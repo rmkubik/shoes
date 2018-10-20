@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import StateMachine from 'javascript-state-machine';
 
 import { getCurrentEnemy } from '../state/map';
 import Button from '../prefabs/button';
@@ -28,16 +29,22 @@ class battleScene extends Phaser.Scene {
       this.state.player.shoes[this.state.player.currentShoe].imageKey,
     ).setScale(3);
 
-    // this.input.keyboard.on('keydown_Q', () => { this.actions.playerStopAttack(); });
-
-    // const moves = [
-    //   'KICK',
-    //   'LICK',
-    //   'JUMP',
-    //   'STOMP',
-    //   'SNAP',
-    //   'POP',
-    // ];
+    const turns = new StateMachine({
+      init: 'player',
+      transitions: [
+        { name: 'attack', from: 'player', to: 'playerAttacking' },
+        { name: 'attack', from: 'enemy', to: 'enemyAttacking' },
+        { name: 'finishAttack', from: 'playerAttacking', to: 'enemy' },
+        { name: 'finishAttack', from: 'enemyAttacking', to: 'player' },
+      ],
+      methods: {
+        onAfterFinishAttack: () => {
+          // if battle is over
+          this.scene.stop();
+          this.scene.resume('map');
+        },
+      },
+    });
 
     const moves = this.state.player.shoes[this.state.player.currentShoe].moves.map(move => move.name);
 
@@ -75,14 +82,14 @@ class battleScene extends Phaser.Scene {
             getCurrentEnemy(this.state),
             1000,
           );
+          turns.attack();
+          this.time.delayedCall(500, () => {
+            turns.finishAttack();
+          });
         },
         text: move,
       }));
     });
-  }
-
-  update() {
-
   }
 }
 
