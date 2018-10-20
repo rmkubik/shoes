@@ -12,7 +12,7 @@ class Button extends Prefab {
 
     this.text = scene.add.text(position.x + 5, position.y + 5, text, {
       fontFamily: 'Arial',
-      fontSize: 32,
+      fontSize: 16,
       color: '#FFFFFF',
     });
 
