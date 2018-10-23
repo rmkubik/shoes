@@ -12,16 +12,25 @@ class mapScene extends Phaser.Scene {
 
   create() {
     this.transitioning = false;
+    this.entered = false;
     this.startBattleTransition = () => {
-      if (!this.transitioning) {
+      // this.transitioning to debounce
+      // check if any enemies alive --> encounter is not over
+      // console.log(this);
+      if (
+        !this.transitioning
+        && this.state.map[this.state.currentMapIndex].enemies.some(enemy => enemy.hp.current >= 0)
+        && !this.entered
+      ) {
         this.t = 0;
         this.customPipeline.setFloat1('time', this.t);
         this.cameras.main.setRenderToTexture(this.customPipeline);
         this.transitioning = true;
+        this.entered = true;
         this.time.delayedCall(1000, () => {
-          this.scene.pause();
-          this.scene.launch('battle');
           this.transitioning = false;
+          // this.scene.pause('map');
+          this.scene.start('battle');
         });
         // this.cameras.main.clearRenderToTexture();
         // this.cameras.main.fade(800, 0, 0, 0);
@@ -95,7 +104,7 @@ class mapScene extends Phaser.Scene {
 
     this.customPipeline = this.game.renderer.addPipeline('BattleTransition', new BattleTransitionPipeline(this.game));
 
-    this.input.keyboard.on('keydown_W', () => { this.scene.start('battle'); });
+    // this.input.keyboard.on('keydown_W', () => { this.scene.start('battle'); });
     // this.input.keyboard.on('keydown_A', () => { prefab.x -= speed; });
     // this.input.keyboard.on('keydown_S', () => { prefab.y += speed; });
     // this.input.keyboard.on('keydown_D', () => { prefab.x += speed; });

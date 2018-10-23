@@ -40,8 +40,9 @@ class battleScene extends Phaser.Scene {
       methods: {
         onAfterFinishAttack: () => {
           // if battle is over
-          this.scene.stop();
-          this.scene.resume('map');
+          // TODO: how do I get the pause and resume feature between the scenes to work???
+          // this.scene.stop('battle');
+          this.scene.start('map');
         },
       },
     });
@@ -90,6 +91,10 @@ class battleScene extends Phaser.Scene {
         text: move,
       }));
     });
+  }
+
+  update() {
+    // console.log('battle update');
   }
 }
 
