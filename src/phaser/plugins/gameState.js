@@ -13,7 +13,11 @@ export function GameStateFactory() {
 class GameAction extends Phaser.Plugins.BasePlugin {}
 
 export function GameActionsFactory() {
-  Object.assign(GameAction.prototype, actions);
+  const wiredActions = Object.entries(actions).reduce((statefulActions, [key, action]) => {
+    statefulActions[key] = action(state);
+    return statefulActions;
+  }, {});
+  Object.assign(GameAction.prototype, wiredActions);
 
   return GameAction;
 }

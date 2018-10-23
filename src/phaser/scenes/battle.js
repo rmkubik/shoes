@@ -42,6 +42,8 @@ class battleScene extends Phaser.Scene {
           // if battle is over
           // TODO: how do I get the pause and resume feature between the scenes to work???
           // this.scene.stop('battle');
+          // this.actions.advanceMapIndex();
+          this.state.currentMapIndex += 1;
           this.scene.start('map');
         },
       },
@@ -78,12 +80,17 @@ class battleScene extends Phaser.Scene {
           down: 2,
         },
         onclick: () => {
-          this.actions.attack(
-            this.state.player.shoes[this.state.player.currentShoe].moves[index],
-            getCurrentEnemy(this.state),
-            1000,
-          );
+          // this.actions.attack(
+          //   this.state.player.shoes[this.state.player.currentShoe].moves[index],
+          //   getCurrentEnemy(this.state),
+          //   1000,
+          // );
+          // TODO: Add state manipulation into actions like in Hyperapp
+          this.state.playerAttacking = false;
+          this.state.player.shoes[this.state.player.currentShoe].moves[index].uses.current -= 1;
+          getCurrentEnemy(this.state).hp.current -= 1000;
           turns.attack();
+          // TODO: Make this await an animation end event
           this.time.delayedCall(500, () => {
             turns.finishAttack();
           });
