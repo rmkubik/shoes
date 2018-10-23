@@ -17,6 +17,12 @@ export const isPlayerTurn = (state) => {
   return currentMapItem.playerFirst ? currentMapItem.turn % 2 === 0 : currentMapItem.turn % 2 === 1;
 };
 
+export const isEncounterOver = (state, index) => (
+  state.map[index].enemies.some(enemy => enemy.hp.current <= 0)
+);
+
+export const isCurrentEncounterOver = state => isEncounterOver(state, state.currentMapIndex);
+
 export default [
   {
     enemies: [pickRandomlyFromArray([shoes.sneaker, shoes.cleat])],

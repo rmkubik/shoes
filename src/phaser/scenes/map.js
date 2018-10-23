@@ -5,6 +5,8 @@ import Player from '../prefabs/player';
 import Map from '../map';
 import BattleTransitionPipeline from '../pipelines/BattleTransitionPipeline';
 
+import { isEncounterOver } from '../state/map';
+
 class mapScene extends Phaser.Scene {
   constructor() {
     super({ key: 'map' });
@@ -19,7 +21,7 @@ class mapScene extends Phaser.Scene {
       // console.log(this);
       if (
         !this.transitioning
-        && this.state.map[this.state.currentMapIndex].enemies.some(enemy => enemy.hp.current >= 0)
+        && !isEncounterOver(this.state, 0)
         && !this.entered
       ) {
         this.t = 0;
