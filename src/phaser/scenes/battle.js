@@ -4,6 +4,7 @@ import StateMachine from 'javascript-state-machine';
 import { getCurrentEnemy, isCurrentEncounterOver, getCurrentPlayerShoe } from '../state/map';
 import Button from '../prefabs/button';
 import Turns from '../objects/turns';
+import HpBar from '../objects/hpBar';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -23,47 +24,42 @@ class battleScene extends Phaser.Scene {
     graphics.fillEllipseShape(ellipse);
 
     // this.add.sprite(120, 150 / 2, 'legs', 0);
-    this.add.sprite(480 - 120, 80, getCurrentEnemy(this.state).imageKey).setScale(-3, 3);
+    const enemyPosition = {
+      x: 480 - 120,
+      y: 80,
+    };
+    // negative x axis scale to mirror sprite over y axis
+    this.add.sprite(enemyPosition.x, enemyPosition.y, getCurrentEnemy(this.state).imageKey).setScale(-3, 3);
+    this.enemyHp = new HpBar({
+      scene: this,
+      position: {
+        x: enemyPosition.x,
+        y: enemyPosition.y + 50,
+      },
+      hp: getCurrentEnemy(this.state).hp,
+    });
+
+    const playerPosition = {
+      x: 120,
+      y: 180,
+    };
     this.add.sprite(
-      120,
-      180,
+      playerPosition.x,
+      playerPosition.y,
       this.state.player.shoes[this.state.player.currentShoe].imageKey,
     ).setScale(3);
+    this.playerHp = new HpBar({
+      scene: this,
+      position: {
+        x: playerPosition.x,
+        y: playerPosition.y + 50,
+      },
+      hp: getCurrentPlayerShoe(this.state).hp,
+    });
 
     this.turns = new Turns();
 
-    // this.turns = new StateMachine({
-    //   init: 'player',
-    //   transitions: [
-    //     { name: 'attack', from: 'player', to: 'playerAttacking' },
-    //     { name: 'attack', from: 'enemy', to: 'enemyAttacking' },
-    //     { name: 'finishAttack', from: 'playerAttacking', to: 'enemy' },
-    //     { name: 'finishAttack', from: 'enemyAttacking', to: 'player' },
-    //   ],
-    //   methods: {
-    //     onAfterFinishAttack: () => {
-    //       // if battle is over
-    //       // TODO: how do I get the pause and resume feature between the scenes to work???
-    //       // this.scene.stop('battle');
-    //       // this.actions.advanceMapIndex();
-    //       if (isCurrentEncounterOver(this.state)) {
-    //         this.state.currentMapIndex += 1;
-    //         this.scene.start('map');
-    //       }
-    //     },
-    //     onEnterEnemy: () => {
-    //       // TODO: I cannot transition between states while entering a state...(ideally this.turns.attack would happen immediately, and an animation would play)
-    //       this.time.delayedCall(500, () => {
-    //         console.log('enemy attacks!');
-    //         this.turns.attack();
-    //         this.turns.finishAttack();
-    //       });
-    //     },
-    //   },
-    // });
-
     const moves = this.state.player.shoes[this.state.player.currentShoe].moves.map(move => move.name);
-
     const grid = {
       x: 160,
       y: 310,
@@ -99,15 +95,11 @@ class battleScene extends Phaser.Scene {
   }
 
   attack(index) {
-    // this.actions.attack(
-    //   this.state.player.shoes[this.state.player.currentShoe].moves[index],
-    //   getCurrentEnemy(this.state),
-    //   1000,
-    // );
     // TODO: Add state manipulation into actions like in Hyperapp
     this.state.playerAttacking = false;
     getCurrentPlayerShoe(this.state).moves[index].uses.current -= 1;
     getCurrentEnemy(this.state).hp.current -= getCurrentPlayerShoe(this.state).moves[index].damage;
+    this.enemyHp.takeDamage(getCurrentPlayerShoe(this.state).moves[index].damage);
     // this.turns.attack();
     // TODO: Make this await an animation end event
     this.time.delayedCall(500, () => {
@@ -117,9 +109,19 @@ class battleScene extends Phaser.Scene {
   }
 
   update() {
+    this.enemyHp.draw();
+    this.playerHp.draw();
+
+    if (isCurrentEncounterOver(this.state)) {
+      // TODO: how do I get the pause and resume feature between the scenes to work???
+      this.state.currentMapIndex += 1;
+      this.scene.start('map');
+    }
+
     if (this.turns.isEnemyTurn()) {
       // take enemy turn
       getCurrentPlayerShoe(this.state).hp.current -= getCurrentEnemy(this.state).moves[0].damage;
+      this.playerHp.takeDamage(getCurrentEnemy(this.state).moves[0].damage);
       this.turns.nextTurn();
     }
   }
