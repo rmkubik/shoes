@@ -5,7 +5,7 @@ class Turns {
   }
 
   isLastTurnInRound() {
-    return this.current > this.order.length - 1;
+    return this.current >= this.order.length - 1;
   }
 
   nextTurn() {

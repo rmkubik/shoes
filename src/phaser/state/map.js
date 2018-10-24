@@ -19,8 +19,10 @@ export const isPlayerTurn = (state) => {
   return currentMapItem.playerFirst ? currentMapItem.turn % 2 === 0 : currentMapItem.turn % 2 === 1;
 };
 
+const allShoesDead = shoeList => shoeList.every(shoe => shoe.hp.current <= 0);
+
 export const isEncounterOver = (state, index) => (
-  state.map[index].enemies.some(enemy => enemy.hp.current <= 0)
+  allShoesDead(state.map[index].enemies) || allShoesDead(state.player.shoes)
 );
 
 export const isCurrentEncounterOver = state => isEncounterOver(state, state.currentMapIndex);

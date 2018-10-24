@@ -95,8 +95,11 @@ class battleScene extends Phaser.Scene {
   }
 
   attack(index) {
+    if (this.state.attacking) {
+      return;
+    }
+    this.state.attacking = true;
     // TODO: Add state manipulation into actions like in Hyperapp
-    this.state.playerAttacking = false;
     getCurrentPlayerShoe(this.state).moves[index].uses.current -= 1;
     getCurrentEnemy(this.state).hp.current -= getCurrentPlayerShoe(this.state).moves[index].damage;
     this.enemyHp.takeDamage(getCurrentPlayerShoe(this.state).moves[index].damage);
@@ -104,6 +107,7 @@ class battleScene extends Phaser.Scene {
     // TODO: Make this await an animation end event
     this.time.delayedCall(500, () => {
       // this.turns.finishAttack();
+      this.state.attacking = false;
       this.turns.nextTurn();
     });
   }
@@ -112,17 +116,23 @@ class battleScene extends Phaser.Scene {
     this.enemyHp.draw();
     this.playerHp.draw();
 
-    if (isCurrentEncounterOver(this.state)) {
+    if (isCurrentEncounterOver(this.state) && !this.state.attacking) {
       // TODO: how do I get the pause and resume feature between the scenes to work???
       this.state.currentMapIndex += 1;
       this.scene.start('map');
     }
 
-    if (this.turns.isEnemyTurn()) {
+    if (this.turns.isEnemyTurn() && !this.state.attacking) {
       // take enemy turn
       getCurrentPlayerShoe(this.state).hp.current -= getCurrentEnemy(this.state).moves[0].damage;
       this.playerHp.takeDamage(getCurrentEnemy(this.state).moves[0].damage);
-      this.turns.nextTurn();
+      this.state.attacking = true;
+      // TODO: Make this await an animation end event
+      this.time.delayedCall(500, () => {
+        // this.turns.finishAttack();
+        this.state.attacking = false;
+        this.turns.nextTurn();
+      });
     }
   }
 }
