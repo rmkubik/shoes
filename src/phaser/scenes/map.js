@@ -7,7 +7,7 @@ import BattleTransitionPipeline from '../pipelines/BattleTransitionPipeline';
 
 import { isEncounterOver } from '../state/map';
 
-class mapScene extends Phaser.Scene {
+class MapScene extends Phaser.Scene {
   constructor() {
     super({ key: 'map' });
   }
@@ -100,7 +100,12 @@ class mapScene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, map.tilemap.widthInPixels, map.tilemap.heightInPixels);
     this.cameras.main.setSize(480, 480);
 
-    this.physics.world.setBounds(120, 0, 240, 100 * 16); // height is number of tiles in map * tile size
+    this.physics.world.setBounds(
+      120,
+      0,
+      240,
+      100 * 16, // height is number of tiles in map * tile size
+    );
     this.physics.add.collider(player, map.layers.objects);
     this.objects.add(player);
 
@@ -124,4 +129,4 @@ class mapScene extends Phaser.Scene {
   }
 }
 
-export default mapScene;
+export default MapScene;
