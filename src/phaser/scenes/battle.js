@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
 import StateMachine from 'javascript-state-machine';
 
-import { getCurrentEnemy } from '../state/map';
+import { getCurrentEnemy, isCurrentEncounterOver, getCurrentPlayerShoe } from '../state/map';
 import Button from '../prefabs/button';
+import Turns from '../objects/turns';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -29,25 +30,37 @@ class battleScene extends Phaser.Scene {
       this.state.player.shoes[this.state.player.currentShoe].imageKey,
     ).setScale(3);
 
-    const turns = new StateMachine({
-      init: 'player',
-      transitions: [
-        { name: 'attack', from: 'player', to: 'playerAttacking' },
-        { name: 'attack', from: 'enemy', to: 'enemyAttacking' },
-        { name: 'finishAttack', from: 'playerAttacking', to: 'enemy' },
-        { name: 'finishAttack', from: 'enemyAttacking', to: 'player' },
-      ],
-      methods: {
-        onAfterFinishAttack: () => {
-          // if battle is over
-          // TODO: how do I get the pause and resume feature between the scenes to work???
-          // this.scene.stop('battle');
-          // this.actions.advanceMapIndex();
-          this.state.currentMapIndex += 1;
-          this.scene.start('map');
-        },
-      },
-    });
+    this.turns = new Turns();
+
+    // this.turns = new StateMachine({
+    //   init: 'player',
+    //   transitions: [
+    //     { name: 'attack', from: 'player', to: 'playerAttacking' },
+    //     { name: 'attack', from: 'enemy', to: 'enemyAttacking' },
+    //     { name: 'finishAttack', from: 'playerAttacking', to: 'enemy' },
+    //     { name: 'finishAttack', from: 'enemyAttacking', to: 'player' },
+    //   ],
+    //   methods: {
+    //     onAfterFinishAttack: () => {
+    //       // if battle is over
+    //       // TODO: how do I get the pause and resume feature between the scenes to work???
+    //       // this.scene.stop('battle');
+    //       // this.actions.advanceMapIndex();
+    //       if (isCurrentEncounterOver(this.state)) {
+    //         this.state.currentMapIndex += 1;
+    //         this.scene.start('map');
+    //       }
+    //     },
+    //     onEnterEnemy: () => {
+    //       // TODO: I cannot transition between states while entering a state...(ideally this.turns.attack would happen immediately, and an animation would play)
+    //       this.time.delayedCall(500, () => {
+    //         console.log('enemy attacks!');
+    //         this.turns.attack();
+    //         this.turns.finishAttack();
+    //       });
+    //     },
+    //   },
+    // });
 
     const moves = this.state.player.shoes[this.state.player.currentShoe].moves.map(move => move.name);
 
@@ -79,29 +92,36 @@ class battleScene extends Phaser.Scene {
           hover: 1,
           down: 2,
         },
-        onclick: () => {
-          // this.actions.attack(
-          //   this.state.player.shoes[this.state.player.currentShoe].moves[index],
-          //   getCurrentEnemy(this.state),
-          //   1000,
-          // );
-          // TODO: Add state manipulation into actions like in Hyperapp
-          this.state.playerAttacking = false;
-          this.state.player.shoes[this.state.player.currentShoe].moves[index].uses.current -= 1;
-          getCurrentEnemy(this.state).hp.current -= 1000;
-          turns.attack();
-          // TODO: Make this await an animation end event
-          this.time.delayedCall(500, () => {
-            turns.finishAttack();
-          });
-        },
+        onclick: () => { this.attack(index); },
         text: move,
       }));
     });
   }
 
+  attack(index) {
+    // this.actions.attack(
+    //   this.state.player.shoes[this.state.player.currentShoe].moves[index],
+    //   getCurrentEnemy(this.state),
+    //   1000,
+    // );
+    // TODO: Add state manipulation into actions like in Hyperapp
+    this.state.playerAttacking = false;
+    getCurrentPlayerShoe(this.state).moves[index].uses.current -= 1;
+    getCurrentEnemy(this.state).hp.current -= getCurrentPlayerShoe(this.state).moves[index].damage;
+    // this.turns.attack();
+    // TODO: Make this await an animation end event
+    this.time.delayedCall(500, () => {
+      // this.turns.finishAttack();
+      this.turns.nextTurn();
+    });
+  }
+
   update() {
-    // console.log('battle update');
+    if (this.turns.isEnemyTurn()) {
+      // take enemy turn
+      getCurrentPlayerShoe(this.state).hp.current -= getCurrentEnemy(this.state).moves[0].damage;
+      this.turns.nextTurn();
+    }
   }
 }
 

@@ -7,6 +7,8 @@ export const getCurrentEnemy = (state) => {
   return currentMapItem.enemies[currentMapItem.currentEnemyIndex];
 };
 
+export const getCurrentPlayerShoe = state => state.player.shoes[state.player.currentShoe];
+
 export const getNextEnemyIndex = (state) => {
   const currentMapItem = state.map[state.currentMapIndex];
   return currentMapItem.enemies.findIndex(isAlive);
