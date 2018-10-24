@@ -13,7 +13,7 @@ class Turns {
   }
 
   isEnemyTurn() {
-    return this.order[this.current];
+    return this.order[this.current] === 'enemy';
   }
 }
 
