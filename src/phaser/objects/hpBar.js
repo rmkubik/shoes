@@ -8,10 +8,7 @@ class HpBar {
     this.max = max;
     this.position = position;
 
-    this.graphics = scene.add.graphics({
-      lineStyle: { width: 2, color: 0x000000 },
-      fillStyle: { color: 0x000000, alpha: 0.5 },
-    });
+    this.graphics = scene.add.graphics();
   }
 
   takeDamage(damage) {

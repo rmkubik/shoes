@@ -96,6 +96,7 @@ class battleScene extends Phaser.Scene {
 
   attack(index) {
     if (this.state.attacking) {
+      // can't attack if something is already attacking
       return;
     }
     this.state.attacking = true;
