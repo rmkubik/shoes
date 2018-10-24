@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 // internal dependencies
 import Player from '../prefabs/player';
-import Map from '../map';
+import Map from '../objects/map';
 import BattleTransitionPipeline from '../pipelines/BattleTransitionPipeline';
 
 import { isEncounterOver } from '../state/map';
