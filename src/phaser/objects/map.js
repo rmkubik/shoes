@@ -40,17 +40,22 @@ class Map {
       clearing2: scene.make.tilemap({ key: 'clearing2' }),
     };
 
-    this.setMapDataLayer('house', { x: 0, y: 0 });
-    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 10 });
-    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 20 });
-    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 30 });
-    this.setMapDataLayer('house', { x: 0, y: 40 });
-    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 50 });
-    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 60 });
-    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 70 });
-    this.setMapDataLayer('house', { x: 0, y: 80 });
-    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 90 });
-    this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 100 });
+    const encounterSpacing = 10;
+    scene.state.map.forEach((encounter, index) => {
+      this.setMapDataLayer(encounter.mapKey, { x: 0, y: index * encounterSpacing });
+    });
+
+    // this.setMapDataLayer('house', { x: 0, y: 0 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 10 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 20 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 30 });
+    // this.setMapDataLayer('house', { x: 0, y: 40 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 50 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 60 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 70 });
+    // this.setMapDataLayer('house', { x: 0, y: 80 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 90 });
+    // this.setMapDataLayer(Math.random() > 0.5 ? 'clearing' : 'clearing2', { x: 0, y: 100 });
 
     // add 1 to index for some reason?
     this.layers.objects.setCollisionByExclusion([-1, 593, 650, 1362, 1363]);
