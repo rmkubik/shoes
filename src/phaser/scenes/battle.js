@@ -119,7 +119,6 @@ class battleScene extends Phaser.Scene {
 
     if (isCurrentEncounterOver(this.state) && !this.state.attacking) {
       // TODO: how do I get the pause and resume feature between the scenes to work???
-      this.state.currentMapIndex += 1;
       this.scene.start('map');
     }
 

@@ -14,21 +14,18 @@ class MapScene extends Phaser.Scene {
 
   create() {
     this.transitioning = false;
-    this.entered = false;
     this.startBattleTransition = () => {
       // this.transitioning to debounce
       // check if any enemies alive --> encounter is not over
       // console.log(this);
       if (
         !this.transitioning
-        && !isEncounterOver(this.state, 0)
-        && !this.entered
+        && !isEncounterOver(this.state, this.state.currentMapIndex)
       ) {
         this.t = 0;
         this.customPipeline.setFloat1('time', this.t);
         this.cameras.main.setRenderToTexture(this.customPipeline);
         this.transitioning = true;
-        this.entered = true;
         this.time.delayedCall(1000, () => {
           this.transitioning = false;
           // this.scene.pause('map');
@@ -39,7 +36,7 @@ class MapScene extends Phaser.Scene {
       }
     };
 
-    const map = new Map({
+    this.map = new Map({
       scene: this,
       tilesets: [
         {
@@ -86,7 +83,7 @@ class MapScene extends Phaser.Scene {
       right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
     };
 
-    const player = new Player({
+    this.player = new Player({
       scene: this,
       position: {
         x: 32,
@@ -96,8 +93,8 @@ class MapScene extends Phaser.Scene {
       keys,
     });
 
-    this.cameras.main.startFollow(player, true);
-    this.cameras.main.setBounds(0, 0, map.tilemap.widthInPixels, map.tilemap.heightInPixels);
+    this.cameras.main.startFollow(this.player, true);
+    this.cameras.main.setBounds(0, 0, this.map.tilemap.widthInPixels, this.map.tilemap.heightInPixels);
     this.cameras.main.setSize(480, 480);
 
     this.physics.world.setBounds(
@@ -106,8 +103,8 @@ class MapScene extends Phaser.Scene {
       240,
       100 * 16, // height is number of tiles in map * tile size
     );
-    this.physics.add.collider(player, map.layers.objects);
-    this.objects.add(player);
+    this.physics.add.collider(this.player, this.map.layers.objects);
+    this.objects.add(this.player);
 
     this.customPipeline = this.game.renderer.addPipeline('BattleTransition', new BattleTransitionPipeline(this.game));
 
@@ -122,6 +119,8 @@ class MapScene extends Phaser.Scene {
       this.customPipeline.setFloat1('time', this.t);
       this.t += 0.005;
     }
+
+    this.state.currentMapIndex = this.map.getEncounterIndex(this.player);
 
     // if (this.state.scene.current === 'MapScene') {
     //   this.scene.resume('mapScene');

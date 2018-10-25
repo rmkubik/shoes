@@ -40,9 +40,9 @@ class Map {
       clearing2: scene.make.tilemap({ key: 'clearing2' }),
     };
 
-    const encounterSpacing = 10;
+    this.encounterSpacing = 10;
     scene.state.map.forEach((encounter, index) => {
-      this.setMapDataLayer(encounter.mapKey, { x: 0, y: index * encounterSpacing });
+      this.setMapDataLayer(encounter.mapKey, { x: 0, y: index * this.encounterSpacing });
     });
 
     // this.setMapDataLayer('house', { x: 0, y: 0 });
@@ -81,6 +81,10 @@ class Map {
     Object.entries(mapLayerData).forEach(([layerName, layerData]) => {
       this.layers[layerName].putTilesAt(layerData, position.x, position.y);
     });
+  }
+
+  getEncounterIndex(object) {
+    return Math.floor(object.y / (this.encounterSpacing * this.tilemap.tileHeight));
   }
 }
 
