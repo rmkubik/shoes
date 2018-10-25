@@ -5,7 +5,7 @@ import actions from '../actions/index';
 class GameState extends Phaser.Plugins.BasePlugin {}
 
 export function GameStateFactory() {
-  Object.assign(GameState.prototype, state);
+  Object.assign(GameState.prototype, JSON.parse(JSON.stringify(state)));
 
   return GameState;
 }
