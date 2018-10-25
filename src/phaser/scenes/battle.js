@@ -120,9 +120,7 @@ class battleScene extends Phaser.Scene {
     if (isCurrentEncounterOver(this.state) && !this.state.attacking) {
       // TODO: how do I get the pause and resume feature between the scenes to work???
       this.scene.start('map');
-    }
-
-    if (this.turns.isEnemyTurn() && !this.state.attacking) {
+    } else if (this.turns.isEnemyTurn() && !this.state.attacking) {
       // take enemy turn
       getCurrentPlayerShoe(this.state).hp.current -= getCurrentEnemy(this.state).moves[0].damage;
       this.playerHp.takeDamage(getCurrentEnemy(this.state).moves[0].damage);
