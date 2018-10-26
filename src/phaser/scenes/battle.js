@@ -116,15 +116,18 @@ class battleScene extends Phaser.Scene {
   getShoeButtonList() {
     return this.state.player.shoes.map(shoe => ({
       text: shoe.name,
-      onclick: () => console.log(`Used ${shoe.name}`),
+      onclick: () => console.log(`Put on ${shoe.name}`),
     }));
   }
 
   getItemButtonList() {
-    return Object.keys(this.state.player.items).map(name => ({
-      text: name,
-      onclick: () => console.log(`Used ${name}`),
-    }));
+    return Object.keys(this.state.player.items).map((key) => {
+      const item = this.state.items[key];
+      return {
+        text: item.name,
+        onclick: () => console.log(item.useText),
+      };
+    });
   }
 
   getMoveButtonList() {
