@@ -28,7 +28,15 @@ class battleScene extends Phaser.Scene {
 
     this.turns = new Turns();
 
-    this.movesGrid = this.createMovesGrid().show();
+    this.movesGrid = new ButtonGrid({
+      scene: this,
+      position: { x: 160, y: 310 },
+      spacing: { x: 20, y: 15 },
+      buttonDimensions: { height: 40, width: 140 },
+      columns: 2,
+    });
+    this.movesGrid.show(this.getMoveButtonList());
+
 
     const tabButtons = [
       { text: 'Moves', onclick: console.log },
@@ -41,8 +49,8 @@ class battleScene extends Phaser.Scene {
       spacing: { x: 20, y: 15 },
       buttonDimensions: { height: 40, width: 140 },
       columns: 1,
-      buttons: tabButtons,
     });
+    this.tabsGrid.show(tabButtons);
   }
 
   attack(index) {
@@ -87,18 +95,10 @@ class battleScene extends Phaser.Scene {
     }
   }
 
-  createMovesGrid() {
+  getMoveButtonList() {
     const moveNames = this.state.player.shoes[this.state.player.currentShoe]
       .moves.map(move => move.name);
-    const moveButtons = moveNames.map(name => ({ text: name, onclick: this.attack.bind(this) }));
-    return new ButtonGrid({
-      scene: this,
-      position: { x: 160, y: 310 },
-      spacing: { x: 20, y: 15 },
-      buttonDimensions: { height: 40, width: 140 },
-      columns: 2,
-      buttons: moveButtons,
-    });
+    return moveNames.map(name => ({ text: name, onclick: this.attack.bind(this) }));
   }
 
   createEnemy() {

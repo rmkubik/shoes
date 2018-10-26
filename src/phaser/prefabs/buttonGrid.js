@@ -2,18 +2,17 @@ import Button from './button';
 
 class ButtonGrid {
   constructor({
-    scene, position, spacing, buttonDimensions, columns, buttons,
+    scene, position, spacing, buttonDimensions, columns,
   }) {
     this.scene = scene;
     this.position = position;
     this.spacing = spacing;
     this.buttonDimensions = buttonDimensions;
     this.columns = columns;
-    this.buttonsInfo = buttons;
   }
 
-  show() {
-    this.buttons = this.buttonsInfo.map(({ text, onclick }, index) => new Button({
+  show(buttons) {
+    this.buttons = buttons.map(({ text, onclick }, index) => new Button({
       scene: this.scene,
       position: {
         x: this.position.x + ((this.spacing.x + this.buttonDimensions.width) * Math.floor(index % this.columns)),
