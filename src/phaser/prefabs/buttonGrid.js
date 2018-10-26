@@ -4,11 +4,20 @@ class ButtonGrid {
   constructor({
     scene, position, spacing, buttonDimensions, columns, buttons,
   }) {
-    this.buttons = buttons.map(({ text, onclick }, index) => new Button({
-      scene,
+    this.scene = scene;
+    this.position = position;
+    this.spacing = spacing;
+    this.buttonDimensions = buttonDimensions;
+    this.columns = columns;
+    this.buttonsInfo = buttons;
+  }
+
+  show() {
+    this.buttons = this.buttonsInfo.map(({ text, onclick }, index) => new Button({
+      scene: this.scene,
       position: {
-        x: position.x + ((spacing.x + buttonDimensions.width) * Math.floor(index % columns)),
-        y: position.y + ((spacing.y + buttonDimensions.height) * Math.floor(index / columns)),
+        x: this.position.x + ((this.spacing.x + this.buttonDimensions.width) * Math.floor(index % this.columns)),
+        y: this.position.y + ((this.spacing.y + this.buttonDimensions.height) * Math.floor(index / this.columns)),
       },
       sheet: 'buttons',
       sprites: {
@@ -19,6 +28,12 @@ class ButtonGrid {
       onclick: () => { onclick(index); },
       text,
     }));
+  }
+
+  hide() {
+    this.buttons.forEach((button) => {
+      button.destroy();
+    });
   }
 }
 
