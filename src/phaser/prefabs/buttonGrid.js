@@ -1,6 +1,6 @@
 import Button from './button';
 
-class Grid {
+class ButtonGrid {
   constructor({
     scene, position, spacing, buttonDimensions, columns, buttons,
   }) {
@@ -22,4 +22,4 @@ class Grid {
   }
 }
 
-export default Grid;
+export default ButtonGrid;
