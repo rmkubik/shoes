@@ -60,6 +60,20 @@ class battleScene extends Phaser.Scene {
       columns: 2,
       buttons: moveButtons,
     });
+
+    const tabButtons = [
+      { text: 'Moves', onclick: console.log },
+      { text: 'Items', onclick: console.log },
+      { text: 'Shoes', onclick: console.log },
+    ];
+    this.tabsGrid = new ButtonGrid({
+      scene: this,
+      position: { x: 10, y: 310 },
+      spacing: { x: 20, y: 15 },
+      buttonDimensions: { height: 40, width: 140 },
+      columns: 1,
+      buttons: tabButtons,
+    });
   }
 
   attack(index) {
