@@ -14,15 +14,7 @@ class battleScene extends Phaser.Scene {
   create() {
     this.add.sprite(240, 240, 'background'); // zero centered
 
-    this.enemy = new Shoe({
-      scene: this,
-      position: {
-        x: 480 - 120,
-        y: 80,
-      },
-      direction: -1,
-      state: getCurrentEnemy(this.state),
-    });
+    this.enemy = this.createEnemy();
 
     this.player = new Shoe({
       scene: this,
@@ -86,8 +78,11 @@ class battleScene extends Phaser.Scene {
       } else if (getCurrentEnemy(this.state).hp.current <= 0) {
         // choose next enemy
         getCurrentMapItem(this.state).currentEnemyIndex += 1;
-        this.enemySprite.setTexture(getCurrentEnemy(this.state).imageKey);
-        this.createEnemyHpBar();
+
+        this.enemy.destroy();
+        this.enemy = this.createEnemy();
+
+        // skip enemy's turn
         this.turns.nextTurn();
       } else if (this.turns.isEnemyTurn()) {
         // take enemy turn
@@ -100,6 +95,18 @@ class battleScene extends Phaser.Scene {
         });
       }
     }
+  }
+
+  createEnemy() {
+    return new Shoe({
+      scene: this,
+      position: {
+        x: 480 - 120,
+        y: 80,
+      },
+      direction: -1,
+      state: getCurrentEnemy(this.state),
+    });
   }
 }
 
