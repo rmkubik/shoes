@@ -4,7 +4,7 @@ import HpBar from '../objects/hpBar';
 
 class Shoe {
   constructor({
-    scene, position, direction = 1, key, scale = 3, state,
+    scene, position, direction = 1, scale = 3, state,
   }) {
     this.position = position;
     this.state = state;
@@ -28,7 +28,7 @@ class Shoe {
     this.sprite = scene.add.sprite(
       this.position.x,
       this.position.y,
-      key,
+      this.state.imageKey,
     ).setScale(scale * direction, scale);
 
     const hpOffset = 50;

@@ -3,7 +3,6 @@ import StateMachine from 'javascript-state-machine';
 
 import { getCurrentEnemy, isCurrentEncounterOver, getCurrentPlayerShoe, getCurrentMapItem } from '../state/map';
 import Turns from '../objects/turns';
-import HpBar from '../objects/hpBar';
 import ButtonGrid from '../prefabs/buttonGrid';
 import Shoe from '../prefabs/shoe';
 
@@ -22,28 +21,18 @@ class battleScene extends Phaser.Scene {
         y: 80,
       },
       direction: -1,
-      key: getCurrentEnemy(this.state).imageKey,
       state: getCurrentEnemy(this.state),
     });
 
-    const graphics = this.add.graphics({
-      lineStyle: { width: 2, color: 0x000000 },
-      fillStyle: { color: 0x000000, alpha: 0.5 },
+    this.player = new Shoe({
+      scene: this,
+      position: {
+        x: 120,
+        y: 180,
+      },
+      direction: 1,
+      state: getCurrentPlayerShoe(this.state),
     });
-    const ellipse = new Phaser.Geom.Ellipse(480 - 120, 80 + 38, 128, 32); // x, y, width, height
-    ellipse.setTo(120, 180 + 38, 128, 32);
-    graphics.fillEllipseShape(ellipse);
-
-    this.playerPosition = {
-      x: 120,
-      y: 180,
-    };
-    this.playerSprite = this.add.sprite(
-      this.playerPosition.x,
-      this.playerPosition.y,
-      this.state.player.shoes[this.state.player.currentShoe].imageKey,
-    ).setScale(3);
-    this.createPlayerHpBar(this.playerPosition);
 
     this.turns = new Turns();
 
@@ -90,8 +79,6 @@ class battleScene extends Phaser.Scene {
   }
 
   update() {
-    this.playerHp.draw();
-
     if (!this.state.attacking) {
       if (isCurrentEncounterOver(this.state)) {
         // TODO: how do I get the pause and resume feature between the scenes to work???
@@ -104,8 +91,7 @@ class battleScene extends Phaser.Scene {
         this.turns.nextTurn();
       } else if (this.turns.isEnemyTurn()) {
         // take enemy turn
-        getCurrentPlayerShoe(this.state).hp.current -= getCurrentEnemy(this.state).moves[0].damage;
-        this.playerHp.takeDamage(getCurrentEnemy(this.state).moves[0].damage);
+        this.player.takeDamage(getCurrentEnemy(this.state).moves[0].damage);
         this.state.attacking = true;
         // TODO: Make this await an animation end event
         this.time.delayedCall(500, () => {
@@ -114,17 +100,6 @@ class battleScene extends Phaser.Scene {
         });
       }
     }
-  }
-
-  createPlayerHpBar() {
-    this.playerHp = new HpBar({
-      scene: this,
-      position: {
-        x: this.playerPosition.x,
-        y: this.playerPosition.y + 50,
-      },
-      hp: getCurrentPlayerShoe(this.state).hp,
-    });
   }
 }
 
