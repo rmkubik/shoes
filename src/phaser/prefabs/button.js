@@ -51,6 +51,11 @@ class Button extends Prefab {
       this.fsm.up();
     });
   }
+
+  destroy() {
+    this.text.destroy();
+    super.destroy();
+  }
 }
 
 export default Button;
