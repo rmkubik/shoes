@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import StateMachine from 'javascript-state-machine';
 
-import { getCurrentEnemy, isCurrentEncounterOver, getCurrentPlayerShoe } from '../state/map';
+import { getCurrentEnemy, isCurrentEncounterOver, getCurrentPlayerShoe, getCurrentMapItem } from '../state/map';
 import Button from '../prefabs/button';
 import Turns from '../objects/turns';
 import HpBar from '../objects/hpBar';
@@ -24,38 +24,24 @@ class battleScene extends Phaser.Scene {
     graphics.fillEllipseShape(ellipse);
 
     // this.add.sprite(120, 150 / 2, 'legs', 0);
-    const enemyPosition = {
+    this.enemyPosition = {
       x: 480 - 120,
       y: 80,
     };
     // negative x axis scale to mirror sprite over y axis
-    this.add.sprite(enemyPosition.x, enemyPosition.y, getCurrentEnemy(this.state).imageKey).setScale(-3, 3);
-    this.enemyHp = new HpBar({
-      scene: this,
-      position: {
-        x: enemyPosition.x,
-        y: enemyPosition.y + 50,
-      },
-      hp: getCurrentEnemy(this.state).hp,
-    });
+    this.enemySprite = this.add.sprite(this.enemyPosition.x, this.enemyPosition.y, getCurrentEnemy(this.state).imageKey).setScale(-3, 3);
+    this.createEnemyHpBar(this.enemyPosition);
 
-    const playerPosition = {
+    this.playerPosition = {
       x: 120,
       y: 180,
     };
-    this.add.sprite(
-      playerPosition.x,
-      playerPosition.y,
+    this.playerSprite = this.add.sprite(
+      this.playerPosition.x,
+      this.playerPosition.y,
       this.state.player.shoes[this.state.player.currentShoe].imageKey,
     ).setScale(3);
-    this.playerHp = new HpBar({
-      scene: this,
-      position: {
-        x: playerPosition.x,
-        y: playerPosition.y + 50,
-      },
-      hp: getCurrentPlayerShoe(this.state).hp,
-    });
+    this.createPlayerHpBar(this.playerPosition);
 
     this.turns = new Turns();
 
@@ -121,6 +107,12 @@ class battleScene extends Phaser.Scene {
       if (isCurrentEncounterOver(this.state)) {
         // TODO: how do I get the pause and resume feature between the scenes to work???
         this.scene.start('map');
+      } else if (getCurrentEnemy(this.state).hp.current <= 0) {
+        // choose next enemy
+        getCurrentMapItem(this.state).currentEnemyIndex += 1;
+        this.enemySprite.setTexture(getCurrentEnemy(this.state).imageKey);
+        this.createEnemyHpBar();
+        this.turns.nextTurn();
       } else if (this.turns.isEnemyTurn()) {
         // take enemy turn
         getCurrentPlayerShoe(this.state).hp.current -= getCurrentEnemy(this.state).moves[0].damage;
@@ -134,6 +126,28 @@ class battleScene extends Phaser.Scene {
         });
       }
     }
+  }
+
+  createEnemyHpBar() {
+    this.enemyHp = new HpBar({
+      scene: this,
+      position: {
+        x: this.enemyPosition.x,
+        y: this.enemyPosition.y + 50,
+      },
+      hp: getCurrentEnemy(this.state).hp,
+    });
+  }
+
+  createPlayerHpBar() {
+    this.playerHp = new HpBar({
+      scene: this,
+      position: {
+        x: this.playerPosition.x,
+        y: this.playerPosition.y + 50,
+      },
+      hp: getCurrentPlayerShoe(this.state).hp,
+    });
   }
 }
 
