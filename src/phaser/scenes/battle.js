@@ -5,6 +5,7 @@ import { getCurrentEnemy, isCurrentEncounterOver, getCurrentPlayerShoe, getCurre
 import Turns from '../objects/turns';
 import HpBar from '../objects/hpBar';
 import ButtonGrid from '../prefabs/buttonGrid';
+import Shoe from '../prefabs/shoe';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -14,27 +15,24 @@ class battleScene extends Phaser.Scene {
   create() {
     this.add.sprite(240, 240, 'background'); // zero centered
 
+    this.enemy = new Shoe({
+      scene: this,
+      position: {
+        x: 480 - 120,
+        y: 80,
+      },
+      direction: -1,
+      key: getCurrentEnemy(this.state).imageKey,
+      state: getCurrentEnemy(this.state),
+    });
+
     const graphics = this.add.graphics({
       lineStyle: { width: 2, color: 0x000000 },
       fillStyle: { color: 0x000000, alpha: 0.5 },
     });
     const ellipse = new Phaser.Geom.Ellipse(480 - 120, 80 + 38, 128, 32); // x, y, width, height
-    graphics.fillEllipseShape(ellipse);
     ellipse.setTo(120, 180 + 38, 128, 32);
     graphics.fillEllipseShape(ellipse);
-
-    // this.add.sprite(120, 150 / 2, 'legs', 0);
-    this.enemyPosition = {
-      x: 480 - 120,
-      y: 80,
-    };
-    // negative x axis scale to mirror sprite over y axis
-    this.enemySprite = this.add.sprite(
-      this.enemyPosition.x,
-      this.enemyPosition.y,
-      getCurrentEnemy(this.state).imageKey,
-    ).setScale(-3, 3);
-    this.createEnemyHpBar(this.enemyPosition);
 
     this.playerPosition = {
       x: 120,
@@ -82,21 +80,16 @@ class battleScene extends Phaser.Scene {
       return;
     }
     this.state.attacking = true;
-    // TODO: Add state manipulation into actions like in Hyperapp
     getCurrentPlayerShoe(this.state).moves[index].uses.current -= 1;
-    getCurrentEnemy(this.state).hp.current -= getCurrentPlayerShoe(this.state).moves[index].damage;
-    this.enemyHp.takeDamage(getCurrentPlayerShoe(this.state).moves[index].damage);
-    // this.turns.attack();
+    this.enemy.takeDamage(getCurrentPlayerShoe(this.state).moves[index].damage);
     // TODO: Make this await an animation end event
     this.time.delayedCall(500, () => {
-      // this.turns.finishAttack();
       this.state.attacking = false;
       this.turns.nextTurn();
     });
   }
 
   update() {
-    this.enemyHp.draw();
     this.playerHp.draw();
 
     if (!this.state.attacking) {
@@ -116,23 +109,11 @@ class battleScene extends Phaser.Scene {
         this.state.attacking = true;
         // TODO: Make this await an animation end event
         this.time.delayedCall(500, () => {
-          // this.turns.finishAttack();
           this.state.attacking = false;
           this.turns.nextTurn();
         });
       }
     }
-  }
-
-  createEnemyHpBar() {
-    this.enemyHp = new HpBar({
-      scene: this,
-      position: {
-        x: this.enemyPosition.x,
-        y: this.enemyPosition.y + 50,
-      },
-      hp: getCurrentEnemy(this.state).hp,
-    });
   }
 
   createPlayerHpBar() {
