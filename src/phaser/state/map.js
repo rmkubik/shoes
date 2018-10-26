@@ -2,20 +2,22 @@ import shoes, { isAlive } from './shoes';
 import items from './items';
 import { pickRandomlyFromArray } from '../../helpers';
 
+export const getCurrentMapItem = state => state.map[state.currentMapIndex];
+
 export const getCurrentEnemy = (state) => {
-  const currentMapItem = state.map[state.currentMapIndex];
+  const currentMapItem = getCurrentMapItem(state);
   return currentMapItem.enemies[currentMapItem.currentEnemyIndex];
 };
 
 export const getCurrentPlayerShoe = state => state.player.shoes[state.player.currentShoe];
 
 export const getNextEnemyIndex = (state) => {
-  const currentMapItem = state.map[state.currentMapIndex];
+  const currentMapItem = getCurrentMapItem(state);
   return currentMapItem.enemies.findIndex(isAlive);
 };
 
 export const isPlayerTurn = (state) => {
-  const currentMapItem = state.map[state.currentMapIndex];
+  const currentMapItem = getCurrentMapItem(state);
   return currentMapItem.playerFirst ? currentMapItem.turn % 2 === 0 : currentMapItem.turn % 2 === 1;
 };
 
