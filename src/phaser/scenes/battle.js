@@ -2,9 +2,9 @@ import Phaser from 'phaser';
 import StateMachine from 'javascript-state-machine';
 
 import { getCurrentEnemy, isCurrentEncounterOver, getCurrentPlayerShoe, getCurrentMapItem } from '../state/map';
-import Button from '../prefabs/button';
 import Turns from '../objects/turns';
 import HpBar from '../objects/hpBar';
+import ButtonGrid from '../prefabs/buttonGrid';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -29,7 +29,11 @@ class battleScene extends Phaser.Scene {
       y: 80,
     };
     // negative x axis scale to mirror sprite over y axis
-    this.enemySprite = this.add.sprite(this.enemyPosition.x, this.enemyPosition.y, getCurrentEnemy(this.state).imageKey).setScale(-3, 3);
+    this.enemySprite = this.add.sprite(
+      this.enemyPosition.x,
+      this.enemyPosition.y,
+      getCurrentEnemy(this.state).imageKey,
+    ).setScale(-3, 3);
     this.createEnemyHpBar(this.enemyPosition);
 
     this.playerPosition = {
@@ -45,38 +49,16 @@ class battleScene extends Phaser.Scene {
 
     this.turns = new Turns();
 
-    const moves = this.state.player.shoes[this.state.player.currentShoe].moves.map(move => move.name);
-    const grid = {
-      x: 160,
-      y: 310,
-      spacing: {
-        x: 20,
-        y: 15,
-      },
-      button: {
-        height: 40,
-        width: 140,
-      },
+    const moveNames = this.state.player.shoes[this.state.player.currentShoe]
+      .moves.map(move => move.name);
+    const moveButtons = moveNames.map(name => ({ text: name, onclick: this.attack.bind(this) }));
+    this.movesGrid = new ButtonGrid({
+      scene: this,
+      position: { x: 160, y: 310 },
+      spacing: { x: 20, y: 15 },
+      buttonDimensions: { height: 40, width: 140 },
       columns: 2,
-    };
-
-    this.buttons = [];
-    moves.forEach((move, index) => {
-      this.buttons.push(new Button({
-        scene: this,
-        position: {
-          x: grid.x + ((grid.spacing.x + grid.button.width) * Math.floor(index % grid.columns)),
-          y: grid.y + ((grid.spacing.y + grid.button.height) * Math.floor(index / grid.columns)),
-        },
-        sheet: 'buttons',
-        sprites: {
-          up: 0,
-          hover: 1,
-          down: 2,
-        },
-        onclick: () => { this.attack(index); },
-        text: move,
-      }));
+      buttons: moveButtons,
     });
   }
 
