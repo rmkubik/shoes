@@ -28,20 +28,38 @@ class battleScene extends Phaser.Scene {
 
     this.turns = new Turns();
 
-    this.movesGrid = new ButtonGrid({
+    this.buttonGrid = new ButtonGrid({
       scene: this,
       position: { x: 160, y: 310 },
       spacing: { x: 20, y: 15 },
       buttonDimensions: { height: 40, width: 140 },
       columns: 2,
     });
-    this.movesGrid.show(this.getMoveButtonList());
+    this.buttonGrid.show(this.getMoveButtonList());
 
 
     const tabButtons = [
-      { text: 'Moves', onclick: console.log },
-      { text: 'Items', onclick: console.log },
-      { text: 'Shoes', onclick: console.log },
+      {
+        text: 'Moves',
+        onclick: () => {
+          this.buttonGrid.hide();
+          this.buttonGrid.show(this.getMoveButtonList());
+        },
+      },
+      {
+        text: 'Items',
+        onclick: () => {
+          this.buttonGrid.hide();
+          this.buttonGrid.show(this.getItemButtonList());
+        },
+      },
+      {
+        text: 'Shoes',
+        onclick: () => {
+          this.buttonGrid.hide();
+          this.buttonGrid.show(this.getShoeButtonList());
+        },
+      },
     ];
     this.tabsGrid = new ButtonGrid({
       scene: this,
@@ -93,6 +111,20 @@ class battleScene extends Phaser.Scene {
         });
       }
     }
+  }
+
+  getShoeButtonList() {
+    return this.state.player.shoes.map(shoe => ({
+      text: shoe.name,
+      onclick: () => console.log(`Used ${shoe.name}`),
+    }));
+  }
+
+  getItemButtonList() {
+    return Object.keys(this.state.player.items).map(name => ({
+      text: name,
+      onclick: () => console.log(`Used ${name}`),
+    }));
   }
 
   getMoveButtonList() {
