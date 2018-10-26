@@ -31,6 +31,10 @@ class HpBar {
     this.graphics.fillStyle(0x00ff00);
     this.graphics.fillRect((this.position.x + 2) - 40, this.position.y + 2, currentHealthWidth, 12);
   }
+
+  destroy() {
+    this.graphics.destroy();
+  }
 }
 
 export default HpBar;
