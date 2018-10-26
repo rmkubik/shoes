@@ -15,8 +15,12 @@ class ButtonGrid {
     this.buttons = buttons.map(({ text, onclick }, index) => new Button({
       scene: this.scene,
       position: {
-        x: this.position.x + ((this.spacing.x + this.buttonDimensions.width) * Math.floor(index % this.columns)),
-        y: this.position.y + ((this.spacing.y + this.buttonDimensions.height) * Math.floor(index / this.columns)),
+        x: this.position.x + (
+          (this.spacing.x + this.buttonDimensions.width) * Math.floor(index % this.columns)
+        ),
+        y: this.position.y + (
+          (this.spacing.y + this.buttonDimensions.height) * Math.floor(index / this.columns)
+        ),
       },
       sheet: 'buttons',
       sprites: {
