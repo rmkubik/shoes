@@ -73,11 +73,11 @@ class battleScene extends Phaser.Scene {
     this.state.attacking = true;
     getCurrentPlayerShoe(this.state).moves[index].uses.current -= 1;
     this.enemy.takeDamage(getCurrentPlayerShoe(this.state).moves[index].damage);
-    // TODO: Make this await an animation end event
-    this.time.delayedCall(500, () => {
-      this.state.attacking = false;
-      this.turns.nextTurn();
-    });
+    this.player.attack()
+      .then(() => {
+        this.state.attacking = false;
+        this.turns.nextTurn();
+      });
   }
 
   update() {
@@ -98,11 +98,11 @@ class battleScene extends Phaser.Scene {
         // take enemy turn
         this.player.takeDamage(getCurrentEnemy(this.state).moves[0].damage);
         this.state.attacking = true;
-        // TODO: Make this await an animation end event
-        this.time.delayedCall(500, () => {
-          this.state.attacking = false;
-          this.turns.nextTurn();
-        });
+        this.enemy.attack()
+          .then(() => {
+            this.state.attacking = false;
+            this.turns.nextTurn();
+          });
       }
     }
   }
