@@ -131,6 +131,12 @@ class battleScene extends Phaser.Scene {
           console.log(item.useText);
           ItemHelpers.decrementItemUse(this.state, item.key);
           Effects[item.effect](this.state);
+
+          if (this.state.player.items[key] <= 0) {
+            delete this.state.player.items[key];
+            this.buttonGrid.hide();
+            this.buttonGrid.show(this.getItemButtonList());
+          }
         },
       };
     });
