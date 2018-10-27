@@ -6,9 +6,9 @@ const calcCatchChance = shoe => (1 - (shoe.hp.current / shoe.hp.max)) * shoe.cat
 
 export default {
   animation: (scene) => {
-    const onComplete = new Promise((resolve, reject) => {
+    const onComplete = new Promise((resolve) => {
       const item = scene.add.image(160, 280, 'items', 0);
-      const tween = scene.tweens.add({
+      scene.tweens.add({
         targets: item,
         x: 320,
         y: 80,
