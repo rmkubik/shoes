@@ -18,15 +18,7 @@ class battleScene extends Phaser.Scene {
 
     this.enemy = this.createEnemy();
 
-    this.player = new Shoe({
-      scene: this,
-      position: {
-        x: 120,
-        y: 180,
-      },
-      direction: 1,
-      state: getCurrentPlayerShoe(this.state),
-    });
+    this.player = this.createPlayerShoe();
 
     this.turns = new Turns();
 
@@ -118,7 +110,15 @@ class battleScene extends Phaser.Scene {
   getShoeButtonList() {
     return this.state.player.shoes.map(shoe => ({
       text: shoe.name,
-      onclick: () => console.log(`Put on ${shoe.name}`),
+      onclick: (index) => {
+        console.log(`Put on ${shoe.name}`);
+        this.state.player.currentShoe = index;
+        this.player.destroy();
+        this.player = this.createPlayerShoe();
+
+        // skip player's turn
+        this.turns.nextTurn();
+      },
     }));
   }
 
@@ -151,6 +151,18 @@ class battleScene extends Phaser.Scene {
       },
       direction: -1,
       state: getCurrentEnemy(this.state),
+    });
+  }
+
+  createPlayerShoe() {
+    return new Shoe({
+      scene: this,
+      position: {
+        x: 120,
+        y: 180,
+      },
+      direction: 1,
+      state: getCurrentPlayerShoe(this.state),
     });
   }
 }
