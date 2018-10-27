@@ -134,15 +134,18 @@ class battleScene extends Phaser.Scene {
         onclick: () => {
           console.log(item.useText);
           ItemHelpers.decrementItemUse(this.state, item.key);
-          Effects[item.effect](this.state);
+          Effects[item.effect].animation(this)
+            .then(() => {
+              Effects[item.effect].effect(this.state);
 
-          if (this.state.player.items[key] <= 0) {
-            delete this.state.player.items[key];
-          }
+              if (this.state.player.items[key] <= 0) {
+                delete this.state.player.items[key];
+              }
 
-          // update button state
-          this.buttonGrid.hide();
-          this.buttonGrid.show(this.getItemButtonList());
+              // update button state
+              this.buttonGrid.hide();
+              this.buttonGrid.show(this.getItemButtonList());
+            });
         },
       };
     });
