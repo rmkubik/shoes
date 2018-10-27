@@ -6,8 +6,10 @@ class Shoe {
   constructor({
     scene, position, direction = 1, scale = 3, state,
   }) {
+    this.scene = scene;
     this.position = position;
     this.state = state;
+    this.direction = direction;
 
     this.shadow = scene.add.graphics({
       fillStyle: { color: 0x000000, alpha: 0.5 },
@@ -41,6 +43,22 @@ class Shoe {
       hp: this.state.hp,
     });
     this.hpBar.draw();
+  }
+
+  attack() {
+    return new Promise((resolve) => {
+      this.scene.tweens.add({
+        targets: this.sprite,
+        x: this.position.x + (this.direction * 30),
+        ease: 'Power1',
+        duration: 250,
+        yoyo: true,
+
+        onComplete: () => {
+          resolve();
+        },
+      });
+    });
   }
 
   takeDamage(damage) {
