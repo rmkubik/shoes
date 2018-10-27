@@ -5,6 +5,8 @@ import { getCurrentEnemy, isCurrentEncounterOver, getCurrentPlayerShoe, getCurre
 import Turns from '../objects/turns';
 import ButtonGrid from '../prefabs/buttonGrid';
 import Shoe from '../prefabs/shoe';
+import Effects from '../objects/items/effects';
+import ItemHelpers from '../objects/items/helpers';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -125,7 +127,11 @@ class battleScene extends Phaser.Scene {
       const item = this.state.items[key];
       return {
         text: item.name,
-        onclick: () => console.log(item.useText),
+        onclick: () => {
+          console.log(item.useText);
+          ItemHelpers.decrementItemUse(this.state, item.key);
+          Effects[item.effect](this.state);
+        },
       };
     });
   }
