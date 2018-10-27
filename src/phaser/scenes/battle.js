@@ -118,6 +118,10 @@ class battleScene extends Phaser.Scene {
 
         // skip player's turn
         this.turns.nextTurn();
+
+        // update button state
+        this.buttonGrid.hide();
+        this.buttonGrid.show(this.getShoeButtonList());
       },
     }));
   }
@@ -126,7 +130,7 @@ class battleScene extends Phaser.Scene {
     return Object.keys(this.state.player.items).map((key) => {
       const item = this.state.items[key];
       return {
-        text: item.name,
+        text: `${item.name} - ${this.state.player.items[key]}`,
         onclick: () => {
           console.log(item.useText);
           ItemHelpers.decrementItemUse(this.state, item.key);
@@ -134,18 +138,27 @@ class battleScene extends Phaser.Scene {
 
           if (this.state.player.items[key] <= 0) {
             delete this.state.player.items[key];
-            this.buttonGrid.hide();
-            this.buttonGrid.show(this.getItemButtonList());
           }
+
+          // update button state
+          this.buttonGrid.hide();
+          this.buttonGrid.show(this.getItemButtonList());
         },
       };
     });
   }
 
   getMoveButtonList() {
-    const moveNames = this.state.player.shoes[this.state.player.currentShoe]
-      .moves.map(move => move.name);
-    return moveNames.map(name => ({ text: name, onclick: this.attack.bind(this) }));
+    return this.state.player.shoes[this.state.player.currentShoe].moves.map(move => ({
+      text: `${move.name} - ${move.uses.current}/${move.uses.max}`,
+      onclick: (index) => {
+        this.attack(index);
+
+        // update button state
+        this.buttonGrid.hide();
+        this.buttonGrid.show(this.getMoveButtonList());
+      },
+    }));
   }
 
   createEnemy() {
