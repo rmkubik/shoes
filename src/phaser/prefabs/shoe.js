@@ -65,7 +65,23 @@ class Shoe {
     return new Promise((resolve) => {
       this.scene.tweens.add({
         targets: this.sprite,
-        x: this.position.x + (-1 * this.direction * 120),
+        x: this.position.x + (-1 * this.direction * 160),
+        ease: 'Power1',
+        duration: 250,
+
+        onComplete: () => {
+          resolve();
+        },
+      });
+    });
+  }
+
+  equipShoe() {
+    return new Promise((resolve) => {
+      this.sprite.x = this.direction > 0 ? -160 : 480 + 160;
+      this.scene.tweens.add({
+        targets: this.sprite,
+        x: this.position.x,
         ease: 'Power1',
         duration: 250,
 

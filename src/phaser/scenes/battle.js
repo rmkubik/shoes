@@ -121,6 +121,7 @@ class battleScene extends Phaser.Scene {
         }
 
         this.player.unEquipShoe()
+          .then(this.player.equipShoe.bind(this.player))
           .then(() => {
             console.log(`Put on ${shoe.name}`);
             this.state.player.currentShoe = index;
