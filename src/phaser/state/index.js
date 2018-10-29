@@ -7,7 +7,7 @@ import types from './types';
 import stats from './stats';
 
 export default {
-  attacking: false,
+  acting: false,
   phaserCanvas: null,
   currentMapIndex: 0,
   moves,

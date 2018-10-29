@@ -66,45 +66,59 @@ class battleScene extends Phaser.Scene {
   }
 
   attack(index) {
-    if (this.state.attacking) {
-      // can't attack if something is already attacking
+    if (this.state.acting) {
+      // can't attack if something is already acting
       return;
     }
     if (getCurrentPlayerShoe(this.state).hp.current <= 0) {
       // can't attack if you're dead
       return;
     }
-    this.state.attacking = true;
+    this.state.acting = true;
     getCurrentPlayerShoe(this.state).moves[index].uses.current -= 1;
     this.enemy.takeDamage(getCurrentPlayerShoe(this.state).moves[index].damage);
     this.player.attack()
       .then(() => {
-        this.state.attacking = false;
+        this.state.acting = false;
         this.turns.nextTurn();
       });
   }
 
   update() {
-    if (!this.state.attacking) {
+    if (!this.state.acting) {
       if (isCurrentEncounterOver(this.state)) {
+        this.state.acting = true;
+
         // TODO: how do I get the pause and resume feature between the scenes to work???
-        this.scene.start('map');
+        Promise.all([this.player.unEquipShoe(), this.enemy.unEquipShoe()])
+          .then(() => {
+            this.state.acting = false;
+            this.scene.start('map');
+          });
       } else if (getCurrentEnemy(this.state).hp.current <= 0) {
-        // choose next enemy
-        getCurrentMapItem(this.state).currentEnemyIndex += 1;
+        this.state.acting = true;
+        this.enemy.unEquipShoe()
+          .then(() => {
+            // choose next enemy
+            getCurrentMapItem(this.state).currentEnemyIndex += 1;
 
-        this.enemy.destroy();
-        this.enemy = this.createEnemy();
+            this.enemy.destroy();
+            this.enemy = this.createEnemy();
 
-        // skip enemy's turn
-        this.turns.nextTurn();
+            return this.enemy.equipShoe();
+          })
+          .then(() => {
+            this.state.acting = false;
+            // skip enemy's turn
+            this.turns.nextTurn();
+          });
       } else if (this.turns.isEnemyTurn()) {
         // take enemy turn
         this.player.takeDamage(getCurrentEnemy(this.state).moves[0].damage);
-        this.state.attacking = true;
+        this.state.acting = true;
         this.enemy.attack()
           .then(() => {
-            this.state.attacking = false;
+            this.state.acting = false;
             this.turns.nextTurn();
           });
       }
@@ -121,13 +135,15 @@ class battleScene extends Phaser.Scene {
         }
 
         this.player.unEquipShoe()
-          .then(this.player.equipShoe.bind(this.player))
           .then(() => {
             console.log(`Put on ${shoe.name}`);
             this.state.player.currentShoe = index;
             this.player.destroy();
             this.player = this.createPlayerShoe();
 
+            return this.player.equipShoe();
+          })
+          .then(() => {
             // skip player's turn
             this.turns.nextTurn();
 
