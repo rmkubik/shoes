@@ -70,6 +70,10 @@ class battleScene extends Phaser.Scene {
       // can't attack if something is already attacking
       return;
     }
+    if (getCurrentPlayerShoe(this.state).hp.current <= 0) {
+      // can't attack if you're dead
+      return;
+    }
     this.state.attacking = true;
     getCurrentPlayerShoe(this.state).moves[index].uses.current -= 1;
     this.enemy.takeDamage(getCurrentPlayerShoe(this.state).moves[index].damage);
