@@ -61,6 +61,21 @@ class Shoe {
     });
   }
 
+  unEquipShoe() {
+    return new Promise((resolve) => {
+      this.scene.tweens.add({
+        targets: this.sprite,
+        x: this.position.x + (-1 * this.direction * 120),
+        ease: 'Power1',
+        duration: 250,
+
+        onComplete: () => {
+          resolve();
+        },
+      });
+    });
+  }
+
   takeDamage(damage) {
     this.state.hp.current -= damage;
     this.hpBar.takeDamage(damage);
