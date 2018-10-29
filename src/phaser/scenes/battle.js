@@ -115,6 +115,10 @@ class battleScene extends Phaser.Scene {
     return this.state.player.shoes.map(shoe => ({
       text: shoe.name,
       onclick: (index) => {
+        if (shoe.hp.current <= 0) {
+          console.log(`Cannot put on ${shoe.name}, its dead!`);
+          return;
+        }
         console.log(`Put on ${shoe.name}`);
         this.state.player.currentShoe = index;
         this.player.destroy();
