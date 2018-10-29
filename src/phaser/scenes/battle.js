@@ -119,17 +119,21 @@ class battleScene extends Phaser.Scene {
           console.log(`Cannot put on ${shoe.name}, its dead!`);
           return;
         }
-        console.log(`Put on ${shoe.name}`);
-        this.state.player.currentShoe = index;
-        this.player.destroy();
-        this.player = this.createPlayerShoe();
 
-        // skip player's turn
-        this.turns.nextTurn();
+        this.player.unEquipShoe()
+          .then(() => {
+            console.log(`Put on ${shoe.name}`);
+            this.state.player.currentShoe = index;
+            this.player.destroy();
+            this.player = this.createPlayerShoe();
 
-        // update button state
-        this.buttonGrid.hide();
-        this.buttonGrid.show(this.getShoeButtonList());
+            // skip player's turn
+            this.turns.nextTurn();
+
+            // update button state
+            this.buttonGrid.hide();
+            this.buttonGrid.show(this.getShoeButtonList());
+          });
       },
     }));
   }
