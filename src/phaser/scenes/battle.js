@@ -165,7 +165,7 @@ class battleScene extends Phaser.Scene {
           ItemHelpers.decrementItemUse(this.state, item.key);
           Effects[item.effect].animation(this)
             .then(() => {
-              Effects[item.effect].effect(this.state);
+              Effects[item.effect].effect(this);
 
               if (this.state.player.items[key] <= 0) {
                 delete this.state.player.items[key];

@@ -98,6 +98,12 @@ class Shoe {
     this.hpBar.draw();
   }
 
+  heal(amount = (this.state.hp.max - this.state.hp.current)) {
+    this.state.hp.current += amount;
+    this.hpBar.heal(amount);
+    this.hpBar.draw();
+  }
+
   destroy() {
     this.sprite.destroy();
     this.hpBar.destroy();

@@ -15,6 +15,10 @@ class HpBar {
     this.current -= damage;
   }
 
+  heal(amount) {
+    this.current += amount;
+  }
+
   draw() {
     // background
     this.graphics.fillStyle(0x000000);
