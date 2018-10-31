@@ -13,7 +13,7 @@ export default {
         x: 320,
         y: 80,
         ease: 'Power1',
-        duration: 1000,
+        duration: 500,
         onComplete: () => {
           item.destroy();
           resolve();
@@ -22,7 +22,7 @@ export default {
     });
     return onComplete;
   },
-  effect: (state) => {
+  effect: ({ state }) => {
     const encounter = getCurrentMapItem(state);
     const enemy = getCurrentEnemy(state);
     if (encounter.wild && Math.random() < calcCatchChance(enemy)) {
