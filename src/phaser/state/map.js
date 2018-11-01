@@ -31,6 +31,11 @@ export const isCurrentEncounterOver = state => isEncounterOver(state, state.curr
 
 export default [
   {
+    name: 'Home',
+    scene: 'HomeScene',
+    mapKey: 'house',
+  },
+  {
     enemies: [pickRandomlyFromArray([shoes.sneaker, shoes.cleat])],
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
