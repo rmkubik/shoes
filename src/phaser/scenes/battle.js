@@ -134,6 +134,13 @@ class battleScene extends Phaser.Scene {
           return;
         }
 
+        if (this.state.player.currentShoe === index) {
+          console.log(`Already wearing ${shoe.name}!`);
+          return;
+        }
+
+        const originalShoe = getCurrentPlayerShoe(this.state);
+
         this.player.unEquipShoe()
           .then(() => {
             console.log(`Put on ${shoe.name}`);
@@ -144,8 +151,10 @@ class battleScene extends Phaser.Scene {
             return this.player.equipShoe();
           })
           .then(() => {
-            // skip player's turn
-            this.turns.nextTurn();
+            // skip player's turn if old shoe was alive
+            if (originalShoe.hp.current > 0) {
+              this.turns.nextTurn();
+            }
 
             // update button state
             this.buttonGrid.hide();
