@@ -40,7 +40,7 @@ export default [
     currentEnemyIndex: 0,
     name: 'A Wild Shoe Appears!',
     scene: 'BattleScene',
-    mapKey: pickRandomlyFromArray(['clearing', 'clearing2']),
+    mapKey: 'narrows', // pickRandomlyFromArray(['clearing', 'clearing2']),
     wild: true,
     turn: 0,
     reward: 50,
@@ -70,7 +70,7 @@ export default [
   {
     name: 'Cobbler',
     scene: 'ShopScene',
-    mapKey: 'house',
+    mapKey: 'cobbler',
     items: [items.shoeBox, items.shoeRepairKit],
   },
   {
@@ -112,7 +112,7 @@ export default [
   {
     name: 'Cobbler',
     scene: 'ShopScene',
-    mapKey: 'house',
+    mapKey: 'cobbler',
     items: [items.shoeBox, items.shoeRepairKit],
   },
   {

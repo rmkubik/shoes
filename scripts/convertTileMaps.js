@@ -13,6 +13,7 @@ async function loadSets() {
   const sets = {};
   const names = await readdir(tilesetsDir);
   names.forEach((name) => {
+    console.log(path.extname(name));
     if (path.extname(name) === '.json') {
       const tileset = require(`./${path.join(tilesetsDir, name)}`);
       sets[path.basename(name, '.json')] = tileset;
@@ -31,84 +32,88 @@ async function loadMaps() {
       name: path.basename(name, '.json'),
       data,
     });
-    // console.log(`loaded map: ${path.basename(name, '.json')}`);
+    console.log(`loaded map: ${path.basename(name, '.json')}`);
   });
   return maps;
 }
 
 async function buildMaps() {
-  const sets = await loadSets();
-  const maps = await loadMaps();
+  try {
+    const sets = await loadSets();
+    const maps = await loadMaps();
 
-  maps.forEach((map) => {
-    const { tilesets } = map.data;
-    const externalTilesets = tilesets.filter(set => set.source !== undefined);
-    map.data.tilesets.forEach((set, index) => {
-      if (set.source !== undefined) {
-        map.data.tilesets[index] = Object.assign(
-          {},
-          sets[path.basename(set.source, '.json')],
-          { firstgid: set.firstgid },
-        );
-      }
-    });
-
-    console.log('converted external tilesets for: ' + map.name);
-
-    const gidSets = {};
-    externalTilesets.forEach((set) => {
-      gidSets[set.firstgid] = sets[path.basename(set.source, '.json')];
-    });
-
-    const { layers } = map.data;
-    // const objectLayers = layers.filter(layer => !!layer.objects);
-    layers.forEach((layer, index) => {
-      if (layer.objects) {
-        const { objects } = layer;
-        const newObjs = [];
-        objects.forEach((obj) => {
-          const objSet = gidToSet(obj.gid, gidSets);
-          // add in default properties from tileset
-          defaultProps = {};
-          if (objSet.set && objSet.set.tileproperties) {
-            if (objSet.set.tileproperties[objSet.index]) {
-              defaultProps = objSet.set.tileproperties[objSet.index];
-            }
-          }
-          const props = Object.assign(
+    maps.forEach((map) => {
+      const { tilesets } = map.data;
+      const externalTilesets = tilesets.filter(set => set.source !== undefined);
+      map.data.tilesets.forEach((set, index) => {
+        if (set.source !== undefined) {
+          map.data.tilesets[index] = Object.assign(
             {},
-            defaultProps,
-            obj.properties,
+            sets[path.basename(set.source, '.json')],
+            { firstgid: set.firstgid },
           );
-          obj.properties = props;
+        }
+      });
 
-          // do overrides exist on this tileset
-          let overrides = {};
-          if (objSet.set && objSet.set.tiles) {
-            // does this tile have an override
-            overrides = objSet.set.tiles[`${objSet.index}`];
-            if (!overrides) {
-              overrides = {};
+      console.log('converted external tilesets for: ' + map.name);
+
+      const gidSets = {};
+      externalTilesets.forEach((set) => {
+        gidSets[set.firstgid] = sets[path.basename(set.source, '.json')];
+      });
+
+      const { layers } = map.data;
+      // const objectLayers = layers.filter(layer => !!layer.objects);
+      layers.forEach((layer, index) => {
+        if (layer.objects) {
+          const { objects } = layer;
+          const newObjs = [];
+          objects.forEach((obj) => {
+            const objSet = gidToSet(obj.gid, gidSets);
+            // add in default properties from tileset
+            defaultProps = {};
+            if (objSet.set && objSet.set.tileproperties) {
+              if (objSet.set.tileproperties[objSet.index]) {
+                defaultProps = objSet.set.tileproperties[objSet.index];
+              }
             }
-          }
-          newObjs.push(Object.assign(
-            {},
-            obj,
-            overrides,
-          ));
-        });
-        map.data.layers[index].objects = newObjs;
-      }
+            const props = Object.assign(
+              {},
+              defaultProps,
+              obj.properties,
+            );
+            obj.properties = props;
+
+            // do overrides exist on this tileset
+            let overrides = {};
+            if (objSet.set && objSet.set.tiles) {
+              // does this tile have an override
+              overrides = objSet.set.tiles[`${objSet.index}`];
+              if (!overrides) {
+                overrides = {};
+              }
+            }
+            newObjs.push(Object.assign(
+              {},
+              obj,
+              overrides,
+            ));
+          });
+          map.data.layers[index].objects = newObjs;
+        }
+      });
+
+      // console.log('handled object overrides for: ' + map.name);
+
+      fs.writeFile(
+        path.join(buildDir, `${map.name}.json`),
+        JSON.stringify(map.data, null, 4),
+        () => {},
+      );
     });
-
-    // console.log('handled object overrides for: ' + map.name);
-
-    fs.writeFile(
-      path.join(buildDir, `${map.name}.json`),
-      JSON.stringify(map.data, null, 4),
-      () => {},
-    );
-  });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 /**
@@ -149,4 +154,8 @@ function convertCamelToTitle(string) {
   return words.join(' ');
 }
 
-buildMaps();
+try {
+  buildMaps();
+} catch (error) {
+  console.log(error);
+}
