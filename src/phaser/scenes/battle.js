@@ -93,7 +93,8 @@ class battleScene extends Phaser.Scene {
         Promise.all([this.player.unEquipShoe(), this.enemy.unEquipShoe()])
           .then(() => {
             this.state.acting = false;
-            this.scene.start('map');
+            this.scene.stop('battle');
+            this.scene.wake('map');
           });
       } else if (getCurrentEnemy(this.state).hp.current <= 0) {
         this.state.acting = true;

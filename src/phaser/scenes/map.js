@@ -17,7 +17,6 @@ class MapScene extends Phaser.Scene {
     this.startBattleTransition = () => {
       // this.transitioning to debounce
       // check if any enemies alive --> encounter is not over
-      // console.log(this);
       if (
         !this.transitioning
         && !isEncounterOver(this.state, this.state.currentMapIndex)
@@ -27,14 +26,19 @@ class MapScene extends Phaser.Scene {
         this.cameras.main.setRenderToTexture(this.customPipeline);
         this.transitioning = true;
         this.time.delayedCall(1000, () => {
-          this.transitioning = false;
-          // this.scene.pause('map');
-          this.scene.start('battle');
+          this.scene.sleep('map');
+          this.scene.launch('battle');
         });
-        // this.cameras.main.clearRenderToTexture();
         // this.cameras.main.fade(800, 0, 0, 0);
       }
+
+      return true;
     };
+
+    this.events.on('wake', () => {
+      this.transitioning = false;
+      this.cameras.main.clearRenderToTexture();
+    });
 
     this.map = new Map({
       scene: this,
