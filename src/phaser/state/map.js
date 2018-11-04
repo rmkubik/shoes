@@ -24,9 +24,13 @@ export const isPlayerTurn = (state) => {
 const allShoesDead = shoeList => shoeList.every(shoe => shoe.hp.current <= 0);
 
 // Can always enter a shop
-export const isEncounterOver = (state, index) => (
-  state.map[index].scene !== 'ShopScene' && (allShoesDead(state.map[index].enemies) || allShoesDead(state.player.shoes))
-);
+export const isEncounterOver = (state, index) => {
+  if (getCurrentMapItem(state).scene === 'BattleScene') {
+    return allShoesDead(state.map[index].enemies) || allShoesDead(state.player.shoes);
+  }
+
+  return getCurrentMapItem(state).finished;
+};
 
 export const isCurrentEncounterOver = state => isEncounterOver(state, state.currentMapIndex);
 
@@ -73,6 +77,7 @@ export default [
     scene: 'ShopScene',
     mapKey: 'cobbler',
     items: [items.shoeBox, items.shoeRepairKit],
+    finished: false,
   },
   {
     enemies: [shoes.highHeel],
@@ -115,6 +120,7 @@ export default [
     scene: 'ShopScene',
     mapKey: 'cobbler',
     items: [items.shoeBox, items.shoeRepairKit],
+    finished: false,
   },
   {
     enemies: [

@@ -16,6 +16,7 @@ class MapScene extends Phaser.Scene {
     this.transitioning = false;
 
     this.events.on('wake', () => {
+      this.player.unFreeze();
       this.transitioning = false;
       this.cameras.main.clearRenderToTexture();
     });
@@ -118,6 +119,7 @@ class MapScene extends Phaser.Scene {
       !this.transitioning
       && !isEncounterOver(this.state, this.state.currentMapIndex)
     ) {
+      this.player.freeze();
       this.t = 0;
       this.customPipeline.setFloat1('time', this.t);
       this.cameras.main.setRenderToTexture(this.customPipeline);

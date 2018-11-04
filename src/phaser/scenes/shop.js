@@ -27,7 +27,9 @@ class ShopScene extends Phaser.Scene {
       {
         text: 'Done',
         onclick: () => {
-          console.log('finished shopping!');
+          getCurrentMapItem(this.state).finished = true;
+          this.scene.stop('shop');
+          this.scene.wake('map');
         },
       },
     ];

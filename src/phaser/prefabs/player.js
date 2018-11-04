@@ -11,6 +11,7 @@ class Player extends Prefab {
     this.speed = speed;
     this.keys = keys;
     this.direction = { x: 0, y: 0 };
+    this.frozen = false;
 
     this.body.setCollideWorldBounds(true);
   }
@@ -32,12 +33,20 @@ class Player extends Prefab {
       direction.x = 1;
     }
 
-    if (direction.x !== 0 || direction.y !== 0) {
+    if (!this.frozen && (direction.x !== 0 || direction.y !== 0)) {
       this.direction = direction;
 
       this.body.setVelocityX(this.speed * this.direction.x);
       this.body.setVelocityY(this.speed * this.direction.y);
     }
+  }
+
+  freeze() {
+    this.frozen = true;
+  }
+
+  unFreeze() {
+    this.frozen = false;
   }
 }
 
