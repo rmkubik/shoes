@@ -23,8 +23,9 @@ export const isPlayerTurn = (state) => {
 
 const allShoesDead = shoeList => shoeList.every(shoe => shoe.hp.current <= 0);
 
+// Can always enter a shop
 export const isEncounterOver = (state, index) => (
-  allShoesDead(state.map[index].enemies) || allShoesDead(state.player.shoes)
+  state.map[index].scene !== 'ShopScene' && (allShoesDead(state.map[index].enemies) || allShoesDead(state.player.shoes))
 );
 
 export const isCurrentEncounterOver = state => isEncounterOver(state, state.currentMapIndex);

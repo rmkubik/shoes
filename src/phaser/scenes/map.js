@@ -14,26 +14,6 @@ class MapScene extends Phaser.Scene {
 
   create() {
     this.transitioning = false;
-    this.startBattleTransition = () => {
-      // this.transitioning to debounce
-      // check if any enemies alive --> encounter is not over
-      if (
-        !this.transitioning
-        && !isEncounterOver(this.state, this.state.currentMapIndex)
-      ) {
-        this.t = 0;
-        this.customPipeline.setFloat1('time', this.t);
-        this.cameras.main.setRenderToTexture(this.customPipeline);
-        this.transitioning = true;
-        this.time.delayedCall(1000, () => {
-          this.scene.sleep('map');
-          this.scene.launch('battle');
-        });
-        // this.cameras.main.fade(800, 0, 0, 0);
-      }
-
-      return true;
-    };
 
     this.events.on('wake', () => {
       this.transitioning = false;
@@ -129,6 +109,27 @@ class MapScene extends Phaser.Scene {
     // if (this.state.scene.current === 'MapScene') {
     //   this.scene.resume('mapScene');
     // }
+  }
+
+  sceneTransition(key) {
+    // this.transitioning to debounce
+    // check if any enemies alive --> encounter is not over
+    if (
+      !this.transitioning
+      && !isEncounterOver(this.state, this.state.currentMapIndex)
+    ) {
+      this.t = 0;
+      this.customPipeline.setFloat1('time', this.t);
+      this.cameras.main.setRenderToTexture(this.customPipeline);
+      this.transitioning = true;
+      this.time.delayedCall(1000, () => {
+        this.scene.sleep('map');
+        this.scene.launch(key);
+      });
+      // this.cameras.main.fade(800, 0, 0, 0);
+    }
+
+    return true;
   }
 }
 

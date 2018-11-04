@@ -26,6 +26,7 @@ import flatsImage from '../../../assets/images/shoes_7.png';
 import sandalImage from '../../../assets/images/shoes_8.png';
 import sneakerImage from '../../../assets/images/shoes_9.png';
 import backgroundImage from '../../../assets/images/background.png';
+import shopBackgroundImage from '../../../assets/images/shopBackground.png';
 
 class loadScene extends Phaser.Scene {
   constructor() {
@@ -78,6 +79,7 @@ class loadScene extends Phaser.Scene {
     this.load.image('sandal', sandalImage);
     this.load.image('sneaker', sneakerImage);
     this.load.image('background', backgroundImage);
+    this.load.image('shopBackground', shopBackgroundImage);
   }
 
   create() {

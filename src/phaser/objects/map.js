@@ -50,8 +50,12 @@ class Map {
     // add 1 to index for some reason?
     this.layers.objects.setCollisionByExclusion([-1, 593, 650, 1362, 1363]);
 
-    this.layers.objects.setTileIndexCallback(593, scene.startBattleTransition);
-    this.layers.objects.setTileIndexCallback(650, scene.startBattleTransition);
+    // grass
+    this.layers.objects.setTileIndexCallback(593, () => scene.sceneTransition('battle'));
+    this.layers.objects.setTileIndexCallback(650, () => scene.sceneTransition('battle'));
+    // doors
+    this.layers.objects.setTileIndexCallback(152, () => scene.sceneTransition('shop'));
+
 
     if (this.debug) {
       const debugGraphics = scene.add.graphics();

@@ -9,11 +9,12 @@ import {
 import battleScene from './scenes/battle';
 import loadScene from './scenes/load';
 import mapScene from './scenes/map';
+import shopScene from './scenes/shop';
 
 class Game {
   constructor(actions, state, parent) {
     this.game = new Phaser.Game({
-      scene: [loadScene, mapScene, battleScene],
+      scene: [loadScene, mapScene, battleScene, shopScene],
       plugins: {
         global: [
           {
