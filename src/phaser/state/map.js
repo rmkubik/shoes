@@ -67,7 +67,7 @@ export default [
     currentEnemyIndex: 0,
     name: 'Trainer Battle',
     scene: 'BattleScene',
-    mapKey: pickRandomlyFromArray(['clearing', 'clearing2']),
+    mapKey: 'clearingTrainer',
     turn: 0,
     reward: 150,
     playerFirst: true,
