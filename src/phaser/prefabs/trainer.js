@@ -12,9 +12,12 @@ class Trainer extends Prefab {
   }
 
   update() {
-    const searchWidth = 16;
-    if (this.scene.player.y < this.body.y + searchWidth && this.scene.player.y > this.body.y - searchWidth) {
-      console.log('I SEE YOU!!!');
+    const searchWidth = 2;
+    if (
+      this.scene.player.y < this.body.y + searchWidth
+      && this.scene.player.y > this.body.y - searchWidth
+    ) {
+      this.scene.sceneTransition('battle');
     }
   }
 }
