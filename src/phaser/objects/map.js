@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Trainer from '../prefabs/trainer';
+import WildEncounter from '../prefabs/wildEncounter';
 
 class Map {
   constructor({
@@ -17,6 +18,7 @@ class Map {
 
     this.objectMap = {
       21: Trainer,
+      415: WildEncounter,
     };
 
     this.tilesets = tilesets.reduce((map, {
