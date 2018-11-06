@@ -13,6 +13,10 @@ class MapScene extends Phaser.Scene {
   }
 
   create() {
+    this.objects = this.add.group({
+      runChildUpdate: true,
+    });
+
     this.transitioning = false;
 
     this.events.on('wake', () => {
@@ -55,10 +59,6 @@ class MapScene extends Phaser.Scene {
           tileSetKey: 'tiles',
         },
       ],
-    });
-
-    this.objects = this.add.group({
-      runChildUpdate: true,
     });
 
     const keys = {

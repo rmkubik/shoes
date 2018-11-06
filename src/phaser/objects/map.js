@@ -1,13 +1,23 @@
 import Phaser from 'phaser';
+import Trainer from '../prefabs/trainer';
 
 class Map {
   constructor({
     scene, layers, tilesets,
   }) {
+    this.scene = scene;
+    this.offset = {
+      x: 120,
+    };
+
     // this.tilemap = scene.make.tilemap({ key });
-    this.tilemap = scene.make.tilemap({
+    this.tilemap = this.scene.make.tilemap({
       tileWidth: 16, tileHeight: 16, width: 15, height: 100,
     });
+
+    this.objectMap = {
+      21: Trainer,
+    };
 
     this.tilesets = tilesets.reduce((map, {
       tiledName, tileSetKey, margin, spacing, gid,
@@ -29,39 +39,72 @@ class Map {
       [tiledName]: this.tilemap.createBlankDynamicLayer(
         tiledName,
         this.tilesets[tileSetKey],
-        120,
+        this.offset.x,
         0,
       ),
     }), {});
 
     this.maps = {
-      house: scene.make.tilemap({ key: 'house' }),
-      clearing: scene.make.tilemap({ key: 'clearing' }),
-      clearing2: scene.make.tilemap({ key: 'clearing2' }),
-      narrows: scene.make.tilemap({ key: 'narrows' }),
-      cobbler: scene.make.tilemap({ key: 'cobbler' }),
-      clearingTrainer: scene.make.tilemap({ key: 'clearingTrainer' }),
+      house: this.scene.make.tilemap({ key: 'house' }),
+      clearing: this.scene.make.tilemap({ key: 'clearing' }),
+      clearing2: this.scene.make.tilemap({ key: 'clearing2' }),
+      narrows: this.scene.make.tilemap({ key: 'narrows' }),
+      cobbler: this.scene.make.tilemap({ key: 'cobbler' }),
+      clearingTrainer: this.scene.make.tilemap({ key: 'clearingTrainer' }),
     };
 
     this.encounterSpacing = 10;
-    scene.state.map.forEach((encounter, index) => {
-      this.setMapDataLayer(encounter.mapKey, { x: 0, y: index * this.encounterSpacing });
+    this.scene.state.map.forEach((encounter, index) => {
+      const mapLayerData = this.getMapLayerData(encounter.mapKey);
+      // remove obkectMap indices --> -1
+      // create special objects like trainers
+      const objects = this.getObjectsFromLayerData(mapLayerData);
+      mapLayerData.objects = this.pruneObjectTiles(mapLayerData);
+      this.setMapDataLayer(mapLayerData, { x: 0, y: index * this.encounterSpacing });
+      this.createObjects(objects, index);
     });
 
     // add 1 to index for some reason?
     this.layers.objects.setCollisionByExclusion([-1, 593, 650, 1362, 1363]);
 
     // grass
-    this.layers.objects.setTileIndexCallback(593, () => scene.sceneTransition('battle'));
-    this.layers.objects.setTileIndexCallback(650, () => scene.sceneTransition('battle'));
+    this.layers.objects.setTileIndexCallback(593, () => this.scene.sceneTransition('battle'));
+    this.layers.objects.setTileIndexCallback(650, () => this.scene.sceneTransition('battle'));
     // doors
-    this.layers.objects.setTileIndexCallback(152, () => scene.sceneTransition('shop'));
+    this.layers.objects.setTileIndexCallback(152, () => this.scene.sceneTransition('shop'));
 
 
     if (this.debug) {
-      const debugGraphics = scene.add.graphics();
+      const debugGraphics = this.scene.add.graphics();
       this.tilemap.renderDebug(debugGraphics, undefined, this.layers.objects);
     }
+  }
+
+  createObjects(objects, index) {
+    return objects.forEach((object) => {
+      this.scene.objects.add(new this.objectMap[object.index]({
+        scene: this.scene,
+        position: {
+          x: this.offset.x + (object.x * this.tilemap.tileWidth),
+          y: (this.tilemap.tileHeight * index * this.encounterSpacing) + (object.y * this.tilemap.tileHeight),
+        },
+      }));
+    });
+  }
+
+  getObjectsFromLayerData(layerData) {
+    return layerData.objects.reduce((objects, row) => {
+      row.forEach((tile) => {
+        if (this.objectMap[tile.index]) {
+          objects.push(tile);
+        }
+      });
+      return objects;
+    }, []);
+  }
+
+  pruneObjectTiles(layerData) {
+    return layerData.objects.map(row => row.map(tile => (this.objectMap[tile.index] ? -1 : tile)));
   }
 
   getMapLayerData(key) {
@@ -71,8 +114,7 @@ class Map {
     }), {});
   }
 
-  setMapDataLayer(key, position) {
-    const mapLayerData = this.getMapLayerData(key);
+  setMapDataLayer(mapLayerData, position) {
     Object.entries(mapLayerData).forEach(([layerName, layerData]) => {
       this.layers[layerName].putTilesAt(layerData, position.x, position.y);
     });
