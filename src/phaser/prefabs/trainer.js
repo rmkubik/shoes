@@ -20,6 +20,8 @@ class Trainer extends Prefab {
       && !this.transitioning
     ) {
       this.transitioning = true;
+      this.scene.player.freeze();
+
       const exclamation = this.scene.add.image(this.x, this.y - 16, 'tiles', 1763);
       exclamation.setScale(0.25, 0.25);
       this.scene.tweens.add({
@@ -33,8 +35,8 @@ class Trainer extends Prefab {
         targets: exclamation,
         y: exclamation.y - 8,
         ease: 'Sine.easeInOut',
-        duration: 200,
-        repeat: 3,
+        duration: 250,
+        repeat: 2,
         yoyo: true,
 
         onComplete: () => {
