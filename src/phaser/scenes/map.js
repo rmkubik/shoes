@@ -106,15 +106,10 @@ class MapScene extends Phaser.Scene {
     }
 
     this.state.currentMapIndex = this.map.getEncounterIndex(this.player);
-
-    // if (this.state.scene.current === 'MapScene') {
-    //   this.scene.resume('mapScene');
-    // }
   }
 
   sceneTransition(key) {
     // this.transitioning to debounce
-    // check if any enemies alive --> encounter is not over
     if (
       !this.transitioning
       && !isEncounterOver(this.state, this.state.currentMapIndex)

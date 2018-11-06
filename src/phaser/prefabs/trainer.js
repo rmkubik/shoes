@@ -9,6 +9,7 @@ class Trainer extends Prefab {
     });
 
     this.body.setCollideWorldBounds(true);
+    this.transitioning = false;
   }
 
   update() {
@@ -16,8 +17,30 @@ class Trainer extends Prefab {
     if (
       this.scene.player.y < this.body.y + searchWidth
       && this.scene.player.y > this.body.y - searchWidth
+      && !this.transitioning
     ) {
-      this.scene.sceneTransition('battle');
+      this.transitioning = true;
+      const exclamation = this.scene.add.image(this.x, this.y - 16, 'tiles', 1763);
+      exclamation.setScale(0.25, 0.25);
+      this.scene.tweens.add({
+        targets: exclamation,
+        scaleX: 1,
+        scaleY: 1,
+        ease: 'Power1',
+        duration: 300,
+      });
+      this.scene.tweens.add({
+        targets: exclamation,
+        y: exclamation.y - 8,
+        ease: 'Sine.easeInOut',
+        duration: 200,
+        repeat: 3,
+        yoyo: true,
+
+        onComplete: () => {
+          this.scene.sceneTransition('battle');
+        },
+      });
     }
   }
 }
