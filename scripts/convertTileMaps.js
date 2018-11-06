@@ -13,7 +13,6 @@ async function loadSets() {
   const sets = {};
   const names = await readdir(tilesetsDir);
   names.forEach((name) => {
-    console.log(path.extname(name));
     if (path.extname(name) === '.json') {
       const tileset = require(`./${path.join(tilesetsDir, name)}`);
       sets[path.basename(name, '.json')] = tileset;
@@ -27,11 +26,13 @@ async function loadMaps() {
   const maps = [];
   const names = await readdir(rawDir);
   names.forEach((name) => {
-    const data = require(`./${path.join(rawDir, name)}`);
-    maps.push({
-      name: path.basename(name, '.json'),
-      data,
-    });
+    if (path.extname(name) === '.json') {
+      const data = require(`./${path.join(rawDir, name)}`);
+      maps.push({
+        name: path.basename(name, '.json'),
+        data,
+      });
+    }
     console.log(`loaded map: ${path.basename(name, '.json')}`);
   });
   return maps;
