@@ -40,6 +40,7 @@ class Map {
       clearing2: scene.make.tilemap({ key: 'clearing2' }),
       narrows: scene.make.tilemap({ key: 'narrows' }),
       cobbler: scene.make.tilemap({ key: 'cobbler' }),
+      clearingTrainer: scene.make.tilemap({ key: 'clearingTrainer' }),
     };
 
     this.encounterSpacing = 10;

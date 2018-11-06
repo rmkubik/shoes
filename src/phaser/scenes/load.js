@@ -14,6 +14,7 @@ import clearingMap from '../../../assets/tilemaps/clearing.json';
 import clearing2Map from '../../../assets/tilemaps/clearing2.json';
 import cobblerMap from '../../../assets/tilemaps/cobbler.json';
 import narrowsMap from '../../../assets/tilemaps/narrows.json';
+import clearingTrainerMap from '../../../assets/tilemaps/clearing_trainer.json';
 
 import bootImage from '../../../assets/images/shoes_0.png';
 import highHeelImage from '../../../assets/images/shoes_1.png';
@@ -67,6 +68,7 @@ class loadScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('clearing2', clearing2Map);
     this.load.tilemapTiledJSON('narrows', narrowsMap);
     this.load.tilemapTiledJSON('cobbler', cobblerMap);
+    this.load.tilemapTiledJSON('clearingTrainer', clearingTrainerMap);
 
     this.load.image('boot', bootImage);
     this.load.image('highHeel', highHeelImage);
