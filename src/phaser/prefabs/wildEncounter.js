@@ -13,7 +13,7 @@ class WildEncounter extends Prefab {
   }
 
   update() {
-    const searchWidth = 2;
+    const searchWidth = 1.2;
     if (
       this.scene.player.y < this.body.y + (searchWidth * 16)
       && this.scene.player.y > this.body.y - (searchWidth * 16)
