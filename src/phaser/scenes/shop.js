@@ -2,9 +2,6 @@ import Phaser from 'phaser';
 
 import { getCurrentMapItem } from '../state/map';
 import ButtonGrid from '../prefabs/buttonGrid';
-import Shoe from '../prefabs/shoe';
-import Effects from '../objects/items/effects';
-import ItemHelpers from '../objects/items/helpers';
 
 class ShopScene extends Phaser.Scene {
   constructor() {
@@ -13,6 +10,13 @@ class ShopScene extends Phaser.Scene {
 
   create() {
     this.add.sprite(240, 240, 'shopBackground'); // zero centered
+
+    this.moneyTemplate = money => `Money: $${money}`;
+    this.moneyText = this.add.text(32, 32, this.moneyTemplate(this.state.player.money), {
+      fontFamily: 'Arial',
+      fontSize: 16,
+      color: '#FFFFFF',
+    });
 
     this.buttonGrid = new ButtonGrid({
       scene: this,
@@ -47,7 +51,14 @@ class ShopScene extends Phaser.Scene {
     return getCurrentMapItem(this.state).items.map(item => ({
       text: `${item.name} - $${item.cost}`,
       onclick: () => {
-        console.log(item.useText);
+        if (this.state.player.money >= item.cost) {
+          if (!this.state.player.items[item.key]) {
+            this.state.player.items[item.key] = 0;
+          }
+          this.state.player.items[item.key] += 1;
+          this.state.player.money -= item.cost;
+          this.moneyText.setText(this.moneyTemplate(this.state.player.money));
+        }
       },
     }));
   }
