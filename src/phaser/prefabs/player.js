@@ -11,7 +11,12 @@ class Player extends Prefab {
     this.speed = speed;
     this.keys = keys;
     this.direction = { x: 0, y: 0 };
-    this.frozen = false;
+    this.frozen = {
+      up: false,
+      down: false,
+      left: false,
+      right: false,
+    };
 
     this.body.setCollideWorldBounds(true);
   }
@@ -33,20 +38,54 @@ class Player extends Prefab {
       direction.x = 1;
     }
 
-    if (!this.frozen && (direction.x !== 0 || direction.y !== 0)) {
+    if (direction.x !== 0 || direction.y !== 0) {
       this.direction = direction;
+      const frozenDirection = this.resolveFrozenDirection(direction);
 
-      this.body.setVelocityX(this.speed * this.direction.x);
-      this.body.setVelocityY(this.speed * this.direction.y);
+      this.body.setVelocityX(this.speed * frozenDirection.x);
+      this.body.setVelocityY(this.speed * frozenDirection.y);
     }
   }
 
+  resolveFrozenDirection({ x, y }) {
+    const direction = {
+      x,
+      y,
+    };
+
+    if (this.frozen.up && y === -1) {
+      direction.y = 0;
+    }
+    if (this.frozen.down && y === 1) {
+      direction.y = 0;
+    }
+    if (this.frozen.left && x === -1) {
+      direction.x = 0;
+    }
+    if (this.frozen.right && x === 1) {
+      direction.x = 0;
+    }
+
+    return direction;
+  }
+
   freeze() {
-    this.frozen = true;
+    this.setFreeze({
+      up: true, down: true, left: true, right: true,
+    });
   }
 
   unFreeze() {
-    this.frozen = false;
+    this.setFreeze({
+      up: false, down: false, left: false, right: false,
+    });
+  }
+
+  setFreeze(direction) {
+    this.frozen = {
+      ...this.frozen,
+      ...direction,
+    };
   }
 }
 
