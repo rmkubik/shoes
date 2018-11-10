@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Trainer from '../prefabs/trainer';
 import WildEncounter from '../prefabs/wildEncounter';
+import OneWayGate from '../prefabs/oneWayGate';
 
 class Map {
   constructor({
@@ -19,6 +20,7 @@ class Map {
     this.objectMap = {
       21: Trainer,
       415: WildEncounter,
+      109: OneWayGate,
     };
 
     this.tilesets = tilesets.reduce((map, {
@@ -53,6 +55,7 @@ class Map {
       narrows: this.scene.make.tilemap({ key: 'narrows' }),
       cobbler: this.scene.make.tilemap({ key: 'cobbler' }),
       clearingTrainer: this.scene.make.tilemap({ key: 'clearingTrainer' }),
+      splitTwoGrass: this.scene.make.tilemap({ key: 'splitTwoGrass' }),
     };
 
     this.encounterSpacing = 10;

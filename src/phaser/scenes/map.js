@@ -25,6 +25,23 @@ class MapScene extends Phaser.Scene {
       this.cameras.main.clearRenderToTexture();
     });
 
+    const keys = {
+      up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
+      left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT),
+      down: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
+      right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
+    };
+
+    this.player = new Player({
+      scene: this,
+      position: {
+        x: 32,
+        y: 32,
+      },
+      speed: 150,
+      keys,
+    });
+
     this.map = new Map({
       scene: this,
       tilesets: [
@@ -61,22 +78,7 @@ class MapScene extends Phaser.Scene {
       ],
     });
 
-    const keys = {
-      up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
-      left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT),
-      down: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
-      right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
-    };
-
-    this.player = new Player({
-      scene: this,
-      position: {
-        x: 32,
-        y: 32,
-      },
-      speed: 150,
-      keys,
-    });
+    this.children.bringToTop(this.player);
 
     this.cameras.main.startFollow(this.player, true);
     this.cameras.main.setBounds(0, 0, this.map.tilemap.widthInPixels, this.map.tilemap.heightInPixels);
