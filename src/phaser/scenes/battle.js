@@ -66,7 +66,7 @@ class battleScene extends Phaser.Scene {
     this.tabsGrid.show(tabButtons);
   }
 
-  attack(move) {
+  attack(attacker, target, move) {
     if (this.state.acting) {
       // can't attack if something is already acting
       return;
@@ -84,8 +84,8 @@ class battleScene extends Phaser.Scene {
     this.state.acting = true;
     move.uses.current -= 1;
 
-    Moves[move.effect].effect(this.enemy, move);
-    Moves[move.effect].animation(this.player)
+    Moves[move.effect].effect(target, move);
+    Moves[move.effect].animation(attacker)
       .then(() => {
         this.state.acting = false;
         this.turns.nextTurn();
@@ -203,7 +203,7 @@ class battleScene extends Phaser.Scene {
       text: `${move.name} - ${move.uses.current}/${move.uses.max}`,
       onclick: () => {
         if (move.uses.current >= 0) {
-          this.attack(move);
+          this.attack(this.player, this.enemy, move);
         } else {
           console.log('This attack is expended!');
         }
