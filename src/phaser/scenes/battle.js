@@ -7,6 +7,7 @@ import ButtonGrid from '../prefabs/buttonGrid';
 import Shoe from '../prefabs/shoe';
 import Effects from '../objects/items/effects';
 import ItemHelpers from '../objects/items/helpers';
+import Moves from '../objects/moves/moves';
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -65,7 +66,7 @@ class battleScene extends Phaser.Scene {
     this.tabsGrid.show(tabButtons);
   }
 
-  attack(index) {
+  attack(move) {
     if (this.state.acting) {
       // can't attack if something is already acting
       return;
@@ -75,8 +76,13 @@ class battleScene extends Phaser.Scene {
       return;
     }
     this.state.acting = true;
-    getCurrentPlayerShoe(this.state).moves[index].uses.current -= 1;
-    this.enemy.takeDamage(getCurrentPlayerShoe(this.state).moves[index].damage);
+    move.uses.current -= 1;
+    // pick move effect
+    // Effects[item.effect].animation(this)
+
+    Moves[move.effect].effect(this.enemy, move);
+    // this.enemy.takeDamage(move.damage);
+    // pick move animation
     this.player.attack()
       .then(() => {
         this.state.acting = false;
@@ -193,9 +199,9 @@ class battleScene extends Phaser.Scene {
   getMoveButtonList() {
     return this.state.player.shoes[this.state.player.currentShoe].moves.map(move => ({
       text: `${move.name} - ${move.uses.current}/${move.uses.max}`,
-      onclick: (index) => {
+      onclick: () => {
         if (move.uses.current >= 0) {
-          this.attack(index);
+          this.attack(move);
         } else {
           console.log('This attack is expended!');
         }

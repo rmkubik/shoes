@@ -6,6 +6,7 @@ export default {
       current: 10,
       max: 10,
     },
+    effect: 'dealDamage',
   },
   thunderKick: {
     name: 'Thunder Kick',
@@ -14,6 +15,7 @@ export default {
       current: 10,
       max: 10,
     },
+    effect: 'dealDamage',
   },
   crush: {
     name: 'Crush',
@@ -22,6 +24,7 @@ export default {
       current: 5,
       max: 5,
     },
+    effect: 'dealDamage',
   },
   lick: {
     name: 'Lick',
@@ -30,6 +33,7 @@ export default {
       current: 20,
       max: 20,
     },
+    effect: 'dealDamage',
   },
   chomp: {
     name: 'Chomp!',
@@ -38,6 +42,7 @@ export default {
       current: 1,
       max: 1,
     },
+    effect: 'dealDamage',
   },
   flail: {
     name: 'Flail Around',
@@ -46,6 +51,7 @@ export default {
       current: 10,
       max: 10,
     },
+    effect: 'dealDamage',
   },
   stab: {
     name: 'Flying Stab',
@@ -54,6 +60,7 @@ export default {
       current: 10,
       max: 10,
     },
+    effect: 'dealDamage',
   },
   puncture: {
     name: 'Punk-ture',
@@ -62,6 +69,7 @@ export default {
       current: 15,
       max: 15,
     },
+    effect: 'dealDamage',
   },
   spur: {
     name: 'Hydro Spur',
@@ -70,6 +78,7 @@ export default {
       current: 20,
       max: 20,
     },
+    effect: 'dealDamage',
   },
   quick: {
     name: 'Quick Kick',
@@ -78,6 +87,7 @@ export default {
       current: 20,
       max: 20,
     },
+    effect: 'dealDamage',
   },
   bounce: {
     name: 'Bounce',
@@ -86,6 +96,7 @@ export default {
       current: 8,
       max: 8,
     },
+    effect: 'dealDamage',
   },
   squish: {
     name: 'Big Squish',
@@ -94,6 +105,7 @@ export default {
       current: 12,
       max: 12,
     },
+    effect: 'dealDamage',
   },
   squirt: {
     name: 'Surprise Squirt',
@@ -102,6 +114,7 @@ export default {
       current: 2,
       max: 2,
     },
+    effect: 'dealDamage',
   },
   dance: {
     name: 'Do a little Dance',
@@ -110,6 +123,7 @@ export default {
       current: 10,
       max: 10,
     },
+    effect: 'dealDamage',
   },
   love: {
     name: 'Make a little Love',
@@ -118,6 +132,7 @@ export default {
       current: 10,
       max: 10,
     },
+    effect: 'dealDamage',
   },
   whip: {
     name: 'Strap Whip',
@@ -126,5 +141,6 @@ export default {
       current: 20,
       max: 20,
     },
+    effect: 'dealDamage',
   },
 };
