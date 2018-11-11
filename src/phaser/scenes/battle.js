@@ -202,11 +202,7 @@ class battleScene extends Phaser.Scene {
     return this.state.player.shoes[this.state.player.currentShoe].moves.map(move => ({
       text: `${move.name} - ${move.uses.current}/${move.uses.max}`,
       onclick: () => {
-        if (move.uses.current >= 0) {
-          this.attack(this.player, this.enemy, move);
-        } else {
-          console.log('This attack is expended!');
-        }
+        this.attack(this.player, this.enemy, move);
 
         // update button state
         this.buttonGrid.hide();
