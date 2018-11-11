@@ -56,6 +56,7 @@ class Map {
       cobbler: this.scene.make.tilemap({ key: 'cobbler' }),
       clearingTrainer: this.scene.make.tilemap({ key: 'clearingTrainer' }),
       splitTwoGrass: this.scene.make.tilemap({ key: 'splitTwoGrass' }),
+      splitThreeGrass: this.scene.make.tilemap({ key: 'splitThreeGrass' }),
     };
 
     this.encounterSpacing = 10;
