@@ -14,6 +14,10 @@ class OneWayTile extends Prefab {
     };
 
     this.body.setImmovable(true);
+    this.body.checkCollision = {
+      none: false, up: false, down: true, left: false, right: false,
+    };
+    scene.physics.add.collider(this, scene.player);
   }
 }
 
