@@ -1,4 +1,14 @@
 export default {
+  mend: {
+    name: 'Mend',
+    amount: 100,
+    uses: {
+      current: 10,
+      max: 10,
+    },
+    effect: 'restoreHealth',
+    target: 'self',
+  },
   specialStomp: {
     name: 'Special Stomp',
     damage: 10,

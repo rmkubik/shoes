@@ -11,7 +11,7 @@ export default {
       current: 100,
     },
     imageKey: 'boot',
-    moves: [moves.thunderKick, moves.specialStomp, moves.crush],
+    moves: [moves.thunderKick, moves.specialStomp, moves.crush, moves.mend],
     type: types.boot,
     catchChance: {
       current: 0.3,
