@@ -123,13 +123,7 @@ class battleScene extends Phaser.Scene {
           });
       } else if (this.turns.isEnemyTurn()) {
         // take enemy turn
-        this.player.takeDamage(getCurrentEnemy(this.state).moves[0].damage);
-        this.state.acting = true;
-        this.enemy.attack()
-          .then(() => {
-            this.state.acting = false;
-            this.turns.nextTurn();
-          });
+        this.attack(this.enemy, this.player, getCurrentEnemy(this.state).moves[0]);
       }
     }
   }
