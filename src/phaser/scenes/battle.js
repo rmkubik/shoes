@@ -75,15 +75,17 @@ class battleScene extends Phaser.Scene {
       // can't attack if you're dead
       return;
     }
+
+    if (move.uses.current <= 0) {
+      console.log('This move is all used up!');
+      return;
+    }
+
     this.state.acting = true;
     move.uses.current -= 1;
-    // pick move effect
-    // Effects[item.effect].animation(this)
 
     Moves[move.effect].effect(this.enemy, move);
-    // this.enemy.takeDamage(move.damage);
-    // pick move animation
-    this.player.attack()
+    Moves[move.effect].animation(this.player)
       .then(() => {
         this.state.acting = false;
         this.turns.nextTurn();
