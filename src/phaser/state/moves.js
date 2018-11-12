@@ -1,12 +1,23 @@
 export default {
-  sunder: {
-    name: 'Sunder',
+  pumpUp: {
+    name: 'Pump Up',
     amount: 50,
     uses: {
       current: 10,
       max: 10,
     },
-    effect: 'reduceStat',
+    effect: 'adjustStat',
+    stat: 'attack',
+    target: 'self',
+  },
+  sunder: {
+    name: 'Sunder',
+    amount: -50,
+    uses: {
+      current: 10,
+      max: 10,
+    },
+    effect: 'adjustStat',
     stat: 'defense',
   },
   mend: {

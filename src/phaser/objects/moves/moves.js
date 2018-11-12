@@ -1,9 +1,9 @@
 import dealDamage from './dealDamage';
 import restoreHealth from './restoreHealth';
-import reduceStat from './reduceStat';
+import adjustStat from './adjustStat';
 
 export default {
   dealDamage,
-  reduceStat,
+  adjustStat,
   restoreHealth,
 };
