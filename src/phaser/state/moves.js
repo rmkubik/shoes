@@ -1,4 +1,14 @@
 export default {
+  sunder: {
+    name: 'Sunder',
+    amount: 50,
+    uses: {
+      current: 10,
+      max: 10,
+    },
+    effect: 'reduceStat',
+    stat: 'defense',
+  },
   mend: {
     name: 'Mend',
     amount: 100,
