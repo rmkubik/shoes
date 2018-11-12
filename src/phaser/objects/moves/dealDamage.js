@@ -1,6 +1,8 @@
 export default {
   animation: target => target.attack(),
-  effect: (target, { damage }) => {
-    target.takeDamage(damage);
+  effect: (attacker, target, { damage }) => {
+    const newDamage = (attacker.state.stats.attack.current / target.state.stats.defense.current) * damage;
+    console.log(newDamage);
+    target.takeDamage(newDamage);
   },
 };

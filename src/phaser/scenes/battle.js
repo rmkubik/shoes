@@ -85,7 +85,7 @@ class battleScene extends Phaser.Scene {
     move.uses.current -= 1;
 
     // TODO: make effect happen before animation resolves, may change this...
-    Moves[move.effect].effect(move.target === 'self' ? attacker : target, move);
+    Moves[move.effect].effect(attacker, move.target === 'self' ? attacker : target, move);
     Moves[move.effect].animation(attacker)
       .then(() => {
         this.state.acting = false;

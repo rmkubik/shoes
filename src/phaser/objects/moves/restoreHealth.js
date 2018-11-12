@@ -1,6 +1,6 @@
 export default {
   animation: target => target.attack(),
-  effect: (target, { amount }) => {
+  effect: (attacker, target, { amount }) => {
     target.heal(amount);
   },
 };
