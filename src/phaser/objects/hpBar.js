@@ -9,14 +9,27 @@ class HpBar {
     this.position = position;
 
     this.graphics = scene.add.graphics();
+
+    this.text = scene.add.text(
+      position.x + 45,
+      position.y,
+      this.current,
+      {
+        fontFamily: 'Arial',
+        fontSize: 16,
+        color: '#FFFFFF',
+      },
+    );
   }
 
   takeDamage(damage) {
     this.current -= damage;
+    this.text.setText(this.current);
   }
 
   heal(amount) {
     this.current += amount;
+    this.text.setText(this.current);
   }
 
   draw() {
@@ -38,6 +51,7 @@ class HpBar {
 
   destroy() {
     this.graphics.destroy();
+    this.text.destroy();
   }
 }
 

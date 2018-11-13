@@ -122,6 +122,7 @@ Def: ${stats.defense.current}`;
     this.sprite.destroy();
     this.hpBar.destroy();
     this.shadow.destroy();
+    this.statText.destroy();
   }
 
   adjustStat(stat, amount) {
