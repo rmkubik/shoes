@@ -48,8 +48,8 @@ class Shoe {
 Def: ${stats.defense.current}`;
 
     this.statText = scene.add.text(
-      position.x,
-      position.y + 60,
+      position.x - 25,
+      position.y + 68,
       this.statTextTemplate(this.state.stats),
       {
         fontFamily: 'Arial',
