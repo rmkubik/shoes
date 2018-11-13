@@ -43,6 +43,20 @@ class Shoe {
       hp: this.state.hp,
     });
     this.hpBar.draw();
+
+    this.statTextTemplate = stats => `Atk: ${stats.attack.current}
+Def: ${stats.defense.current}`;
+
+    this.statText = scene.add.text(
+      position.x,
+      position.y + 60,
+      this.statTextTemplate(this.state.stats),
+      {
+        fontFamily: 'Arial',
+        fontSize: 16,
+        color: '#FFFFFF',
+      },
+    );
   }
 
   attack() {
@@ -108,6 +122,11 @@ class Shoe {
     this.sprite.destroy();
     this.hpBar.destroy();
     this.shadow.destroy();
+  }
+
+  adjustStat(stat, amount) {
+    this.state.stats[stat].current += amount;
+    this.statText.setText(this.statTextTemplate(this.state.stats));
   }
 }
 
