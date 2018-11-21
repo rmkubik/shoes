@@ -46,15 +46,15 @@ class MapScene extends Phaser.Scene {
       scene: this,
       tilesets: [
         {
-          tiledName: 'roguelikeChar_transparent',
+          tiledName: 'characters',
           tileSetKey: 'characters',
           spacing: 1,
         },
         {
-          tiledName: 'roguelikeSheet_transparent',
+          tiledName: 'tiles',
           tileSetKey: 'tiles',
           margin: 1,
-          spacing: 3,
+          spacing: 1,
           gid: 1,
         },
       ],

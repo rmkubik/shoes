@@ -1,0 +1,12 @@
+{ "columns":8,
+ "image":"..\/..\/assets\/spritesheets\/characters.png",
+ "imageheight":18,
+ "imagewidth":137,
+ "margin":1,
+ "name":"characters",
+ "spacing":1,
+ "tilecount":8,
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset"
+}

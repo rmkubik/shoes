@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 
 // tilesheets
-import characterSheet from '../../../assets/spritesheets/roguelikeChar_transparent.png';
-import tileSheet from '../../../assets/spritesheets/roguelikeSheet_transparent.png';
+import characterSheet from '../../../assets/spritesheets/characters.png';
+import tileSheet from '../../../assets/spritesheets/tiles.png';
 import buttonSheet from '../../../assets/spritesheets/buttons.png';
 import legsSheet from '../../../assets/spritesheets/legs.png';
 import itemSheet from '../../../assets/spritesheets/items.png';
@@ -42,11 +42,12 @@ class loadScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16,
       spacing: 1,
+      margin: 1,
     });
     this.load.spritesheet('tiles', tileSheet, {
       frameWidth: 16,
       frameHeight: 16,
-      spacing: 3,
+      spacing: 1,
       margin: 1,
     });
     this.load.spritesheet('buttons', buttonSheet, {

@@ -1,0 +1,12 @@
+{ "columns":8,
+ "image":"..\/..\/assets\/spritesheets\/tiles.png",
+ "imageheight":35,
+ "imagewidth":137,
+ "margin":1,
+ "name":"tiles",
+ "spacing":1,
+ "tilecount":16,
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset"
+}
