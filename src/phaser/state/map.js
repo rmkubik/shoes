@@ -38,7 +38,7 @@ export default [
   {
     name: 'Home',
     scene: 'HomeScene',
-    mapKey: 'empty', // 'house',
+    mapKey: 'house',
   },
   {
     mapKey: 'splitTwoGrass', // pickRandomlyFromArray(['clearing', 'clearing2']),

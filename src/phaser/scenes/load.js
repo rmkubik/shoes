@@ -9,7 +9,7 @@ import itemSheet from '../../../assets/spritesheets/items.png';
 
 // tilemaps
 import tiledMap from '../../../assets/tilemaps/main.json';
-import houseMap from '../../../assets/tilemaps/house.json';
+import houseMap from '../../../assets/tilemaps/house_wide.json';
 import clearingMap from '../../../assets/tilemaps/clearing.json';
 import clearing2Map from '../../../assets/tilemaps/clearing2.json';
 import cobblerMap from '../../../assets/tilemaps/cobbler.json';
