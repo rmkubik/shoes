@@ -17,6 +17,7 @@ import narrowsMap from '../../../assets/tilemaps/narrows.json';
 import clearingTrainerMap from '../../../assets/tilemaps/clearing_trainer.json';
 import splitTwoGrassMap from '../../../assets/tilemaps/split_two_grass.json';
 import splitThreeGrassMap from '../../../assets/tilemaps/split_three_grass.json';
+import emptyMap from '../../../assets/tilemaps/empty.json';
 
 import bootImage from '../../../assets/images/shoes_0.png';
 import highHeelImage from '../../../assets/images/shoes_1.png';
@@ -73,6 +74,7 @@ class loadScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('clearingTrainer', clearingTrainerMap);
     this.load.tilemapTiledJSON('splitTwoGrass', splitTwoGrassMap);
     this.load.tilemapTiledJSON('splitThreeGrass', splitThreeGrassMap);
+    this.load.tilemapTiledJSON('empty', emptyMap);
 
     this.load.image('boot', bootImage);
     this.load.image('highHeel', highHeelImage);

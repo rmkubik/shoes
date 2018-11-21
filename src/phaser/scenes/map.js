@@ -85,9 +85,9 @@ class MapScene extends Phaser.Scene {
     this.cameras.main.setSize(480, 480);
 
     this.physics.world.setBounds(
-      120,
       0,
-      240,
+      0,
+      480,
       100 * 16, // height is number of tiles in map * tile size
     );
     this.physics.add.collider(this.player, this.map.layers.objects);

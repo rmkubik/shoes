@@ -9,12 +9,12 @@ class Map {
   }) {
     this.scene = scene;
     this.offset = {
-      x: 120,
+      x: 0,
     };
 
     // this.tilemap = scene.make.tilemap({ key });
     this.tilemap = this.scene.make.tilemap({
-      tileWidth: 16, tileHeight: 16, width: 15, height: 100,
+      tileWidth: 16, tileHeight: 16, width: 30, height: 100,
     });
 
     this.objectMap = {
@@ -57,9 +57,10 @@ class Map {
       clearingTrainer: this.scene.make.tilemap({ key: 'clearingTrainer' }),
       splitTwoGrass: this.scene.make.tilemap({ key: 'splitTwoGrass' }),
       splitThreeGrass: this.scene.make.tilemap({ key: 'splitThreeGrass' }),
+      empty: this.scene.make.tilemap({ key: 'empty' }),
     };
 
-    this.encounterSpacing = 10;
+    this.encounterSpacing = 15;
     this.scene.state.map.forEach((encounter, index) => {
       const mapLayerData = this.getMapLayerData(encounter.mapKey);
       // remove obkectMap indices --> -1
