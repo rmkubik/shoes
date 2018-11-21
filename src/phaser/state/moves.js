@@ -9,6 +9,7 @@ export default {
     effect: 'adjustStat',
     stat: 'attack',
     target: 'self',
+    description: 'Increase your attack by 50',
   },
   sunder: {
     name: 'Sunder',
@@ -19,6 +20,7 @@ export default {
     },
     effect: 'adjustStat',
     stat: 'defense',
+    description: 'Decrease opponent\'s defense by 50',
   },
   mend: {
     name: 'Mend',
@@ -29,6 +31,7 @@ export default {
     },
     effect: 'restoreHealth',
     target: 'self',
+    description: 'Restore your health by 100',
   },
   specialStomp: {
     name: 'Special Stomp',
@@ -38,6 +41,7 @@ export default {
       max: 10,
     },
     effect: 'dealDamage',
+    description: 'Do 10 damage',
   },
   thunderKick: {
     name: 'Thunder Kick',
@@ -47,6 +51,7 @@ export default {
       max: 10,
     },
     effect: 'dealDamage',
+    description: 'Do 30 damage',
   },
   crush: {
     name: 'Crush',
@@ -56,6 +61,7 @@ export default {
       max: 5,
     },
     effect: 'dealDamage',
+    description: 'Do 50 damage',
   },
   lick: {
     name: 'Lick',
@@ -65,6 +71,7 @@ export default {
       max: 20,
     },
     effect: 'dealDamage',
+    description: 'Do 15 damage',
   },
   chomp: {
     name: 'Chomp!',
@@ -74,6 +81,7 @@ export default {
       max: 1,
     },
     effect: 'dealDamage',
+    description: 'Do 200 damage',
   },
   flail: {
     name: 'Flail Around',
@@ -83,6 +91,7 @@ export default {
       max: 10,
     },
     effect: 'dealDamage',
+    description: 'Do 1 damage',
   },
   stab: {
     name: 'Flying Stab',
@@ -92,6 +101,7 @@ export default {
       max: 10,
     },
     effect: 'dealDamage',
+    description: 'Do 45 damage',
   },
   puncture: {
     name: 'Punk-ture',
@@ -101,6 +111,7 @@ export default {
       max: 15,
     },
     effect: 'dealDamage',
+    description: 'Do 35 damage',
   },
   spur: {
     name: 'Hydro Spur',
@@ -110,6 +121,7 @@ export default {
       max: 20,
     },
     effect: 'dealDamage',
+    description: 'Do 35 damage',
   },
   quick: {
     name: 'Quick Kick',
@@ -119,6 +131,7 @@ export default {
       max: 20,
     },
     effect: 'dealDamage',
+    description: 'Do 15 damage',
   },
   bounce: {
     name: 'Bounce',
@@ -128,6 +141,7 @@ export default {
       max: 8,
     },
     effect: 'dealDamage',
+    description: 'Do 30 damage',
   },
   squish: {
     name: 'Big Squish',
@@ -137,6 +151,7 @@ export default {
       max: 12,
     },
     effect: 'dealDamage',
+    description: 'Do 30 damage',
   },
   squirt: {
     name: 'Surprise Squirt',
@@ -146,6 +161,7 @@ export default {
       max: 2,
     },
     effect: 'dealDamage',
+    description: 'Do 40 damage',
   },
   dance: {
     name: 'Do a little Dance',
@@ -155,6 +171,7 @@ export default {
       max: 10,
     },
     effect: 'dealDamage',
+    description: 'Do 25 damage',
   },
   love: {
     name: 'Make a little Love',
@@ -164,6 +181,7 @@ export default {
       max: 10,
     },
     effect: 'dealDamage',
+    description: 'Do 25 damage',
   },
   whip: {
     name: 'Strap Whip',
@@ -173,5 +191,6 @@ export default {
       max: 20,
     },
     effect: 'dealDamage',
+    description: 'Do 30 damage',
   },
 };
