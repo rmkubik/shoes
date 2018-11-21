@@ -5,7 +5,7 @@ class OneWayTile extends Prefab {
     scene, position,
   }) {
     super({
-      scene, position, sheet: 'tiles', sprite: 108,
+      scene, position, sheet: 'tiles', sprite: 6,
     });
 
     this.direction = {

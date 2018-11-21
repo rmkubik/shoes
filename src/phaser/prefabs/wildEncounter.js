@@ -5,7 +5,7 @@ class WildEncounter extends Prefab {
     scene, position,
   }) {
     super({
-      scene, position, sheet: 'tiles', sprite: 414,
+      scene, position, sheet: 'tiles', sprite: 7,
     });
 
     this.body.setCollideWorldBounds(true);
@@ -24,7 +24,7 @@ class WildEncounter extends Prefab {
       this.transitioning = true;
       this.scene.player.freeze();
 
-      const exclamation = this.scene.add.image(this.x, this.y - 16, 'tiles', 1763);
+      const exclamation = this.scene.add.image(this.x, this.y - 16, 'tiles', 8);
       exclamation.setScale(0.25, 0.25);
       this.scene.tweens.add({
         targets: exclamation,

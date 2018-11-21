@@ -19,8 +19,8 @@ class Map {
 
     this.objectMap = {
       21: Trainer,
-      415: WildEncounter,
-      109: OneWayGate,
+      8: WildEncounter,
+      7: OneWayGate,
     };
 
     this.tilesets = tilesets.reduce((map, {
@@ -72,7 +72,8 @@ class Map {
     });
 
     // add 1 to index for some reason?
-    this.layers.objects.setCollisionByExclusion([-1, 593, 650, 1362, 1363]);
+    // this.layers.objects.setCollisionByExclusion([-1, 593, 650, 1362, 1363]);
+    this.layers.objects.setCollisionByExclusion([-1, 7, 8]);
 
     // grass
     this.layers.objects.setTileIndexCallback(593, () => this.scene.sceneTransition('battle'));
