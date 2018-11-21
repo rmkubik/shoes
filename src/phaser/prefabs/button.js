@@ -18,6 +18,7 @@ class Button extends Prefab {
       fontFamily: 'Arial',
       fontSize: 16,
       color: '#FFFFFF',
+      wordWrap: { width: this.width },
     });
 
     this.graphics = scene.add.graphics();
@@ -25,6 +26,7 @@ class Button extends Prefab {
       fontFamily: 'Arial',
       fontSize: 16,
       color: '#FFFFFF',
+      wordWrap: { width: 160 },
     });
 
     this.fsm = new StateMachine({
