@@ -12,7 +12,7 @@ class ButtonGrid {
   }
 
   show(buttons) {
-    this.buttons = buttons.map(({ text, onclick }, index) => new Button({
+    this.buttons = buttons.map(({ text, onclick, description }, index) => new Button({
       scene: this.scene,
       position: {
         x: this.position.x + (
@@ -30,6 +30,7 @@ class ButtonGrid {
       },
       onclick: () => { onclick(index); },
       text,
+      description,
     }));
   }
 

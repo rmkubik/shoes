@@ -4,7 +4,7 @@ import Prefab from './prefab';
 
 class Button extends Prefab {
   constructor({
-    scene, position, sheet, sprites, onclick = () => {}, text = '',
+    scene, position, sheet, sprites, onclick = () => {}, text = '', description = '',
   }) {
     super({
       scene, position, sheet, sprite: sprites.up,
@@ -12,6 +12,7 @@ class Button extends Prefab {
 
     this.position = position;
     this.scene = scene;
+    this.description = description;
 
     this.text = scene.add.text(position.x + 5, position.y + 5, text, {
       fontFamily: 'Arial',
@@ -38,10 +39,14 @@ class Button extends Prefab {
       methods: {
         onEnterHover: () => {
           this.setFrame(sprites.hover);
-          this.showPopOver();
+          if (this.description) {
+            this.showPopOver();
+          }
         },
         onLeaveHover: () => {
-          this.hidePopOver();
+          if (this.description) {
+            this.hidePopOver();
+          }
         },
         onEnterUp: () => { this.setFrame(sprites.up); },
         onEnterDown: () => { this.setFrame(sprites.down); },
@@ -71,7 +76,7 @@ class Button extends Prefab {
   showPopOver() {
     this.graphics.fillStyle(0x000000);
     this.graphics.fillRect(this.position.x, this.position.y, 160, 80);
-    this.popOverText.setText('more info');
+    this.popOverText.setText(this.description);
     this.scene.children.bringToTop(this.graphics);
     this.scene.children.bringToTop(this.popOverText);
   }

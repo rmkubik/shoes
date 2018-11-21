@@ -132,6 +132,7 @@ class battleScene extends Phaser.Scene {
   getShoeButtonList() {
     return this.state.player.shoes.map(shoe => ({
       text: shoe.name,
+      description: shoe.description,
       onclick: (index) => {
         if (shoe.hp.current <= 0) {
           console.log(`Cannot put on ${shoe.name}, its dead!`);
@@ -173,6 +174,7 @@ class battleScene extends Phaser.Scene {
       const item = this.state.items[key];
       return {
         text: `${item.name} - ${this.state.player.items[key]}`,
+        description: item.description,
         onclick: () => {
           console.log(item.useText);
           ItemHelpers.decrementItemUse(this.state, item.key);
@@ -196,6 +198,7 @@ class battleScene extends Phaser.Scene {
   getMoveButtonList() {
     return this.state.player.shoes[this.state.player.currentShoe].moves.map(move => ({
       text: `${move.name} - ${move.uses.current}/${move.uses.max}`,
+      description: move.description,
       onclick: () => {
         this.attack(this.player, this.enemy, move);
 
