@@ -10,13 +10,13 @@ import itemSheet from '../../../assets/spritesheets/items.png';
 // tilemaps
 import tiledMap from '../../../assets/tilemaps/main.json';
 import houseMap from '../../../assets/tilemaps/house_wide.json';
-import clearingMap from '../../../assets/tilemaps/clearing.json';
+import clearingMap from '../../../assets/tilemaps/clearing_wide.json';
 import clearing2Map from '../../../assets/tilemaps/clearing2.json';
 import cobblerMap from '../../../assets/tilemaps/cobbler.json';
 import narrowsMap from '../../../assets/tilemaps/narrows.json';
 import clearingTrainerMap from '../../../assets/tilemaps/clearing_trainer.json';
-import splitTwoGrassMap from '../../../assets/tilemaps/split_two_grass.json';
-import splitThreeGrassMap from '../../../assets/tilemaps/split_three_grass.json';
+import splitTwoGrassMap from '../../../assets/tilemaps/two_split_wide.json';
+import splitThreeGrassMap from '../../../assets/tilemaps/three_split_wide.json';
 import emptyMap from '../../../assets/tilemaps/empty.json';
 
 import bootImage from '../../../assets/images/shoes_0.png';
