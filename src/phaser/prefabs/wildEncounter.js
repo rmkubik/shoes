@@ -5,7 +5,7 @@ class WildEncounter extends Prefab {
     scene, position,
   }) {
     super({
-      scene, position, sheet: 'tiles', sprite: 7,
+      scene, position, sheet: 'characters', sprite: 3,
     });
 
     this.body.setCollideWorldBounds(true);

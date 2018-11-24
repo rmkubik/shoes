@@ -42,6 +42,14 @@ export default [
   },
   {
     mapKey: 'splitTwoGrass', // pickRandomlyFromArray(['clearing', 'clearing2']),
+    enemies: [pickRandomlyFromArray([shoes.sneaker, shoes.cleat])],
+    currentEnemyIndex: 0,
+    name: 'A Wild Shoe Appears!',
+    scene: 'BattleScene',
+    wild: true,
+    turn: 0,
+    reward: 50,
+    playerFirst: true,
     encounters: [
       {
         enemies: [pickRandomlyFromArray([shoes.sneaker, shoes.cleat])],
