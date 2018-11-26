@@ -128,7 +128,7 @@ class Map {
     });
   }
 
-  getEncounterIndex(object) {
+  getMapIndex(object) {
     return Math.floor(object.y / (this.encounterSpacing * this.tilemap.tileHeight));
   }
 }

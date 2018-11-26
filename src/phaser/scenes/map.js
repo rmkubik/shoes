@@ -107,7 +107,7 @@ class MapScene extends Phaser.Scene {
       this.t += 0.005;
     }
 
-    this.state.currentMapIndex = this.map.getEncounterIndex(this.player);
+    this.state.currentMapIndex = this.map.getMapIndex(this.player);
   }
 
   sceneTransition(key) {
