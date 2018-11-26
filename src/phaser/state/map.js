@@ -2,7 +2,7 @@ import shoes, { isAlive } from './shoes';
 import items from './items';
 import { pickRandomlyFromArray } from '../../helpers';
 
-export const getCurrentMapItem = state => state.map[state.currentMapIndex];
+export const getCurrentMapItem = state => state.map[state.currentMapIndex].encounters[state.currentEncounterIndex];
 
 export const getCurrentEnemy = (state) => {
   const currentMapItem = getCurrentMapItem(state);
@@ -24,15 +24,20 @@ export const isPlayerTurn = (state) => {
 const allShoesDead = shoeList => shoeList.every(shoe => shoe.hp.current <= 0);
 
 // Can always enter a shop
-export const isEncounterOver = (state, index) => {
+export const isEncounterOver = (state, mapIndex, encounterIndex) => {
   if (getCurrentMapItem(state).scene === 'BattleScene') {
-    return allShoesDead(state.map[index].enemies) || allShoesDead(state.player.shoes);
+    return allShoesDead(state.map[mapIndex].encounters[encounterIndex].enemies)
+      || allShoesDead(state.player.shoes);
   }
 
   return getCurrentMapItem(state).finished;
 };
 
-export const isCurrentEncounterOver = state => isEncounterOver(state, state.currentMapIndex);
+export const isCurrentEncounterOver = state => isEncounterOver(
+  state,
+  state.currentMapIndex,
+  state.currentEncounterIndex,
+);
 
 export default [
   {
@@ -52,7 +57,7 @@ export default [
     playerFirst: true,
     encounters: [
       {
-        enemies: [pickRandomlyFromArray([shoes.sneaker, shoes.cleat])],
+        enemies: [pickRandomlyFromArray([shoes.clown])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
