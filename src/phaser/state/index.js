@@ -10,6 +10,7 @@ export default {
   acting: false,
   phaserCanvas: null,
   currentMapIndex: 0,
+  currentEncounterInex: 0,
   moves,
   shoes,
   player,
