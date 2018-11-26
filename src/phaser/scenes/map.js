@@ -110,7 +110,7 @@ class MapScene extends Phaser.Scene {
     this.state.currentMapIndex = this.map.getMapIndex(this.player);
   }
 
-  sceneTransition(key) {
+  sceneTransition(key, encounterIndex) {
     // this.transitioning to debounce
     if (
       !this.transitioning
@@ -121,6 +121,7 @@ class MapScene extends Phaser.Scene {
       this.customPipeline.setFloat1('time', this.t);
       this.cameras.main.setRenderToTexture(this.customPipeline);
       this.transitioning = true;
+      this.state.currentEncounterIndex = encounterIndex;
       this.time.delayedCall(1000, () => {
         this.scene.sleep('map');
         this.scene.launch(key);

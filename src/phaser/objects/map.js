@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import Trainer from '../prefabs/trainer';
 import WildEncounter from '../prefabs/wildEncounter';
 import OneWayGate from '../prefabs/oneWayGate';
+import { getMapItem } from '../state/map';
 
 class Map {
   constructor({
@@ -76,8 +77,8 @@ class Map {
     this.layers.objects.setCollisionByExclusion([-1, 7, 8]);
 
     // grass
-    this.layers.objects.setTileIndexCallback(593, () => this.scene.sceneTransition('battle'));
-    this.layers.objects.setTileIndexCallback(650, () => this.scene.sceneTransition('battle'));
+    // this.layers.objects.setTileIndexCallback(593, () => this.scene.sceneTransition('battle'));
+    // this.layers.objects.setTileIndexCallback(650, () => this.scene.sceneTransition('battle'));
     // doors
     this.layers.objects.setTileIndexCallback(152, () => this.scene.sceneTransition('shop'));
 
@@ -90,12 +91,17 @@ class Map {
 
   createObjects(objects, index) {
     return objects.forEach((object) => {
+      const y = (this.tilemap.tileHeight * index * this.encounterSpacing)
+        + (object.y * this.tilemap.tileHeight);
+
       this.scene.objects.add(new this.objectMap[object.index]({
         scene: this.scene,
         position: {
           x: this.offset.x + (object.x * this.tilemap.tileWidth),
-          y: (this.tilemap.tileHeight * index * this.encounterSpacing) + (object.y * this.tilemap.tileHeight),
+          y,
         },
+        encounterIndex: 0,
+        state: getMapItem(this.scene.state, this.calcMapIndex(y), 0),
       }));
     });
   }
@@ -128,8 +134,12 @@ class Map {
     });
   }
 
+  calcMapIndex(y) {
+    return Math.floor(y / (this.encounterSpacing * this.tilemap.tileHeight));
+  }
+
   getMapIndex(object) {
-    return Math.floor(object.y / (this.encounterSpacing * this.tilemap.tileHeight));
+    return this.calcMapIndex(object.y);
   }
 }
 

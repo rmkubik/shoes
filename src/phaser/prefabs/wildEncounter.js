@@ -2,11 +2,24 @@ import Prefab from './prefab';
 
 class WildEncounter extends Prefab {
   constructor({
-    scene, position,
+    scene, position, scale = 0.5, encounterIndex, state,
   }) {
     super({
-      scene, position, sheet: 'characters', sprite: 3,
+      scene, position, // sheet: 'characters', sprite: 3,
     });
+
+    this.encounterIndex = encounterIndex;
+
+    // TODO: This is  hack. Wild Encounter is purposely using a sprite that doesn't
+    // exist so that it will not be rendered. Then it is intentionally rendering
+    // a separate sprite on top of itself. WildEncounter should either not be a prefab,
+    // or it should be correctly passed a sprite index upon creation.
+    // the -8 is to draw the hacky sprite at the center of a tile.
+    scene.add.sprite(
+      this.x - 8,
+      this.y - 8,
+      state.enemies[0].imageKey,
+    ).setScale(scale);
 
     this.body.setCollideWorldBounds(true);
     this.transitioning = false;
@@ -42,7 +55,7 @@ class WildEncounter extends Prefab {
         yoyo: true,
 
         onComplete: () => {
-          this.scene.sceneTransition('battle');
+          this.scene.sceneTransition('battle', this.encounterIndex);
         },
       });
     }

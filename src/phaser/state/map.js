@@ -2,7 +2,11 @@ import shoes, { isAlive } from './shoes';
 import items from './items';
 import { pickRandomlyFromArray } from '../../helpers';
 
-export const getCurrentMapItem = state => state.map[state.currentMapIndex].encounters[state.currentEncounterIndex];
+export const getMapItem = (state, mapIndex, encounterIndex) =>
+  state.map[mapIndex].encounters[encounterIndex];
+
+export const getCurrentMapItem = state =>
+  getMapItem(state, state.currentMapIndex, state.currentEncounterIndex);
 
 export const getCurrentEnemy = (state) => {
   const currentMapItem = getCurrentMapItem(state);
