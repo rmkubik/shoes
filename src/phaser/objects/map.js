@@ -90,6 +90,8 @@ class Map {
   }
 
   createObjects(objects, index) {
+    let encounterIndex = 0;
+
     return objects.forEach((object) => {
       const y = (this.tilemap.tileHeight * index * this.encounterSpacing)
         + (object.y * this.tilemap.tileHeight);
@@ -100,9 +102,15 @@ class Map {
           x: this.offset.x + (object.x * this.tilemap.tileWidth),
           y,
         },
-        encounterIndex: 0,
-        state: getMapItem(this.scene.state, this.calcMapIndex(y), 0),
+        encounterIndex,
+        state: getMapItem(this.scene.state, this.calcMapIndex(y), encounterIndex),
       }));
+
+      // TODO: THIS IS ANOTHER HACK. If the object index matches the WildEncounter or Trainer then
+      // we need to incremement the encounterIndex.
+      if (object.index === 8 || object.index === 21) {
+        encounterIndex += 1;
+      }
     });
   }
 
