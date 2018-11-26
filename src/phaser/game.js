@@ -4,7 +4,7 @@ import Phaser from 'phaser';
 import config from './config';
 import {
   GameStateFactory,
-  GameActionsFactory,
+  // GameActionsFactory,
 } from './plugins/gameState';
 import battleScene from './scenes/battle';
 import loadScene from './scenes/load';
@@ -23,12 +23,12 @@ class Game {
             start: true,
             mapping: 'state',
           },
-          {
-            key: 'GameActions',
-            plugin: GameActionsFactory(),
-            start: true,
-            mapping: 'actions',
-          },
+          // {
+          //   key: 'GameActions',
+          //   plugin: GameActionsFactory(),
+          //   start: true,
+          //   mapping: 'actions',
+          // },
         ],
       },
       parent,
