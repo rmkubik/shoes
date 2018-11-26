@@ -5,7 +5,7 @@ import Player from '../prefabs/player';
 import Map from '../objects/map';
 import BattleTransitionPipeline from '../pipelines/BattleTransitionPipeline';
 
-import { isEncounterOver } from '../state/map';
+import { isCurrentEncounterOver } from '../state/map';
 
 class MapScene extends Phaser.Scene {
   constructor() {
@@ -114,7 +114,7 @@ class MapScene extends Phaser.Scene {
     // this.transitioning to debounce
     if (
       !this.transitioning
-      && !isEncounterOver(this.state, this.state.currentMapIndex)
+      && !isCurrentEncounterOver(this.state)
     ) {
       this.player.freeze();
       this.t = 0;
