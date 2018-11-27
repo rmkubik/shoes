@@ -2,7 +2,7 @@ import Prefab from './prefab';
 
 class WildEncounter extends Prefab {
   constructor({
-    scene, position, scale = 0.5, encounterIndex, state,
+    scene, position, scale = 0.75, encounterIndex, state,
   }) {
     super({
       scene, position, // sheet: 'characters', sprite: 3,
