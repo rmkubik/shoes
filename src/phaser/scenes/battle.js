@@ -98,9 +98,9 @@ class battleScene extends Phaser.Scene {
       if (isCurrentEncounterOver(this.state)) {
         this.state.acting = true;
 
-        // TODO: how do I get the pause and resume feature between the scenes to work???
         Promise.all([this.player.unEquipShoe(), this.enemy.unEquipShoe()])
           .then(() => {
+            ItemHelpers.resetAllPlayerShoeStatsToBaseAmount(this.state);
             this.state.acting = false;
             this.scene.stop('battle');
             this.scene.wake('map');
