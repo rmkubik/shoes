@@ -15,7 +15,7 @@ class Map {
 
     // this.tilemap = scene.make.tilemap({ key });
     this.tilemap = this.scene.make.tilemap({
-      tileWidth: 16, tileHeight: 16, width: 30, height: 100,
+      tileWidth: 16, tileHeight: 16, width: 30, height: 105,
     });
 
     this.objectMap = {
