@@ -91,9 +91,10 @@ class Map {
   }
 
   createObjects(objects, index) {
+    const sortedObjects = [...objects].sort((a, b) => a.x - b.x);
     let encounterIndex = 0;
 
-    return objects.forEach((object) => {
+    return sortedObjects.forEach((object) => {
       const y = (this.tilemap.tileHeight * index * this.encounterSpacing)
         + (object.y * this.tilemap.tileHeight);
 
