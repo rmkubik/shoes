@@ -195,7 +195,7 @@ export default [
     ],
   },
   {
-    mapKey: 'finalBoss', // pickRandomlyFromArray(['clearing', 'clearing2']),
+    mapKey: 'finalBoss',
     encounters: [
       {
         enemies: [shoes.clown],
