@@ -12,7 +12,16 @@ function restoreAllMovesUses(shoe) {
   }));
 }
 
+function resetAllPlayerShoeStatsToBaseAmount(state) {
+  state.player.shoes.forEach((shoe) => {
+    Object.values(shoe.stats).forEach((stat) => {
+      stat.current = stat.default;
+    });
+  });
+}
+
 export default {
   decrementItemUse,
   restoreAllMovesUses,
+  resetAllPlayerShoeStatsToBaseAmount,
 };
