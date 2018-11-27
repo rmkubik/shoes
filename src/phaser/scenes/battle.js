@@ -249,6 +249,7 @@ class battleScene extends Phaser.Scene {
         ease: 'Power1',
         duration: 750,
         onComplete: () => {
+          ItemHelpers.incrementItemUse(this.state, item.key);
           itemImage.destroy();
           resolve();
         },

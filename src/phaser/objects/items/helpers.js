@@ -2,6 +2,10 @@ function decrementItemUse(state, item) {
   state.player.items[item] -= 1;
 }
 
+function incrementItemUse(state, item) {
+  state.player.items[item] = state.player.items[item] ? state.player.items[item] + 1 : 1;
+}
+
 function restoreAllMovesUses(shoe) {
   shoe.moves = shoe.moves.map(move => ({
     ...move,
@@ -22,6 +26,7 @@ function resetAllPlayerShoeStatsToBaseAmount(state) {
 
 export default {
   decrementItemUse,
+  incrementItemUse,
   restoreAllMovesUses,
   resetAllPlayerShoeStatsToBaseAmount,
 };
