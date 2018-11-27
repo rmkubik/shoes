@@ -59,6 +59,7 @@ class Map {
       splitTwoGrass: this.scene.make.tilemap({ key: 'splitTwoGrass' }),
       splitThreeGrass: this.scene.make.tilemap({ key: 'splitThreeGrass' }),
       empty: this.scene.make.tilemap({ key: 'empty' }),
+      finalBoss: this.scene.make.tilemap({ key: 'finalBoss' }),
     };
 
     this.encounterSpacing = 15;
