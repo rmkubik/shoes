@@ -8,6 +8,9 @@ import Shoe from '../prefabs/shoe';
 import Effects from '../objects/items/effects';
 import ItemHelpers from '../objects/items/helpers';
 import Moves from '../objects/moves/moves';
+import { pickRandomlyFromArray } from '../../helpers';
+import items from '../state/items';
+
 
 class battleScene extends Phaser.Scene {
   constructor() {
@@ -98,12 +101,15 @@ class battleScene extends Phaser.Scene {
       if (isCurrentEncounterOver(this.state)) {
         this.state.acting = true;
 
-        Promise.all([this.player.unEquipShoe(), this.enemy.unEquipShoe()])
+        this.gainItem(pickRandomlyFromArray([items.shoeBox, items.shoeRepairKit]))
           .then(() => {
-            ItemHelpers.resetAllPlayerShoeStatsToBaseAmount(this.state);
-            this.state.acting = false;
-            this.scene.stop('battle');
-            this.scene.wake('map');
+            Promise.all([this.player.unEquipShoe(), this.enemy.unEquipShoe()])
+              .then(() => {
+                ItemHelpers.resetAllPlayerShoeStatsToBaseAmount(this.state);
+                this.state.acting = false;
+                this.scene.stop('battle');
+                this.scene.wake('map');
+              });
           });
       } else if (getCurrentEnemy(this.state).hp.current <= 0) {
         this.state.acting = true;
@@ -231,6 +237,24 @@ class battleScene extends Phaser.Scene {
       direction: 1,
       state: getCurrentPlayerShoe(this.state),
     });
+  }
+
+  gainItem(item) {
+    const onComplete = new Promise((resolve) => {
+      const itemImage = this.add.image(320, 80, 'items', item.frame);
+      this.tweens.add({
+        targets: itemImage,
+        x: 160,
+        y: 280,
+        ease: 'Power1',
+        duration: 750,
+        onComplete: () => {
+          itemImage.destroy();
+          resolve();
+        },
+      });
+    });
+    return onComplete;
   }
 }
 
