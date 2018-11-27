@@ -194,6 +194,21 @@ export default [
       },
     ],
   },
+  {
+    mapKey: 'finalBoss', // pickRandomlyFromArray(['clearing', 'clearing2']),
+    encounters: [
+      {
+        enemies: [shoes.clown],
+        currentEnemyIndex: 0,
+        name: 'A Wild Shoe Appears!',
+        scene: 'BattleScene',
+        wild: true,
+        turn: 0,
+        reward: 50,
+        playerFirst: true,
+      },
+    ],
+  },
   // {
   //   enemies: [pickRandomlyFromArray([shoes.boot, shoes.flats, shoes.slipper]), shoes.clown],
   //   currentEnemyIndex: 0,
