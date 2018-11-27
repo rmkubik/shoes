@@ -53,7 +53,7 @@ export default [
     mapKey: 'splitTwoGrass', // pickRandomlyFromArray(['clearing', 'clearing2']),
     encounters: [
       {
-        enemies: [pickRandomlyFromArray([shoes.slipper, shoes.cleat])],
+        enemies: [pickRandomlyFromArray([shoes.sneaker, shoes.cleat])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
@@ -63,7 +63,7 @@ export default [
         playerFirst: true,
       },
       {
-        enemies: [pickRandomlyFromArray([shoes.slipper, shoes.cleat])],
+        enemies: [pickRandomlyFromArray([shoes.sneaker, shoes.cleat])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
@@ -113,7 +113,7 @@ export default [
     mapKey: 'splitTwoGrass', // pickRandomlyFromArray(['clearing', 'clearing2']),
     encounters: [
       {
-        enemies: [pickRandomlyFromArray([shoes.slipper, shoes.cleat])],
+        enemies: [pickRandomlyFromArray([shoes.highHeel, shoes.cleat])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
@@ -123,7 +123,7 @@ export default [
         playerFirst: true,
       },
       {
-        enemies: [pickRandomlyFromArray([shoes.slipper, shoes.cleat])],
+        enemies: [pickRandomlyFromArray([shoes.highHeel, shoes.cleat])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
@@ -138,7 +138,7 @@ export default [
     mapKey: 'splitTwoGrass', // pickRandomlyFromArray(['clearing', 'clearing2']),
     encounters: [
       {
-        enemies: [pickRandomlyFromArray([shoes.slipper, shoes.cleat])],
+        enemies: [pickRandomlyFromArray([shoes.sandal, shoes.cowboy])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
@@ -148,7 +148,7 @@ export default [
         playerFirst: true,
       },
       {
-        enemies: [pickRandomlyFromArray([shoes.slipper, shoes.cleat])],
+        enemies: [pickRandomlyFromArray([shoes.sandal, shoes.cowboy])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
@@ -163,7 +163,7 @@ export default [
     mapKey: 'splitThreeGrass', // pickRandomlyFromArray(['clearing', 'clearing2']),
     encounters: [
       {
-        enemies: [pickRandomlyFromArray([shoes.boot, shoes.flats, shoes.slipper])],
+        enemies: [pickRandomlyFromArray([shoes.boot, shoes.sneaker, shoes.cowboy, shoes.flats])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
@@ -173,7 +173,7 @@ export default [
         playerFirst: true,
       },
       {
-        enemies: [pickRandomlyFromArray([shoes.boot, shoes.flats, shoes.slipper])],
+        enemies: [shoes.croc],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
@@ -183,7 +183,7 @@ export default [
         playerFirst: true,
       },
       {
-        enemies: [pickRandomlyFromArray([shoes.boot, shoes.flats, shoes.slipper])],
+        enemies: [pickRandomlyFromArray([shoes.boot, shoes.sneaker, shoes.cowboy, shoes.flats])],
         currentEnemyIndex: 0,
         name: 'A Wild Shoe Appears!',
         scene: 'BattleScene',
