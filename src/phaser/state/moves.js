@@ -24,14 +24,14 @@ export default {
   },
   mend: {
     name: 'Mend',
-    amount: 100,
+    amount: 80,
     uses: {
       current: 10,
       max: 10,
     },
     effect: 'restoreHealth',
     target: 'self',
-    description: 'Restore your health by 100',
+    description: 'Restore your health by 80',
   },
   // specialStomp: {
   //   name: 'Special Stomp',
@@ -55,23 +55,23 @@ export default {
   // },
   crush: {
     name: 'Crush',
-    damage: 50,
+    damage: 45,
     uses: {
-      current: 5,
-      max: 5,
+      current: 8,
+      max: 8,
     },
     effect: 'dealDamage',
-    description: 'Do 50 damage',
+    description: 'Do 45 damage',
   },
   lick: {
     name: 'Lick',
-    damage: 15,
+    damage: 30,
     uses: {
-      current: 20,
-      max: 20,
+      current: 15,
+      max: 15,
     },
     effect: 'dealDamage',
-    description: 'Do 15 damage',
+    description: 'Do 30 damage',
   },
   chomp: {
     name: 'Chomp!',
@@ -85,13 +85,13 @@ export default {
   },
   flail: {
     name: 'Flail Around',
-    damage: 1,
+    damage: 10,
     uses: {
-      current: 10,
-      max: 10,
+      current: 20,
+      max: 20,
     },
     effect: 'dealDamage',
-    description: 'Do 1 damage',
+    description: 'Do 10 damage',
   },
   // stab: {
   //   name: 'Flying Stab',
@@ -114,24 +114,26 @@ export default {
   //   description: 'Do 35 damage',
   // },
   spur: {
-    name: 'Hydro Spur',
-    damage: 35,
+    name: 'Spur Wall',
+    amount: 50,
     uses: {
-      current: 20,
-      max: 20,
+      current: 10,
+      max: 10,
     },
-    effect: 'dealDamage',
-    description: 'Do 35 damage',
+    effect: 'adjustStat',
+    stat: 'defense',
+    target: 'self',
+    description: 'Increase your defense by 50',
   },
   quick: {
     name: 'Quick Kick',
-    damage: 15,
+    damage: 20,
     uses: {
       current: 20,
       max: 20,
     },
     effect: 'dealDamage',
-    description: 'Do 15 damage',
+    description: 'Do 20 damage',
   },
   bounce: {
     name: 'Big Bounce',
@@ -155,13 +157,14 @@ export default {
   // },
   squirt: {
     name: 'Surprise Squirt',
-    damage: 40,
+    amount: -50,
     uses: {
-      current: 2,
-      max: 2,
+      current: 10,
+      max: 10,
     },
-    effect: 'dealDamage',
-    description: 'Do 40 damage',
+    effect: 'adjustStat',
+    description: 'Decrease opponent\'s attack by 50',
+    stat: 'attack',
   },
   // dance: {
   //   name: 'Do a little Dance',
