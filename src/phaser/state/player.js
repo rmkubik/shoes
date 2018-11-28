@@ -8,6 +8,7 @@ export default {
   items: {
     shoeBox: 5,
     shoeRepairKit: 2,
+    teachMend: 1,
   },
   currentShoe: 0,
   money: 30,

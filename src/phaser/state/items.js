@@ -1,3 +1,5 @@
+import moves from './moves';
+
 export default {
   shoeBox: {
     key: 'shoeBox',
@@ -25,6 +27,15 @@ export default {
     cost: 30,
     effect: 'applyShoeRepairKit',
     useText: 'Use Shoe Repair Kit',
+    frame: 1,
+  },
+  teachMend: {
+    key: 'teachMend',
+    name: 'Mend Skill',
+    cost: 50,
+    effect: 'teachMove',
+    value: moves.mend,
+    useText: 'You taught your shoe Mend!',
     frame: 1,
   },
 };
