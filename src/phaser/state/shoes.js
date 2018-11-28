@@ -11,7 +11,7 @@ export default {
       current: 100,
     },
     imageKey: 'boot',
-    moves: [moves.pumpUp, moves.sunder, moves.crush, moves.mend],
+    moves: [moves.crush, moves.mend],
     type: types.boot,
     catchChance: {
       current: 0.3,
@@ -35,7 +35,7 @@ export default {
       current: 100,
     },
     imageKey: 'highHeel',
-    moves: [moves.stab, moves.puncture],
+    moves: [moves.quick, moves.sunder],
     type: types.dress,
     catchChance: {
       current: 0.4,
@@ -43,8 +43,8 @@ export default {
     },
     stats: {
       attack: {
-        current: 125,
-        default: 125,
+        current: 150,
+        default: 150,
       },
       defense: {
         current: 50,
@@ -55,8 +55,8 @@ export default {
   croc: {
     name: 'Croc',
     hp: {
-      max: 100,
-      current: 100,
+      max: 150,
+      current: 150,
     },
     imageKey: 'croc',
     moves: [moves.chomp, moves.flail],
@@ -71,8 +71,8 @@ export default {
         default: 100,
       },
       defense: {
-        current: 120,
-        default: 120,
+        current: 100,
+        default: 100,
       },
     },
   },
@@ -83,7 +83,7 @@ export default {
       current: 100,
     },
     imageKey: 'cowboy',
-    moves: [moves.spur, moves.squish],
+    moves: [moves.spur, moves.crush, moves.sunder],
     type: types.boot,
     catchChance: {
       current: 0.3,
@@ -91,23 +91,23 @@ export default {
     },
     stats: {
       attack: {
-        current: 120,
-        default: 120,
+        current: 75,
+        default: 75,
       },
       defense: {
-        current: 80,
-        default: 80,
+        current: 130,
+        default: 130,
       },
     },
   },
   cleat: {
     name: 'Soccer Cleat',
     hp: {
-      max: 80,
-      current: 80,
+      max: 75,
+      current: 75,
     },
     imageKey: 'cleat',
-    moves: [moves.thunderKick, moves.quick],
+    moves: [moves.quick, moves.lick],
     type: types.boot,
     catchChance: {
       current: 0.3,
@@ -115,12 +115,12 @@ export default {
     },
     stats: {
       attack: {
-        current: 135,
-        default: 135,
+        current: 125,
+        default: 125,
       },
       defense: {
-        current: 70,
-        default: 70,
+        current: 100,
+        default: 100,
       },
     },
   },
@@ -131,7 +131,7 @@ export default {
       current: 80,
     },
     imageKey: 'slipper',
-    moves: [moves.flail, moves.quick, moves.squish],
+    moves: [moves.flail, moves.bounce],
     type: types.slipOn,
     catchChance: {
       current: 0.3,
@@ -139,8 +139,8 @@ export default {
     },
     stats: {
       attack: {
-        current: 135,
-        default: 135,
+        current: 80,
+        default: 80,
       },
       defense: {
         current: 70,
@@ -151,11 +151,11 @@ export default {
   clown: {
     name: 'Clown Shoes',
     hp: {
-      max: 140,
-      current: 140,
+      max: 220,
+      current: 220,
     },
     imageKey: 'clown',
-    moves: [moves.squish, moves.squirt],
+    moves: [moves.crush, moves.squirt],
     type: types.sneaker,
     catchChance: {
       current: 0.2,
@@ -163,23 +163,23 @@ export default {
     },
     stats: {
       attack: {
-        current: 90,
-        default: 90,
+        current: 125,
+        default: 125,
       },
       defense: {
-        current: 110,
-        default: 110,
+        current: 125,
+        default: 125,
       },
     },
   },
   flats: {
     name: 'Ballet Flats',
     hp: {
-      max: 70,
-      current: 70,
+      max: 50,
+      current: 50,
     },
     imageKey: 'flats',
-    moves: [moves.dance, moves.love],
+    moves: [moves.quick, moves.pumpUp],
     type: types.dress,
     catchChance: {
       current: 0.3,
@@ -191,8 +191,8 @@ export default {
         default: 120,
       },
       defense: {
-        current: 120,
-        default: 120,
+        current: 150,
+        default: 150,
       },
     },
   },
@@ -203,7 +203,7 @@ export default {
       current: 90,
     },
     imageKey: 'sandal',
-    moves: [moves.whip],
+    moves: [moves.quick, moves.mend],
     type: types.slipOn,
     catchChance: {
       current: 0.4,
@@ -223,11 +223,11 @@ export default {
   sneaker: {
     name: 'Sneaker',
     hp: {
-      max: 110,
-      current: 110,
+      max: 100,
+      current: 100,
     },
     imageKey: 'sneaker',
-    moves: [moves.lick, moves.thunderKick],
+    moves: [moves.lick],
     type: types.slipOn,
     catchChance: {
       current: 0.4,
@@ -235,8 +235,8 @@ export default {
     },
     stats: {
       attack: {
-        current: 135,
-        default: 135,
+        current: 100,
+        default: 100,
       },
       defense: {
         current: 100,
