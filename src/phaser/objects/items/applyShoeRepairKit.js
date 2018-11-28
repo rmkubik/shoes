@@ -11,7 +11,6 @@ export default {
         ease: 'Power1',
         duration: 500,
         onComplete: () => {
-          // scene.player.heal();
           item.destroy();
           resolve();
         },
